@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, Image, TextInput } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { themeColors } from "../theme";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ArrowLeftIcon } from "react-native-heroicons/solid";
@@ -42,16 +42,29 @@ export default function SignUpScreen() {
     } else {
       setPasswordError(false);
     }
-
-    handlesubmit();
+    collectData();
+    handlesubmit();  
   };
+    const collectData = async()=>{
+      const data={name,email,password};
+      const url="https://localhost:3000/signup";
+      let result=await fetch(url,{
+        method:"post",
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify(data)
+      })
+      result=result.json();
+      console.warn(result);
+    }
 
   const handlesubmit = () => {
     if (setEmailError.toString) {
       // not properly working some kind of issue is there (right now jugad)
       if (setPasswordError.toString) {
         console.log("login successful");
-        navigation.navigate("Home");
+        navigation.navigate("Login");
       }
     } else {
       console.log("There is some problem");
