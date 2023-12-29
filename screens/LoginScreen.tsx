@@ -7,8 +7,9 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Platform,
+  Alert,
 } from "react-native";
-
+import Snackbar from "react-native-snackbar"
 import { useNavigation } from "@react-navigation/native";
 // import { SafeAreaView } from "react-native-safe-area-context";
 // import { ArrowLeftIcon } from "react-native-heroicons/solid";
@@ -41,10 +42,41 @@ const LoginScreen= ({navigation}: any) => {
     } else {
       setPasswordError(false);
     }
-
-    handleSubmit();
+    collectData();
+    // handleSubmit();
   };
-
+  const collectData = async () => {
+    const data = {email, password};
+    const url = 'http://192.168.29.80:3000/login';
+    let result = await fetch(url, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data),
+    });
+    const body=result.text.toString;
+    if (result.status == 200) {
+      //console.info(result.json);
+      handleSubmit();
+    } else {
+      Snackbar.show({
+        text: 'Enter Valid Details',
+        duration: Snackbar.LENGTH_SHORT,
+        textColor: 'red',
+        backgroundColor: 'black',
+        // action:{
+        //   text:"CLose",
+        //   textColor:"green",
+        //   onPress:()=>{
+        //     Snackbar.dismiss();
+        //   }
+        // }
+      });
+      // Alert.alert("Error",User())
+      console.log(result.status);
+    }
+    return result.text();
+  };
+  // const User = () => toast("Enter Valid Details");
   const handleSubmit = () => {
     if (!emailError && !passwordError) {
       console.log("login successful");
@@ -55,6 +87,7 @@ const LoginScreen= ({navigation}: any) => {
   };
 
   return (
+    
     <View
       style={{ flex: 1, backgroundColor: themeColors.bg }}
     >
@@ -78,7 +111,7 @@ const LoginScreen= ({navigation}: any) => {
             style={{ width: 370, height: 280 }}
           />
         </View>
-
+            
       <View
         style={{
           borderTopLeftRadius: 50,
@@ -158,6 +191,7 @@ const LoginScreen= ({navigation}: any) => {
           <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
             <Text style={{ fontWeight: "bold", color: "yellow" }}> Sign Up</Text>
           </TouchableOpacity>
+          
         </View>
       </View>
     </View>
