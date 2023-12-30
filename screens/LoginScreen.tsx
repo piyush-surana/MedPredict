@@ -8,11 +8,11 @@ import {
   KeyboardAvoidingView,
   Platform,
   StyleSheet,
+  Alert,
 } from 'react-native';
+import Snackbar from 'react-native-snackbar';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
-// import { SafeAreaView } from "react-native-safe-area-context";
-// import { ArrowLeftIcon } from "react-native-heroicons/solid";
 import {themeColors} from '../theme';
 
 const LoginScreen = ({navigation}: any) => {
@@ -21,7 +21,6 @@ const LoginScreen = ({navigation}: any) => {
   const [emailError, setEmailError] = useState<boolean>(false);
   const [passwordError, setPasswordError] = useState<boolean>(false);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
-
 
   const validate = () => {
     if (!email) {
@@ -43,10 +42,41 @@ const LoginScreen = ({navigation}: any) => {
     } else {
       setPasswordError(false);
     }
-
-    handleSubmit();
+    collectData();
+    // handleSubmit();
   };
-
+  const collectData = async () => {
+    const data = {email, password};
+    const url = 'http://192.168.29.80:3000/login';
+    let result = await fetch(url, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data),
+    });
+    const body = result.text.toString;
+    if (result.status == 200) {
+      //console.info(result.json);
+      handleSubmit();
+    } else {
+      Snackbar.show({
+        text: 'Enter Valid Details',
+        duration: Snackbar.LENGTH_SHORT,
+        textColor: 'red',
+        backgroundColor: 'black',
+        // action:{
+        //   text:"CLose",
+        //   textColor:"green",
+        //   onPress:()=>{
+        //     Snackbar.dismiss();
+        //   }
+        // }
+      });
+      // Alert.alert("Error",User())
+      console.log(result.status);
+    }
+    return result.text();
+  };
+  // const User = () => toast("Enter Valid Details");
   const handleSubmit = () => {
     if (!emailError && !passwordError) {
       console.log('login successful');
@@ -72,7 +102,7 @@ const LoginScreen = ({navigation}: any) => {
       <View style={{flexDirection: 'row', justifyContent: 'center'}}>
         <Image
           source={require('../assets/images/login_banner.png')}
-          style={{width: 370, height: 280, margin: 30}}
+          style={{width: 370, height: 280}}
         />
       </View>
 
@@ -110,22 +140,19 @@ const LoginScreen = ({navigation}: any) => {
 
             <Text style={{color: 'gray', marginLeft: 20}}>Password</Text>
             <View style={styles.container}>
-            <TextInput
-              style={styles.input}
-              secureTextEntry
-              placeholderTextColor={'gray'}
-              placeholder="Password"
-              value={password}
-              onChangeText={setPassword}
-            />
-            <TouchableOpacity
-              style={styles.iconContainer}
-              onPress={() => setPasswordVisibility(!passwordVisibility)}>
-              <Icon
-                name='eye'
-                size={20}
-                color="black"></Icon>
-            </TouchableOpacity>
+              <TextInput
+                style={styles.input}
+                secureTextEntry
+                placeholderTextColor={'gray'}
+                placeholder="Password"
+                value={password}
+                onChangeText={setPassword}
+              />
+              <TouchableOpacity
+                style={styles.iconContainer}
+                onPress={() => setPasswordVisibility(!passwordVisibility)}>
+                <Icon name="eye" size={20} color="black"></Icon>
+              </TouchableOpacity>
             </View>
             {passwordError ? (
               <Text style={{color: 'red', fontSize: 14}}>

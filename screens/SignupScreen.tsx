@@ -66,7 +66,7 @@ const SignUpScreen = ({navigation}: any) => {
 
   const collectData = async () => {
     const data = {name, email, password};
-    const url = 'http://192.168.203.164:3000/signup';
+    const url = 'http://192.168.29.80:3000/signup';
     let result = await fetch(url, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -77,7 +77,7 @@ const SignUpScreen = ({navigation}: any) => {
       //console.info(result.json);
       handlesubmit();
     } else {
-      Alert.alert(body());
+      // Alert.alert(body());
       console.log(result.status);
     }
     return result.text();
@@ -91,7 +91,7 @@ const SignUpScreen = ({navigation}: any) => {
       }
     } else {
       console.log('Register successful');
-      navigation.navigate('Home');
+      navigation.navigate('Login');
     }
   };
 
