@@ -47,7 +47,7 @@ const WelcomeScreen= ({navigation}: any) => {
                 fontSize: 20,
                 fontWeight: 'bold',
                 textAlign: 'center',
-                color: 'gray',
+                color: 'black',
               }}>
               Start
             </Text>

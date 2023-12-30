@@ -7,9 +7,12 @@ import {
   TextInput,
   ToastAndroid,
   Alert,
+  StyleSheet,
 } from 'react-native';
 import {themeColors} from '../theme';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import {Snackbar} from 'react-native-paper';
+import {black} from 'react-native-paper/lib/typescript/styles/colors';
 
 const SignUpScreen = ({navigation}: any) => {
   const [email, setEmail] = useState<string>('');
@@ -18,6 +21,8 @@ const SignUpScreen = ({navigation}: any) => {
   const [nameError, setNameError] = useState<boolean>(false);
   const [emailError, setEmailError] = useState<boolean>(false);
   const [passwordError, setPasswordError] = useState<boolean>(false);
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
+  const [rightIcon, setRightIcon] = useState('eye');
 
   const [visible, setVisible] = React.useState(true);
 
@@ -67,7 +72,7 @@ const SignUpScreen = ({navigation}: any) => {
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(data),
     });
-    const body=result.text.toString;
+    const body = result.text.toString;
     if (result.status == 200) {
       //console.info(result.json);
       handlesubmit();
@@ -102,7 +107,7 @@ const SignUpScreen = ({navigation}: any) => {
             marginLeft: 15,
             marginTop: 15,
           }}>
-          <Text>back</Text>
+          <Icon name={'back'} size={20} color={'black'} />
         </TouchableOpacity>
       </View>
       <View style={{flexDirection: 'row', justifyContent: 'center'}}>
@@ -121,7 +126,7 @@ const SignUpScreen = ({navigation}: any) => {
           paddingTop: 20,
         }}>
         <View style={{marginVertical: 2}}>
-          <Text style={{color: 'gray', marginLeft: 20}}>Full Name</Text>
+          <Text style={{color: 'black', marginLeft: 20}}>Full Name</Text>
           <TextInput
             style={{
               padding: 16,
@@ -130,6 +135,7 @@ const SignUpScreen = ({navigation}: any) => {
               margin: 10,
             }}
             placeholder="Name"
+            placeholderTextColor={'gray'}
             value={name}
             onChangeText={setName}
           />
@@ -138,7 +144,7 @@ const SignUpScreen = ({navigation}: any) => {
               Please Enter Valid Value
             </Text>
           ) : null}
-          <Text style={{color: 'gray', marginLeft: 20}}>Email</Text>
+          <Text style={{color: 'black', marginLeft: 20}}>Email</Text>
           <TextInput
             style={{
               padding: 16,
@@ -147,6 +153,7 @@ const SignUpScreen = ({navigation}: any) => {
               margin: 10,
             }}
             placeholder="Email"
+            placeholderTextColor={'gray'}
             value={email}
             onChangeText={setEmail}
           />
@@ -155,29 +162,41 @@ const SignUpScreen = ({navigation}: any) => {
               Please Enter Valid Value
             </Text>
           ) : null}
-          <Text style={{color: 'gray', marginLeft: 20}}>Password</Text>
-          <TextInput
-            style={{
-              padding: 16,
-              backgroundColor: '#f3f4f6',
-              borderRadius: 20,
-              margin: 10,
-            }}
-            secureTextEntry
-            placeholder="Password"
-            value={password}
-            onChangeText={setPassword}
-          />
+          <Text style={{color: 'black', marginLeft: 20}}>Password</Text>
+          <View style={styles.container}>
+            <TextInput
+              style={styles.input}
+              secureTextEntry={!passwordVisibility}
+              placeholder="Password"
+              placeholderTextColor={'gray'}
+              value={password}
+              onChangeText={setPassword}
+            />
+            <TouchableOpacity
+              style={styles.iconContainer}
+              onPress={() => setPasswordVisibility(!passwordVisibility)}>
+              <Icon
+                name='eye'
+                size={20}
+                color="black"></Icon>
+            </TouchableOpacity>
+          </View>
           {passwordError ? (
             <Text style={{color: 'red', fontSize: 14}}>
               Please Enter Valid Value
             </Text>
           ) : null}
-          <View style={{paddingTop: 6}}>
+          <View style={{paddingTop: 16}}>
             <TouchableOpacity
-              style={{padding: 24, backgroundColor: 'yellow', borderRadius: 20}}
+              style={{padding: 14, backgroundColor: 'yellow', borderRadius: 20}}
               onPress={validate}>
-              <Text style={{fontSize: 20, fontWeight: 'bold', color: 'gray'}}>
+              <Text
+                style={{
+                  fontSize: 22,
+                  fontWeight: 'bold',
+                  color: 'gray',
+                  textAlign: 'center',
+                }}>
                 Sign Up
               </Text>
             </TouchableOpacity>
@@ -205,5 +224,23 @@ const SignUpScreen = ({navigation}: any) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  input: {
+    flex: 1,
+    color: 'black',
+    padding: 16,
+    backgroundColor: '#f3f4f6',
+    borderRadius: 20,
+    margin: 10,
+  },
+  iconContainer: {
+    padding: 10,
+  },
+});
 
 export default SignUpScreen;
