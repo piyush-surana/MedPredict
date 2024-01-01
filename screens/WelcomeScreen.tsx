@@ -44,7 +44,7 @@ const WelcomeScreen= ({navigation}: any) => {
             }}>
             <Text
               style={{
-                fontSize: 20,
+                fontSize: 24,
                 fontWeight: 'bold',
                 textAlign: 'center',
                 color: 'black',

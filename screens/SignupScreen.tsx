@@ -5,14 +5,12 @@ import {
   TouchableOpacity,
   Image,
   TextInput,
-  ToastAndroid,
-  Alert,
   StyleSheet,
+  Button,
 } from 'react-native';
 import {themeColors} from '../theme';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {Snackbar} from 'react-native-paper';
-import {black} from 'react-native-paper/lib/typescript/styles/colors';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const SignUpScreen = ({navigation}: any) => {
   const [email, setEmail] = useState<string>('');
@@ -22,18 +20,8 @@ const SignUpScreen = ({navigation}: any) => {
   const [emailError, setEmailError] = useState<boolean>(false);
   const [passwordError, setPasswordError] = useState<boolean>(false);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
-  const [rightIcon, setRightIcon] = useState('eye');
-
-  const [visible, setVisible] = React.useState(true);
-
-  const onDismissSnackBar = () => setVisible(false);
-
-  const showToast = () => {
-    ToastAndroid.show('there is some issue', ToastAndroid.TOP);
-  };
 
   const validate = () => {
-    showToast();
     if (!name) {
       setNameError(true);
       return false;
@@ -54,7 +42,12 @@ const SignUpScreen = ({navigation}: any) => {
     if (!password) {
       setPasswordError(true);
       return false;
-    } else if (password.length < 6) {
+    }
+    if (password.length < 6) {
+      setPasswordError(true);
+      return false;
+    }
+    if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]+$/.test(password)) {
       setPasswordError(true);
       return false;
     } else {
@@ -66,7 +59,7 @@ const SignUpScreen = ({navigation}: any) => {
 
   const collectData = async () => {
     const data = {name, email, password};
-    const url = 'http://192.168.29.80:3000/signup';
+    const url = 'http://192.168.203.164:3000/signup';
     let result = await fetch(url, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -74,10 +67,8 @@ const SignUpScreen = ({navigation}: any) => {
     });
     const body = result.text.toString;
     if (result.status == 200) {
-      //console.info(result.json);
       handlesubmit();
     } else {
-      // Alert.alert(body());
       console.log(result.status);
     }
     return result.text();
@@ -107,120 +98,136 @@ const SignUpScreen = ({navigation}: any) => {
             marginLeft: 15,
             marginTop: 15,
           }}>
-          <Icon name={'back'} size={20} color={'black'} />
+          <Icon name="arrow-left" size={18} color={'black'}></Icon>
         </TouchableOpacity>
       </View>
+
       <View style={{flexDirection: 'row', justifyContent: 'center'}}>
         <Image
           source={require('../assets/images/signup.png')}
           style={{width: 330, height: 230, margin: 20}}
         />
       </View>
-      <View
-        style={{
-          borderTopLeftRadius: 50,
-          borderTopRightRadius: 50,
-          flex: 1,
-          backgroundColor: 'white',
-          paddingHorizontal: 20,
-          paddingTop: 20,
-        }}>
-        <View style={{marginVertical: 2}}>
-          <Text style={{color: 'black', marginLeft: 20}}>Full Name</Text>
-          <TextInput
-            style={{
-              padding: 16,
-              backgroundColor: '#f3f4f6',
-              borderRadius: 20,
-              margin: 10,
-            }}
-            placeholder="Name"
-            placeholderTextColor={'gray'}
-            value={name}
-            onChangeText={setName}
-          />
-          {nameError ? (
-            <Text style={{color: 'red', fontSize: 14}}>
-              Please Enter Valid Value
-            </Text>
-          ) : null}
-          <Text style={{color: 'black', marginLeft: 20}}>Email</Text>
-          <TextInput
-            style={{
-              padding: 16,
-              backgroundColor: '#f3f4f6',
-              borderRadius: 20,
-              margin: 10,
-            }}
-            placeholder="Email"
-            placeholderTextColor={'gray'}
-            value={email}
-            onChangeText={setEmail}
-          />
-          {emailError ? (
-            <Text style={{color: 'red', fontSize: 14}}>
-              Please Enter Valid Value
-            </Text>
-          ) : null}
-          <Text style={{color: 'black', marginLeft: 20}}>Password</Text>
-          <View style={styles.container}>
-            <TextInput
-              style={styles.input}
-              secureTextEntry={!passwordVisibility}
-              placeholder="Password"
-              placeholderTextColor={'gray'}
-              value={password}
-              onChangeText={setPassword}
-            />
-            <TouchableOpacity
-              style={styles.iconContainer}
-              onPress={() => setPasswordVisibility(!passwordVisibility)}>
-              <Icon
-                name='eye'
-                size={20}
-                color="black"></Icon>
-            </TouchableOpacity>
-          </View>
-          {passwordError ? (
-            <Text style={{color: 'red', fontSize: 14}}>
-              Please Enter Valid Value
-            </Text>
-          ) : null}
-          <View style={{paddingTop: 16}}>
-            <TouchableOpacity
-              style={{padding: 14, backgroundColor: 'yellow', borderRadius: 20}}
-              onPress={validate}>
-              <Text
-                style={{
-                  fontSize: 22,
-                  fontWeight: 'bold',
-                  color: 'gray',
-                  textAlign: 'center',
-                }}>
-                Sign Up
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <Text
+      <ScrollView>
+        <View
           style={{
-            fontSize: 18,
-            fontWeight: 'bold',
-            color: 'gray',
-            textAlign: 'center',
-            paddingVertical: 3,
+            borderTopLeftRadius: 50,
+            borderTopRightRadius: 50,
+            flex: 1,
+            backgroundColor: 'white',
+            paddingHorizontal: 20,
+            paddingTop: 20,
           }}>
-          Or
-        </Text>
-        <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-          <Text style={{color: 'gray', fontWeight: 'bold'}}>
-            Already have an account?
+          <View style={{marginVertical: 2}}>
+            <Text style={{color: 'black', marginLeft: 20}}>Full Name</Text>
+            <TextInput
+              style={{
+                padding: 16,
+                backgroundColor: '#f3f4f6',
+                borderRadius: 20,
+                margin: 10,
+                color: 'black',
+              }}
+              placeholder="Name"
+              placeholderTextColor={'gray'}
+              value={name}
+              onChangeText={setName}
+            />
+            {nameError ? (
+              <Text style={{color: 'red', fontSize: 14}}>
+                Please Enter Valid Value
+              </Text>
+            ) : null}
+            <Text style={{color: 'black', marginLeft: 20}}>Email</Text>
+            <TextInput
+              style={{
+                padding: 16,
+                backgroundColor: '#f3f4f6',
+                borderRadius: 20,
+                margin: 10,
+                color: 'black',
+              }}
+              placeholder="Email"
+              placeholderTextColor={'gray'}
+              value={email}
+              onChangeText={setEmail}
+            />
+            {emailError ? (
+              <Text style={{color: 'red', fontSize: 14}}>
+                Please Enter Valid Value
+              </Text>
+            ) : null}
+            <Text style={{color: 'black', marginLeft: 20}}>Password</Text>
+            <View style={styles.container}>
+              <TextInput
+                style={styles.input}
+                secureTextEntry={!passwordVisibility}
+                placeholder="Password"
+                placeholderTextColor={'gray'}
+                value={password}
+                onChangeText={setPassword}
+              />
+              <TouchableOpacity
+                style={styles.iconContainer}
+                onPress={() => setPasswordVisibility(!passwordVisibility)}>
+                <Icon
+                  name={passwordVisibility ? 'eye-slash' : 'eye'}
+                  size={20}
+                  color="black"
+                />
+              </TouchableOpacity>
+            </View>
+            {passwordError ? (
+              <Text style={{color: 'red', fontSize: 14}}>
+                Please Enter Valid Value
+              </Text>
+            ) : null}
+            <View style={{paddingTop: 16}}>
+              <TouchableOpacity
+                style={{
+                  padding: 14,
+                  backgroundColor: 'yellow',
+                  borderRadius: 20,
+                }}
+                onPress={validate}>
+                <Text
+                  style={{
+                    fontSize: 22,
+                    fontWeight: 'bold',
+                    color: 'black',
+                    textAlign: 'center',
+                  }}>
+                  Sign Up
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          <Text
+            style={{
+              fontSize: 18,
+              fontWeight: 'bold',
+              color: 'gray',
+              textAlign: 'center',
+              paddingVertical: 10,
+            }}>
+            Or
           </Text>
-          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-            <Text style={{fontWeight: 'bold', color: 'yellow'}}> Login</Text>
-          </TouchableOpacity>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              paddingBottom: 55,
+            }}>
+            <Text style={{color: 'gray', fontWeight: 'bold'}}>
+              Already have an account?
+            </Text>
+            <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+              <Text style={{fontWeight: 'bold', color: 'black'}}> Login</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </View>
   );
 };
