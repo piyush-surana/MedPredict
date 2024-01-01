@@ -65,20 +65,12 @@ const LoginScreen = ({navigation}: any) => {
         duration: Snackbar.LENGTH_SHORT,
         textColor: 'white',
         backgroundColor: 'red',
-        // action:{
-        //   text:"CLose",
-        //   textColor:"green",
-        //   onPress:()=>{
-        //     Snackbar.dismiss();
-        //   }
-        // }
       });
-      // Alert.alert("Error",User())
       console.log(result.status);
     }
     return result.text();
   };
-  // const User = () => toast("Enter Valid Details");
+
   const handleSubmit = () => {
     if (!emailError && !passwordError) {
       console.log('login successful');
@@ -119,9 +111,6 @@ const LoginScreen = ({navigation}: any) => {
             paddingHorizontal: 20,
             paddingTop: 20,
           }}>
-          <KeyboardAvoidingView
-            behavior="position"
-            keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}>
             <View style={{marginVertical: 2}}>
               <Text style={{color: 'black', marginLeft: 20}}>Email</Text>
               <TextInput
@@ -196,7 +185,6 @@ const LoginScreen = ({navigation}: any) => {
                 </Text>
               </TouchableOpacity>
             </View>
-          </KeyboardAvoidingView>
           <Text
             style={{
               fontSize: 18,
