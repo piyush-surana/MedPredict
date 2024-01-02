@@ -74,7 +74,7 @@ const LoginScreen = ({navigation}: any) => {
   const handleSubmit = () => {
     if (!emailError && !passwordError) {
       console.log('login successful');
-      navigation.navigate('Home');
+      navigation.navigate('trial');
     } else {
       console.log('There is some problem');
     }

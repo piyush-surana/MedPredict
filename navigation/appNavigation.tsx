@@ -7,7 +7,7 @@ import WelcomeScreen from '../screens/WelcomeScreen';
 import LoginScreen from '../screens/LoginScreen';
 import SignUpScreen from '../screens/SignupScreen';
 import ForgotpwdScreen from '../screens/ForgotpwdScreen';
-
+import Trail from '../screens/HomeScreen';
 
 const Stack = createStackNavigator();
 
@@ -16,6 +16,7 @@ const AppNavigation: React.FC = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Welcome'>
+        <Stack.Screen name='trial' options={{headerShown:false}} component={Trail}/>
         <Stack.Screen name="Home" options={{headerShown: false}} component={HomeScreen} />
         <Stack.Screen name="Welcome" options={{headerShown: false}} component={WelcomeScreen} />
         <Stack.Screen name="Login" options={{headerShown: false}} component={LoginScreen} />
