@@ -6,8 +6,8 @@ import {
   Image,
   TextInput,
   StyleSheet,
-  Button,
 } from 'react-native';
+import auth from '../auth/auth';
 import {themeColors} from '../theme';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -59,7 +59,7 @@ const SignUpScreen = ({navigation}: any) => {
 
   const collectData = async () => {
     const data = {name, email, password};
-    const url = 'http://192.168.203.164:3000/signup';
+    const url = auth.path + 'signup';
     let result = await fetch(url, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -111,8 +111,8 @@ const SignUpScreen = ({navigation}: any) => {
       <ScrollView>
         <View
           style={{
-            borderTopLeftRadius: 50,
-            borderTopRightRadius: 50,
+            borderRadius: 50,
+            margin: 15,
             flex: 1,
             backgroundColor: 'white',
             paddingHorizontal: 20,
@@ -182,10 +182,15 @@ const SignUpScreen = ({navigation}: any) => {
                 Please Enter Valid Value
               </Text>
             ) : null}
-            <View style={{paddingTop: 16}}>
+
+            <Text style={{fontSize: 10, textAlign: 'center',color:'gray'}}>
+              *Password should be of minimum of 6 character and should have
+              atleast 1 Captial letter,1 Small letter,1 digit
+            </Text>
+            <View style={{paddingTop: 12}}>
               <TouchableOpacity
                 style={{
-                  padding: 14,
+                  padding: 10,
                   backgroundColor: 'yellow',
                   borderRadius: 20,
                 }}
@@ -209,7 +214,7 @@ const SignUpScreen = ({navigation}: any) => {
               fontWeight: 'bold',
               color: 'gray',
               textAlign: 'center',
-              paddingVertical: 10,
+              paddingVertical: 5,
             }}>
             Or
           </Text>
@@ -217,7 +222,7 @@ const SignUpScreen = ({navigation}: any) => {
             style={{
               flexDirection: 'row',
               justifyContent: 'center',
-              paddingBottom: 55,
+              paddingBottom: 15,
             }}>
             <Text style={{color: 'gray', fontWeight: 'bold'}}>
               Already have an account?

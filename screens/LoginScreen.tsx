@@ -5,15 +5,14 @@ import {
   TouchableOpacity,
   Image,
   TextInput,
-  KeyboardAvoidingView,
-  Platform,
   StyleSheet,
 } from 'react-native';
 import Snackbar from 'react-native-snackbar';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {useNavigation} from '@react-navigation/native';
 import {themeColors} from '../theme';
 import {ScrollView} from 'react-native-gesture-handler';
+import {useNavigation} from '@react-navigation/native';
+import auth from '../auth/auth';
 
 const LoginScreen = ({navigation}: any) => {
   const [email, setEmail] = useState<string>('');
@@ -50,7 +49,7 @@ const LoginScreen = ({navigation}: any) => {
   };
   const collectData = async () => {
     const data = {email, password};
-    const url = 'http://192.168.203.164:3000/login';
+    const url = auth.path + 'login';
     let result = await fetch(url, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -74,7 +73,7 @@ const LoginScreen = ({navigation}: any) => {
   const handleSubmit = () => {
     if (!emailError && !passwordError) {
       console.log('login successful');
-      navigation.navigate('trial');
+      navigation.navigate('Home1');
     } else {
       console.log('There is some problem');
     }
@@ -95,7 +94,13 @@ const LoginScreen = ({navigation}: any) => {
           <Icon name="arrow-left" size={18} color={'black'}></Icon>
         </TouchableOpacity>
       </View>
-      <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'center',
+          marginBottom: 15,
+          marginTop: 15,
+        }}>
         <Image
           source={require('../assets/images/login_banner.png')}
           style={{width: 370, height: 280}}
@@ -104,87 +109,91 @@ const LoginScreen = ({navigation}: any) => {
       <ScrollView>
         <View
           style={{
-            borderTopLeftRadius: 50,
-            borderTopRightRadius: 50,
+            borderRadius: 50,
+            margin: 15,
             flex: 1,
             backgroundColor: 'white',
             paddingHorizontal: 20,
             paddingTop: 20,
           }}>
-            <View style={{marginVertical: 2}}>
-              <Text style={{color: 'black', marginLeft: 20}}>Email</Text>
+          <View style={{marginVertical: 2}}>
+            <Text style={{color: 'black', marginLeft: 20}}>Email</Text>
+            <TextInput
+              style={{
+                padding: 16,
+                backgroundColor: '#f3f4f6',
+                borderRadius: 20,
+                margin: 10,
+                color: 'black',
+              }}
+              placeholder="Email"
+              placeholderTextColor={'gray'}
+              value={email}
+              onChangeText={setEmail}
+            />
+            {emailError ? (
+              <Text style={{color: 'red', fontSize: 14}}>
+                Please Enter Valid Value
+              </Text>
+            ) : null}
+
+            <Text style={{color: 'black', marginLeft: 20}}>Password</Text>
+            <View style={styles.container}>
               <TextInput
-                style={{
-                  padding: 16,
-                  backgroundColor: '#f3f4f6',
-                  borderRadius: 20,
-                  margin: 10,
-                  color: 'black',
-                }}
-                placeholder="Email"
+                style={styles.input}
+                secureTextEntry={!passwordVisibility}
                 placeholderTextColor={'gray'}
-                value={email}
-                onChangeText={setEmail}
+                placeholder="Password"
+                value={password}
+                onChangeText={setPassword}
               />
-              {emailError ? (
-                <Text style={{color: 'red', fontSize: 14}}>
-                  Please Enter Valid Value
-                </Text>
-              ) : null}
-
-              <Text style={{color: 'black', marginLeft: 20}}>Password</Text>
-              <View style={styles.container}>
-                <TextInput
-                  style={styles.input}
-                  secureTextEntry={!passwordVisibility}
-                  placeholderTextColor={'gray'}
-                  placeholder="Password"
-                  value={password}
-                  onChangeText={setPassword}
-                />
-                <TouchableOpacity
-                  style={styles.iconContainer}
-                  onPress={() => setPasswordVisibility(!passwordVisibility)}>
-                  <Icon
-                    name={passwordVisibility ? 'eye-slash' : 'eye'}
-                    size={20}
-                    color="black"
-                  />
-                </TouchableOpacity>
-              </View>
-              {passwordError ? (
-                <Text style={{color: 'red', fontSize: 14}}>
-                  Please Enter Valid Value
-                </Text>
-              ) : null}
-
-              <View style={{paddingTop: 5}}>
-                <TouchableOpacity
-                  style={{flex: 1, alignItems: 'flex-end', marginBottom: 25}}
-                  onPress={() => {
-                    navigation.navigate('Forgot_pwd');
-                  }}>
-                  <Text style={{color: 'gray'}}>Forgot Password?</Text>
-                </TouchableOpacity>
-              </View>
               <TouchableOpacity
-                style={{
-                  padding: 14,
-                  backgroundColor: 'yellow',
-                  borderRadius: 20,
-                }}
-                onPress={validate}>
-                <Text
-                  style={{
-                    fontSize: 22,
-                    fontWeight: 'bold',
-                    color: 'black',
-                    textAlign: 'center',
-                  }}>
-                  Login
-                </Text>
+                style={styles.iconContainer}
+                onPress={() => setPasswordVisibility(!passwordVisibility)}>
+                <Icon
+                  name={passwordVisibility ? 'eye-slash' : 'eye'}
+                  size={20}
+                  color="black"
+                />
               </TouchableOpacity>
             </View>
+            {passwordError ? (
+              <Text style={{color: 'red', fontSize: 14}}>
+                Please Enter Valid Value
+              </Text>
+            ) : null}
+
+            <View>
+              <TouchableOpacity
+                style={{flex: 1, alignItems: 'flex-end', marginBottom: 5}}
+                onPress={() => {
+                  navigation.navigate('Forgot_pwd');
+                }}>
+                <Text style={{color: 'gray'}}>Forgot Password?</Text>
+              </TouchableOpacity>
+            </View>
+            <Text style={{fontSize: 10, textAlign: 'center',color:'gray',paddingBottom:10}}>
+              *Password should be of minimum of 6 character and should have
+              atleast 1 Captial letter,1 Small letter,1 digit
+            </Text>
+            <TouchableOpacity
+              style={{
+                padding: 10,
+                backgroundColor: 'yellow',
+                borderRadius: 20,
+              }}
+              onPress={validate}>
+              <Text
+                style={{
+                  fontSize: 22,
+                  fontWeight: 'bold',
+                  color: 'black',
+                  textAlign: 'center',
+                }}>
+                Login
+              </Text>
+            </TouchableOpacity>
+          </View>
           <Text
             style={{
               fontSize: 18,
@@ -199,7 +208,7 @@ const LoginScreen = ({navigation}: any) => {
             style={{
               flexDirection: 'row',
               justifyContent: 'center',
-              paddingBottom: 115,
+              paddingBottom: 30,
             }}>
             <Text style={{color: 'gray', fontWeight: 'bold'}}>
               Don't have an account?
