@@ -10,31 +10,23 @@ import {
   Image,
 } from 'react-native';
 import 'react-native-gesture-handler';
+import Swiper from 'react-native-swiper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../const/color';
 
 const {width} = Dimensions.get('screen');
 
+const images = [
+  '../assets/images/item1.jpg',
+  '../assets/images/item2.jpg',
+  '../assets/images/item3.jpg',
+];
+
+interface ImageSliderProps {
+  images: string[];
+}
+
 const HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
-  // const categoryIcons = [
-  //   <Icon name="person" size={25} color={COLORS.dark} />,
-  //   <Icon name="calendar-month" size={25} color={COLORS.dark} />,
-  //   <Icon name="payment" size={25} color={COLORS.dark} />,
-  //   <Icon name="place" size={25} color={COLORS.dark} />,
-  // ];
-
-  // const ListCategories: React.FC = () => {
-  //   return (
-  //     <View style={style.categoryContainer}>
-  //       {categoryIcons.map((icon, index) => (
-  //         <View key={index} style={style.iconContainer}>
-  //           {icon}
-  //         </View>
-  //       ))}
-  //     </View>
-  //   );
-  // };
-
   const UserProfileCard: React.FC = () => {
     return (
       <View style={style.userProfileCardContainer}>
@@ -47,6 +39,30 @@ const HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
         <View style={style.userInfoContainer}>
           <Text style={style.userName}>John Doe</Text>
           <Text style={style.userRole}>John_deo@gmail.com</Text>
+        </View>
+      </View>
+    );
+  };
+
+  const ImageSlider: React.FC<ImageSliderProps> = ({images}) => {
+    return (
+      <View style={style.container}>
+        <Swiper style={style.wrapper} showsButtons={false} autoplay={true}>
+          {images.map((image, index) => (
+            <View key={index}>
+              <Image source={{uri: image}} style={style.slideImage} />
+            </View>
+          ))}
+        </Swiper>
+      </View>
+    );
+  };
+
+  const SymptomsCard: React.FC = () => {
+    return (
+      <View style={style.mainCardContainer}>
+        <View style={style.userInfoContainer}>
+          <Text style={style.mainFunction}>Symptoms Questionnaire</Text>
         </View>
       </View>
     );
@@ -73,7 +89,9 @@ const HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
         </View>
         <View>
           <UserProfileCard />
+          <SymptomsCard />
           <Text style={style.sectionTitle}>Suggestion</Text>
+          <ImageSlider images={images} />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -104,12 +122,12 @@ const style = StyleSheet.create({
   userProfileCardContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#BBE7FE',
+    backgroundColor: COLORS.lightblue,
     borderRadius: 10,
     overflow: 'hidden',
     margin: 20,
     shadowColor: 'gray',
-    elevation: 40,
+    elevation: 20,
   },
   userProfileImageContainer: {
     width: 100,
@@ -131,6 +149,31 @@ const style = StyleSheet.create({
   userRole: {
     color: 'gray',
     fontSize: 16,
+  },
+  mainCardContainer: {
+    alignItems: 'center',
+    backgroundColor: COLORS.lightpink,
+    borderRadius: 15,
+    padding: 20,
+    marginVertical: 10,
+    marginHorizontal: 20,
+    shadowColor: 'gray',
+    elevation: 20,
+  },
+  mainFunction: {
+    color: 'black',
+    padding: 30,
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  container: {
+    height: 200,
+  },
+  wrapper: {},
+  slideImage: {
+    width: width,
+    height: 200,
+    resizeMode: 'cover',
   },
 });
 

@@ -5,7 +5,7 @@ const COLORS = {
     secondary: '#e1e8e9',
     light: '#f9f9f9',
     grey: 'gray',
-    //red: 'red',
+    lightpink: '#FFD4DB',
     yellow: 'yellow',
     lightblue:'#BBE7FE',
   };

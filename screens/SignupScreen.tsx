@@ -9,8 +9,14 @@ import {
 } from 'react-native';
 import auth from '../auth/auth';
 import {themeColors} from '../theme';
+import {Dropdown} from 'react-native-element-dropdown';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {ScrollView} from 'react-native-gesture-handler';
+
+const data = [
+  {label: 'Patient', value: 'Patient'},
+  {label: 'Doctor', value: 'Doctor'},
+];
 
 const SignUpScreen = ({navigation}: any) => {
   const [email, setEmail] = useState<string>('');
@@ -20,6 +26,8 @@ const SignUpScreen = ({navigation}: any) => {
   const [emailError, setEmailError] = useState<boolean>(false);
   const [passwordError, setPasswordError] = useState<boolean>(false);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
+  const [value, setValue] = useState('Patient');
+  const [isFocus, setIsFocus] = useState(false);
 
   const validate = () => {
     if (!name) {
@@ -105,7 +113,7 @@ const SignUpScreen = ({navigation}: any) => {
       <View style={{flexDirection: 'row', justifyContent: 'center'}}>
         <Image
           source={require('../assets/images/signup.png')}
-          style={{width: 330, height: 230, margin: 20}}
+          style={{width: 220, height: 140, margin: 15}}
         />
       </View>
       <ScrollView>
@@ -116,7 +124,7 @@ const SignUpScreen = ({navigation}: any) => {
             flex: 1,
             backgroundColor: 'white',
             paddingHorizontal: 20,
-            paddingTop: 20,
+            paddingTop: 10,
           }}>
           <View style={{marginVertical: 2}}>
             <Text style={{color: 'black', marginLeft: 20}}>Full Name</Text>
@@ -157,6 +165,30 @@ const SignUpScreen = ({navigation}: any) => {
                 Please Enter Valid Value
               </Text>
             ) : null}
+            <Text style={{color: 'black', marginLeft: 20}}>User Type</Text>
+            <Dropdown
+              style={{
+                padding: 16,
+                backgroundColor: '#f3f4f6',
+                borderRadius: 20,
+                margin: 10,   
+              }}
+              placeholderStyle={styles.placeholderStyle}
+              selectedTextStyle={styles.selectedTextStyle}
+              data={data}
+              itemTextStyle={{color:'gray'}}
+              maxHeight={300}
+              labelField="label"
+              valueField="value"
+              value={value}
+              onFocus={() => setIsFocus(true)}
+              onBlur={() => setIsFocus(false)}
+              onChange={item => {
+                setValue(item.value);
+                setIsFocus(false);
+              }}
+            />
+
             <Text style={{color: 'black', marginLeft: 20}}>Password</Text>
             <View style={styles.container}>
               <TextInput
@@ -183,7 +215,7 @@ const SignUpScreen = ({navigation}: any) => {
               </Text>
             ) : null}
 
-            <Text style={{fontSize: 10, textAlign: 'center',color:'gray'}}>
+            <Text style={{fontSize: 10, textAlign: 'center', color: 'gray'}}>
               *Password should be of minimum of 6 character and should have
               atleast 1 Captial letter,1 Small letter,1 digit
             </Text>
@@ -252,6 +284,22 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     padding: 10,
+  },
+  dropdown: {
+    height: 50,
+    borderColor: 'gray',
+    borderWidth: 0.5,
+    borderRadius: 8,
+    paddingHorizontal: 8,
+    color:'black'
+  },
+  placeholderStyle: {
+    fontSize: 16,
+    color:'black'
+  },
+  selectedTextStyle: {
+    fontSize: 16,
+    color:'black'
   },
 });
 
