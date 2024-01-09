@@ -16,11 +16,6 @@ import COLORS from '../const/color';
 
 const {width} = Dimensions.get('screen');
 
-const images = [
-  '../assets/images/item1.jpg',
-  '../assets/images/item2.jpg',
-  '../assets/images/item3.jpg',
-];
 
 interface ImageSliderProps {
   images: string[];
@@ -44,15 +39,13 @@ const HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
     );
   };
 
-  const ImageSlider: React.FC<ImageSliderProps> = ({images}) => {
+  const ImageSlider: React.FC = () => {
     return (
       <View style={style.container}>
-        <Swiper style={style.wrapper} showsButtons={false} autoplay={true}>
-          {images.map((image, index) => (
-            <View key={index}>
-              <Image source={{uri: image}} style={style.slideImage} />
-            </View>
-          ))}
+        <Swiper showsButtons={false} autoplay={true} >
+          <Image source={require('../assets/images/item1.jpg')} style={style.slideImage}/>
+          <Image source={require('../assets/images/item2.jpg')} style={style.slideImage}/>
+          <Image source={require('../assets/images/item3.jpg')} style={style.slideImage}/>
         </Swiper>
       </View>
     );
@@ -91,7 +84,7 @@ const HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
           <UserProfileCard />
           <SymptomsCard />
           <Text style={style.sectionTitle}>Suggestion</Text>
-          <ImageSlider images={images} />
+          <ImageSlider  />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -168,11 +161,12 @@ const style = StyleSheet.create({
   },
   container: {
     height: 200,
+    margin:15,
   },
-  wrapper: {},
   slideImage: {
-    width: width,
+    width: width-30,
     height: 200,
+    borderRadius:30,
     resizeMode: 'cover',
   },
 });
