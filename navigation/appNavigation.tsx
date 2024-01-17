@@ -9,6 +9,7 @@ import SignUpScreen from '../screens/SignupScreen';
 import ForgotpwdScreen from '../screens/ForgotpwdScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import UserProfile from '../screens/UserProfile';
+import EditProfile from '../screens/EditProfile';
 import ContactScreen from '../screens/ContactScreen';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import COLORS from '../const/color';
@@ -83,6 +84,11 @@ function StackNavigator() {
         name="Forgot_pwd"
         options={{headerShown: false}}
         component={ForgotpwdScreen}
+      />
+      <Stack.Screen
+        name="Edit_profile"
+        options={{headerShown: false}}
+        component={EditProfile}
       />
     </Stack.Navigator>
   );

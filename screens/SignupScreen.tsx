@@ -7,11 +7,12 @@ import {
   TextInput,
   StyleSheet,
 } from 'react-native';
-import auth from '../auth/auth';
+import {makeApiRequest} from '../auth/helpers';
 import {themeColors} from '../theme';
 import {Dropdown} from 'react-native-element-dropdown';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {ScrollView} from 'react-native-gesture-handler';
+import Snackbar from 'react-native-snackbar';
 
 const data = [
   {label: 'Patient', value: 'Patient'},
@@ -26,7 +27,7 @@ const SignUpScreen = ({navigation}: any) => {
   const [emailError, setEmailError] = useState<boolean>(false);
   const [passwordError, setPasswordError] = useState<boolean>(false);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
-  const [value, setValue] = useState('Patient');
+  const [userType, setValue] = useState('Patient');
   const [isFocus, setIsFocus] = useState(false);
 
   const validate = () => {
@@ -61,25 +62,23 @@ const SignUpScreen = ({navigation}: any) => {
     } else {
       setPasswordError(false);
     }
-
     collectData();
   };
 
   const collectData = async () => {
-    const data = {name, email, password};
-    const url = auth.path + 'signup';
-    let result = await fetch(url, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(data),
-    });
-    const body = result.text.toString;
-    if (result.status == 200) {
+    const data = {name, email, password, userType};
+    const result= makeApiRequest({method: 'post', urlPath: 'login', body: data});
+
+    if ((await result).data['status'] == 200) {
       handlesubmit();
     } else {
-      console.log(result.status);
+      Snackbar.show({
+        text: 'Enter Valid Details',
+        duration: Snackbar.LENGTH_SHORT,
+        textColor: 'white',
+        backgroundColor: 'red',
+      });
     }
-    return result.text();
   };
 
   const handlesubmit = () => {
@@ -127,7 +126,7 @@ const SignUpScreen = ({navigation}: any) => {
             paddingTop: 10,
           }}>
           <View style={{marginVertical: 2}}>
-            <Text style={{color: 'black', marginLeft: 20}}>Full Name</Text>
+            <Text style={{color: 'black', marginLeft: 20}}>Name</Text>
             <TextInput
               style={{
                 padding: 16,
@@ -171,16 +170,16 @@ const SignUpScreen = ({navigation}: any) => {
                 padding: 16,
                 backgroundColor: '#f3f4f6',
                 borderRadius: 20,
-                margin: 10,   
+                margin: 10,
               }}
               placeholderStyle={styles.placeholderStyle}
               selectedTextStyle={styles.selectedTextStyle}
               data={data}
-              itemTextStyle={{color:'gray'}}
+              itemTextStyle={{color: 'gray'}}
               maxHeight={300}
               labelField="label"
               valueField="value"
-              value={value}
+              value={userType}
               onFocus={() => setIsFocus(true)}
               onBlur={() => setIsFocus(false)}
               onChange={item => {
@@ -291,15 +290,15 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderRadius: 8,
     paddingHorizontal: 8,
-    color:'black'
+    color: 'black',
   },
   placeholderStyle: {
     fontSize: 16,
-    color:'black'
+    color: 'black',
   },
   selectedTextStyle: {
     fontSize: 16,
-    color:'black'
+    color: 'black',
   },
 });
 

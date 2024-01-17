@@ -1,19 +1,17 @@
 import React from 'react';
 import {View, SafeAreaView, StyleSheet, Image} from 'react-native';
 import {
-  Avatar,
   Title,
   Caption,
   Text,
   TouchableRipple,
 } from 'react-native-paper';
 import COLORS from '../const/color';
-
 import Icon2 from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon1 from 'react-native-vector-icons/FontAwesome';
 
-const UserProfile: React.FC = () => {
+const UserProfile: React.FC = ({navigation}: any) => {
   return (
     <SafeAreaView style={styles.container}>
       <View
@@ -77,7 +75,9 @@ const UserProfile: React.FC = () => {
       </View>
       <View>
         <View style={styles.box}>
-          <TouchableRipple onPress={() => {}}>
+          <TouchableRipple onPress={() => {
+            navigation.navigate('Edit_profile');
+          }}>
             <View style={styles.menuItem}>
               <Icon1 name="user" color="#FF6347" size={25} />
               <Text style={styles.menuItemText}>Edit Profile</Text>

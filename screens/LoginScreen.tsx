@@ -11,8 +11,8 @@ import Snackbar from 'react-native-snackbar';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {themeColors} from '../theme';
 import {ScrollView} from 'react-native-gesture-handler';
-import {useNavigation} from '@react-navigation/native';
-import auth from '../auth/auth';
+import {makeApiRequest} from '../auth/helpers';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginScreen = ({navigation}: any) => {
   const [email, setEmail] = useState<string>('');
@@ -49,26 +49,40 @@ const LoginScreen = ({navigation}: any) => {
   };
   const collectData = async () => {
     const data = {email, password};
-    const url = auth.path + 'login';
-    let result = await fetch(url, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(data),
-    });
-    const body = result.text.toString;
-    if (result.status == 200) {
-      handleSubmit();
-    } else {
-      Snackbar.show({
-        text: 'Enter Valid Details',
-        duration: Snackbar.LENGTH_SHORT,
-        textColor: 'white',
-        backgroundColor: 'red',
-      });
-      console.log(result.status);
+    const result = makeApiRequest({
+      method: 'post',
+      urlPath: 'login',
+      body: data,
+    })
+
+    try {
+      if ((await (result)).data['status'] == 401) {
+        Snackbar.show({
+          text: 'Invalid Credentials',
+          duration: Snackbar.LENGTH_SHORT,
+          textColor: 'white',
+          backgroundColor: 'red',
+        });
+      }  
+      if ((await result).data['status'] == 200) {
+        // console.log((await result).data['data']);
+        storeData((await result).data['data']);
+        handleSubmit();
+      }
+      
+    } catch {
+      console.log((await result).error);
     }
-    return result.text();
   };
+
+  const storeData=async(value: any)=>{
+    try{
+      // await AsyncStorage.removeItem('body')
+      await AsyncStorage.setItem('body',JSON.parse(value));
+    }catch(e){
+      console.log(e);
+    }
+  }
 
   const handleSubmit = () => {
     if (!emailError && !passwordError) {
@@ -158,7 +172,7 @@ const LoginScreen = ({navigation}: any) => {
               </TouchableOpacity>
             </View>
             {passwordError ? (
-              <Text style={{color: 'red', fontSize: 14}}>
+              <Text style={{color: 'red', fontSize: 14 , marginLeft: 20}}>
                 Please Enter Valid Value
               </Text>
             ) : null}
@@ -172,7 +186,13 @@ const LoginScreen = ({navigation}: any) => {
                 <Text style={{color: 'gray'}}>Forgot Password?</Text>
               </TouchableOpacity>
             </View>
-            <Text style={{fontSize: 10, textAlign: 'center',color:'gray',paddingBottom:10}}>
+            <Text
+              style={{
+                fontSize: 10,
+                textAlign: 'center',
+                color: 'gray',
+                paddingBottom: 10,
+              }}>
               *Password should be of minimum of 6 character and should have
               atleast 1 Captial letter,1 Small letter,1 digit
             </Text>
