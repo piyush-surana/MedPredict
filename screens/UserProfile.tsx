@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {View, SafeAreaView, StyleSheet, Image} from 'react-native';
 import {
   Title,
@@ -7,11 +7,40 @@ import {
   TouchableRipple,
 } from 'react-native-paper';
 import COLORS from '../const/color';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon2 from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon1 from 'react-native-vector-icons/FontAwesome';
 
 const UserProfile: React.FC = ({navigation}: any) => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [city, setCity] = useState('');
+  const [phone, setPhone] = useState('');
+  const [Gender, setGender] = useState('');
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('body');
+      //const value1 = await AsyncStorage.getItem('dob');
+      if (value !== null) {
+       // console.log(value);
+        const data = JSON.parse(value);
+        
+        setEmail(data['email']);
+        setName(data['name']);
+        setCity(data['address']);
+        setPhone(data['phone_no']);
+        setGender(data['gender']);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+  };
+
+  getData();
+
   return (
     <SafeAreaView style={styles.container}>
       <View
@@ -44,31 +73,32 @@ const UserProfile: React.FC = ({navigation}: any) => {
                   {
                     marginTop: 15,
                     marginBottom: 5,
+                    color:COLORS.grey
                   },
                 ]}>
-                John Doe
+                {name}
               </Title>
-              <Caption style={styles.caption}>@j_doe</Caption>
+              <Text style={{color:COLORS.grey}}>{email}</Text>
             </View>
           </View>
         </View>
         <View style={styles.userInfoSection}>
           <View style={styles.row}>
             <Icon name="map-marker-radius" color="#777777" size={20} />
-            <Text style={{color: '#777777', marginLeft: 20}}>
-              Kolkata, India
+            <Text style={{color:COLORS.grey, marginLeft: 20}}>
+              {city}
             </Text>
           </View>
           <View style={styles.row}>
             <Icon name="phone" color="#777777" size={20} />
             <Text style={{color: '#777777', marginLeft: 20}}>
-              +91-900000009
+              {phone}
             </Text>
           </View>
           <View style={styles.row}>
             <Icon name="email" color="#777777" size={20} />
             <Text style={{color: '#777777', marginLeft: 20}}>
-              john_doe@email.com
+              {Gender}
             </Text>
           </View>
         </View>

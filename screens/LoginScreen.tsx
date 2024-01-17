@@ -53,36 +53,59 @@ const LoginScreen = ({navigation}: any) => {
       method: 'post',
       urlPath: 'login',
       body: data,
-    })
+    });
+    // result
+    //   .then(response => {
+    //     if (response.data['status'] === 200) {
+    //       console.log(response.data['status']);
+    //       Snackbar.show({
+    //         text: 'User does not exists',
+    //         duration: Snackbar.LENGTH_SHORT,
+    //         textColor: 'white',
+    //         backgroundColor: 'red',
+    //       });
+    //     }
+    //   })
+    //   .catch(error => {
+    //     // console.log('Error in api', error);
+    //   });
 
     try {
-      if ((await (result)).data['status'] == 401) {
+      console.log('code', (await result).data['status']);
+      if ((await result).data['status'] == 200) {
+        storeData((await result).data['data']);
+        handleSubmit();
+      }
+      if ((await result).data['status'] == 401) {
         Snackbar.show({
-          text: 'Invalid Credentials',
+          text: 'User does not exists',
           duration: Snackbar.LENGTH_SHORT,
           textColor: 'white',
           backgroundColor: 'red',
         });
-      }  
-      if ((await result).data['status'] == 200) {
-        // console.log((await result).data['data']);
-        storeData((await result).data['data']);
-        handleSubmit();
       }
-      
+      if ((await result).data['status'] == 403) {
+        Snackbar.show({
+          text: 'Invaild credentials',
+          duration: Snackbar.LENGTH_SHORT,
+          textColor: 'white',
+          backgroundColor: 'red',
+        });
+      }
     } catch {
-      console.log((await result).error);
+      console.log('catch', (await result).error);
     }
   };
 
-  const storeData=async(value: any)=>{
-    try{
+  const storeData = async (value: any) => {
+    try {
       // await AsyncStorage.removeItem('body')
-      await AsyncStorage.setItem('body',JSON.parse(value));
-    }catch(e){
+      //console.log(value);
+      await AsyncStorage.setItem('body', JSON.stringify(value));
+    } catch (e) {
       console.log(e);
     }
-  }
+  };
 
   const handleSubmit = () => {
     if (!emailError && !passwordError) {
@@ -172,7 +195,7 @@ const LoginScreen = ({navigation}: any) => {
               </TouchableOpacity>
             </View>
             {passwordError ? (
-              <Text style={{color: 'red', fontSize: 14 , marginLeft: 20}}>
+              <Text style={{color: 'red', fontSize: 14, marginLeft: 20}}>
                 Please Enter Valid Value
               </Text>
             ) : null}

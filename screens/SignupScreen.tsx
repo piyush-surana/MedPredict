@@ -27,7 +27,7 @@ const SignUpScreen = ({navigation}: any) => {
   const [emailError, setEmailError] = useState<boolean>(false);
   const [passwordError, setPasswordError] = useState<boolean>(false);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
-  const [userType, setValue] = useState('Patient');
+  const [user_Type, setValue] = useState('Patient');
   const [isFocus, setIsFocus] = useState(false);
 
   const validate = () => {
@@ -66,8 +66,8 @@ const SignUpScreen = ({navigation}: any) => {
   };
 
   const collectData = async () => {
-    const data = {name, email, password, userType};
-    const result= makeApiRequest({method: 'post', urlPath: 'login', body: data});
+    const data = {name, email, password, user_Type};
+    const result= makeApiRequest({method: 'post', urlPath: 'signup', body: data});
 
     if ((await result).data['status'] == 200) {
       handlesubmit();
@@ -179,7 +179,7 @@ const SignUpScreen = ({navigation}: any) => {
               maxHeight={300}
               labelField="label"
               valueField="value"
-              value={userType}
+              value={user_Type}
               onFocus={() => setIsFocus(true)}
               onBlur={() => setIsFocus(false)}
               onChange={item => {

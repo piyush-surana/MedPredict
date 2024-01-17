@@ -26,6 +26,7 @@ const EditProfile: React.FC = ({navigation}: any) => {
   const [gender, setGender] = useState('');
   const [phone_no, setPhone] = useState('');
   const [Dob, setDob] = useState('');
+
   const [LNameError, setLNameError] = useState<boolean>(false);
   const [DobError, setDobError] = useState<boolean>(false);
   const [CityError, setCityError] = useState<boolean>(false);
@@ -41,6 +42,11 @@ const EditProfile: React.FC = ({navigation}: any) => {
         const data = JSON.parse(value);
         setEmail(data['email']);
         setName(data['name']);
+        setLName(data['l_name'])
+        setcity(data['address']);
+        setPhone(data['phone_no']);
+        setGender(data['gender']);
+        setDob(data['date_of_birth']);
       }
       if(value1 !== null){
         setDob(value1.toString);
