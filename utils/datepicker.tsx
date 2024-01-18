@@ -4,13 +4,11 @@ import {TextInput} from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { format } from 'date-fns';
 import COLORS from '../const/color';
 
 const DatePicker = ({setDob,Dob}: any ) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  
-
-  
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -22,9 +20,9 @@ const DatePicker = ({setDob,Dob}: any ) => {
 
   const handleConfirm = (date: any) => {
     const date1 = new Date(date);
-    //setDob(date1.toDateString());
-    storeData(date1.toString);
-    setDob(`${date1}`);
+    const formated=format(date1, 'yyyy-MM-dd');
+    storeData(formated);
+    setDob(formated);
     hideDatePicker();
   };
 
@@ -53,7 +51,7 @@ const DatePicker = ({setDob,Dob}: any ) => {
         <TextInput
           style={{color: 'black', paddingRight: 10, width: 270}}
           placeholder="Select date"
-          value={Dob.split('T')[0]}
+          value={Dob}
           placeholderTextColor={COLORS.grey}
           editable={false}></TextInput>
       </View>

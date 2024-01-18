@@ -125,7 +125,19 @@ const SignUpScreen = ({navigation}: any) => {
 
   return (
     <View style={{flex: 1, backgroundColor: themeColors.bg}}>
-      
+      <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={{
+            backgroundColor: 'yellow',
+            padding: 12,
+            borderRadius: 6,
+            marginLeft: 15,
+            marginTop: 15,
+          }}>
+          <Icon name="arrow-left" size={18} color={'black'}></Icon>
+        </TouchableOpacity>
+      </View>
 
       <View style={{flexDirection: 'row', justifyContent: 'center'}}>
         <Image
