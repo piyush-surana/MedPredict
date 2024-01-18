@@ -49,52 +49,65 @@ const LoginScreen = ({navigation}: any) => {
   };
   const collectData = async () => {
     const data = {email, password};
-    const result = makeApiRequest({
+    makeApiRequest({
       method: 'post',
       urlPath: 'login',
       body: data,
-    });
-    // result
-    //   .then(response => {
-    //     if (response.data['status'] === 200) {
-    //       console.log(response.data['status']);
-    //       Snackbar.show({
-    //         text: 'User does not exists',
-    //         duration: Snackbar.LENGTH_SHORT,
-    //         textColor: 'white',
-    //         backgroundColor: 'red',
-    //       });
-    //     }
-    //   })
-    //   .catch(error => {
-    //     // console.log('Error in api', error);
-    //   });
+    }).then(response => {
+        if (response.data['status']== 200) {
+          console.log(response.data.data);
+          if(response.data.data.status == 200)
+          {
+            storeData(response.data['data']);
+            handleSubmit();
+            return;
+          }
 
-    try {
-      console.log('code', (await result).data['status']);
-      if ((await result).data['status'] == 200) {
-        storeData((await result).data['data']);
-        handleSubmit();
+            console.log({resp : response.data.data.status})
+            Snackbar.show({
+              text: response.data.data.message,
+              duration: Snackbar.LENGTH_SHORT,
+              textColor: 'white',
+              backgroundColor: 'red',
+            });
+          
+        }
       }
-      if ((await result).data['status'] == 401) {
+      ).catch(error => {
+        console.log('Error in api', error);
         Snackbar.show({
-          text: 'User does not exists',
+          text: 'Internal error',
           duration: Snackbar.LENGTH_SHORT,
-          textColor: 'white',
+          textColor: 'white',  
           backgroundColor: 'red',
         });
-      }
-      if ((await result).data['status'] == 403) {
-        Snackbar.show({
-          text: 'Invaild credentials',
-          duration: Snackbar.LENGTH_SHORT,
-          textColor: 'white',
-          backgroundColor: 'red',
-        });
-      }
-    } catch {
-      console.log('catch', (await result).error);
-    }
+      });
+
+    // try {
+    //   console.log('code', (await result).data['status']);
+    //   if ((await result).data['status'] == 200) {
+    //     storeData((await result).data['data']);
+    //     handleSubmit();
+    //   }
+    //   if ((await result).data['status'] == 401) {
+    //     Snackbar.show({
+    //       text: 'User does not exists',
+    //       duration: Snackbar.LENGTH_SHORT,
+    //       textColor: 'white',
+    //       backgroundColor: 'red',
+    //     });
+    //   }
+    //   if ((await result).data['status'] == 403) {
+    //     Snackbar.show({
+    //       text: 'Invaild credentials',
+    //       duration: Snackbar.LENGTH_SHORT,
+    //       textColor: 'white',
+    //       backgroundColor: 'red',
+    //     });
+    //   }
+    // } catch {
+    //   console.log('catch', (await result).error);
+    // }
   };
 
   const storeData = async (value: any) => {

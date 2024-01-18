@@ -6,9 +6,11 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import COLORS from '../const/color';
 
-const DatePicker = () => {
+const DatePicker = ({setDob,Dob}: any ) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  const [date, setDate] = useState('');
+  
+
+  
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -19,20 +21,21 @@ const DatePicker = () => {
   };
 
   const handleConfirm = (date: any) => {
-    const date1=new Date(date);
-    setDate(date1.toDateString());
+    const date1 = new Date(date);
+    //setDob(date1.toDateString());
     storeData(date1.toString);
+    setDob(`${date1}`);
     hideDatePicker();
   };
 
-  const storeData=async(value: any)=>{
-    try{
+  const storeData = async (value: any) => {
+    try {
       // await AsyncStorage.removeItem('body')
-      await AsyncStorage.setItem('dob',value);
-    }catch(e){
+      await AsyncStorage.setItem('dob', value);
+    } catch (e) {
       console.log(e);
     }
-  }
+  };
 
   return (
     <View
@@ -48,9 +51,9 @@ const DatePicker = () => {
           margin: 10,
         }}>
         <TextInput
-          style={{color: 'black',paddingRight:10,width:270}}
+          style={{color: 'black', paddingRight: 10, width: 270}}
           placeholder="Select date"
-          value={date}
+          value={Dob.split('T')[0]}
           placeholderTextColor={COLORS.grey}
           editable={false}></TextInput>
       </View>

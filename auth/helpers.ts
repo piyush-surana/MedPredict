@@ -53,8 +53,10 @@ export const makeApiRequest = async ({
   let data: any, error: any;
   try {
     data = await axios(config);
+    //console.log({data})
   } catch (err) {
     error = err;
+    // console.log({error : })
   }
   return {error, data};
 };

@@ -3,14 +3,8 @@ import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {themeColors} from '../theme';
 import {useNavigation} from '@react-navigation/native';
-import SignUpScreen from './SignUpScreen';
 
-import { StackNavigationProp } from '@react-navigation/stack';
-
-
-const WelcomeScreen= ({navigation}: any) => {
-  //const navigation = useNavigation();
-
+const WelcomeScreen = ({navigation}: any) => {
   const goToDetails = () => {
     navigation.navigate('SignUp');
   };
@@ -60,9 +54,10 @@ const WelcomeScreen= ({navigation}: any) => {
 
 const styles = StyleSheet.create({
   view: {
-    flex: 1, 
+    flex: 1,
     justifyContent: 'space-around',
-    marginVertical: 4},
+    marginVertical: 4,
+  },
 });
 
 export default WelcomeScreen;

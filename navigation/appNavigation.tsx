@@ -11,6 +11,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import UserProfile from '../screens/UserProfile';
 import EditProfile from '../screens/EditProfile';
 import ContactScreen from '../screens/ContactScreen';
+import WorkScreen from '../screens/work_in_progress';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import COLORS from '../const/color';
 
@@ -89,6 +90,11 @@ function StackNavigator() {
         name="Edit_profile"
         options={{headerShown: false}}
         component={EditProfile}
+      />
+            <Stack.Screen
+        name="Work_screen"
+        options={{headerShown: false}}
+        component={WorkScreen}
       />
     </Stack.Navigator>
   );

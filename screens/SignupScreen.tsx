@@ -67,18 +67,48 @@ const SignUpScreen = ({navigation}: any) => {
 
   const collectData = async () => {
     const data = {name, email, password, user_Type};
-    const result= makeApiRequest({method: 'post', urlPath: 'signup', body: data});
-
-    if ((await result).data['status'] == 200) {
-      handlesubmit();
-    } else {
+    makeApiRequest({
+      method: 'post',
+      urlPath: 'signup',
+      body: data,
+    }).then(response => {
+      if (response.data['status']== 200) {
+        console.log(response.data.data);
+        if(response.data.data.status == 200)
+        {
+          handlesubmit();
+          return;
+        }
+          console.log({resp : response.data.data.status})
+          Snackbar.show({
+            text: response.data.data.message,
+            duration: Snackbar.LENGTH_SHORT,
+            textColor: 'white',
+            backgroundColor: 'red',
+          });
+        
+      }
+    }
+    ).catch(error => {
+      console.log('Error in api', error);
       Snackbar.show({
-        text: 'Enter Valid Details',
+        text: 'Internal error',
         duration: Snackbar.LENGTH_SHORT,
-        textColor: 'white',
+        textColor: 'white',  
         backgroundColor: 'red',
       });
-    }
+    });
+
+    // if ((await result).data['status'] == 200) {
+    //   handlesubmit();
+    // } else {
+    //   Snackbar.show({
+    //     text: 'Enter Valid Details',
+    //     duration: Snackbar.LENGTH_SHORT,
+    //     textColor: 'white',
+    //     backgroundColor: 'red',
+    //   });
+    // }
   };
 
   const handlesubmit = () => {
@@ -95,19 +125,7 @@ const SignUpScreen = ({navigation}: any) => {
 
   return (
     <View style={{flex: 1, backgroundColor: themeColors.bg}}>
-      <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={{
-            backgroundColor: 'yellow',
-            padding: 12,
-            borderRadius: 6,
-            marginLeft: 15,
-            marginTop: 15,
-          }}>
-          <Icon name="arrow-left" size={18} color={'black'}></Icon>
-        </TouchableOpacity>
-      </View>
+      
 
       <View style={{flexDirection: 'row', justifyContent: 'center'}}>
         <Image

@@ -115,7 +115,7 @@ const UserProfile: React.FC = ({navigation}: any) => {
           </TouchableRipple>
         </View>
         <View style={styles.box}>
-          <TouchableRipple onPress={() => {}}>
+          <TouchableRipple onPress={() => {navigation.navigate('Work_screen')}}>
             <View style={styles.menuItem}>
               <Icon name="credit-card" color="#FF6347" size={25} />
               <Text style={styles.menuItemText}>Payment</Text>
@@ -123,7 +123,7 @@ const UserProfile: React.FC = ({navigation}: any) => {
           </TouchableRipple>
         </View>
         <View style={styles.box}>
-          <TouchableRipple onPress={() => {}}>
+          <TouchableRipple onPress={() => {navigation.navigate('Work_screen')}}>
             <View style={styles.menuItem}>
               <Icon name="account-check-outline" color="#FF6347" size={25} />
               <Text style={styles.menuItemText}>Support</Text>
@@ -131,7 +131,7 @@ const UserProfile: React.FC = ({navigation}: any) => {
           </TouchableRipple>
         </View>
         <View style={styles.box}>
-          <TouchableRipple onPress={() => {}}>
+          <TouchableRipple onPress={() => {navigation.navigate('Work_screen')}}>
             <View style={styles.menuItem}>
               <Icon2 name="settings" color="#FF6347" size={25} />
               <Text style={styles.menuItemText}>Settings</Text>
@@ -139,7 +139,7 @@ const UserProfile: React.FC = ({navigation}: any) => {
           </TouchableRipple>
         </View>
         <View style={styles.box}>
-          <TouchableRipple onPress={() => {}}>
+          <TouchableRipple onPress={() => {navigation.navigate('Welcome')}}>
             <View style={styles.menuItem}>
               <Icon2 name="logout" color="#FF6347" size={25} />
               <Text style={styles.menuItemText}>Log-Out</Text>

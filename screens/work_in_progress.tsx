@@ -9,7 +9,7 @@ import COLORS from '../const/color';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
-const ContactScreen= ({navigation}: any) => {
+const WorkScreen= ({navigation}: any) => {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
@@ -48,4 +48,4 @@ const styles = StyleSheet.create({
     marginVertical: 4},
 });
 
-export default ContactScreen;
+export default WorkScreen;

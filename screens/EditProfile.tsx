@@ -14,9 +14,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Snackbar from 'react-native-snackbar';
 import COLORS from '../const/color';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { makeApiRequest } from '../auth/helpers';
+import {makeApiRequest} from '../auth/helpers';
 import DatePicker from '../utils/datepicker';
-
 
 const EditProfile: React.FC = ({navigation}: any) => {
   const [name, setName] = useState('');
@@ -36,19 +35,19 @@ const EditProfile: React.FC = ({navigation}: any) => {
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem('body');
-      const value1=await  AsyncStorage.getItem('dob');
+      const value1 = await AsyncStorage.getItem('dob');
       if (value !== null) {
         //console.log(value);
         const data = JSON.parse(value);
         setEmail(data['email']);
         setName(data['name']);
-        setLName(data['l_name'])
+        setLName(data['l_name']);
         setcity(data['address']);
         setPhone(data['phone_no']);
         setGender(data['gender']);
-        setDob(data['date_of_birth']);
+        setDob(data['date_of_birth'].split('T')[0]);
       }
-      if(value1 !== null){
+      if (value1 !== null) {
         setDob(value1.toString);
       }
     } catch (e) {
@@ -102,45 +101,42 @@ const EditProfile: React.FC = ({navigation}: any) => {
     } else if (!/^[0-9]+$/.test(phone_no)) {
       setPhoneError(true);
       return false;
-    }else if(phone_no.length!==10){
+    } else if (phone_no.length !== 10) {
       setPhoneError(true);
       return false;
-    }
-     else {
+    } else {
       setPhoneError(false);
     }
     collectData();
   };
 
   const collectData = async () => {
-    const date_of_birth='2003-05-12';
-    const data = {email,l_name,date_of_birth,address ,gender,phone_no};
+    const date_of_birth = '2003-05-12';
+    const data = {email, l_name, date_of_birth, address, gender, phone_no};
     const result = makeApiRequest({
       method: 'post',
       urlPath: 'fill',
       body: data,
     });
     try {
-      if ((await (result)).data['status'] == 401) {
+      if ((await result).data['status'] == 401) {
         Snackbar.show({
           text: 'Invalid Credentials',
           duration: Snackbar.LENGTH_SHORT,
           textColor: 'white',
           backgroundColor: 'red',
         });
-      }  
+      }
       if ((await result).data['status'] == 200) {
         // console.log((await result).data['data']);
         //storeData((await result).data['data']);
         //handleSubmit();
         Alert.alert('data successfully Updated');
       }
-      
     } catch {
       console.log((await result).error);
     }
   };
-
 
   return (
     <SafeAreaView
@@ -151,10 +147,22 @@ const EditProfile: React.FC = ({navigation}: any) => {
       <View
         style={{
           backgroundColor: COLORS.primary,
-          height: 65,
-          padding: 15,
+          height: 70,
+          padding: 10,
         }}>
-        <View style={{flex: 1, flexDirection: 'row'}}>
+        <View style={{flex: 1, flexDirection: 'row',alignItems:'center'}}>
+          <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
+            <TouchableOpacity
+              onPress={() => navigation.goBack()}
+              style={{
+                backgroundColor: 'yellow',
+                padding: 10,
+                borderRadius: 6,
+                margin:5,
+              }}>
+              <Icon name="arrow-left" size={18} color={'black'}></Icon>
+            </TouchableOpacity>
+          </View>
           <Text style={style.headerTitle}>Your Health, Your Way</Text>
         </View>
       </View>
@@ -287,7 +295,7 @@ const EditProfile: React.FC = ({navigation}: any) => {
               flexDirection: 'column',
             }}>
             <Text style={{color: 'black', marginLeft: 20}}>Date of Birth</Text>
-            <DatePicker />
+            <DatePicker setDob={setDob} Dob={Dob} />
           </View>
           {DobError ? (
             <Text style={{color: 'red', fontSize: 14, marginLeft: 20}}>
@@ -353,7 +361,8 @@ const EditProfile: React.FC = ({navigation}: any) => {
               justifyContent: 'center',
               padding: 10,
               margin: 10,
-            }} onPress={validate}>
+            }}
+            onPress={validate}>
             <Text
               style={{
                 color: COLORS.dark,
@@ -373,6 +382,7 @@ const style = StyleSheet.create({
     color: COLORS.white,
     fontWeight: 'bold',
     fontSize: 23,
+    paddingLeft:10,
   },
   container: {
     flex: 1,

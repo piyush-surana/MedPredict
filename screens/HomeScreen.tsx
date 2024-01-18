@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -14,11 +14,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Swiper from 'react-native-swiper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../const/color';
-import { formToJSON } from 'axios';
+import {formToJSON} from 'axios';
 
 const {width} = Dimensions.get('screen');
-
-
 
 interface ImageSliderProps {
   images: string[];
@@ -48,17 +46,24 @@ const HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
 
   const UserProfileCard: React.FC = () => {
     return (
-      <View style={style.userProfileCardContainer}>
-        <View style={style.userProfileImageContainer}>
-          <Image
-            source={require('../assets/images/avatar.png')}
-            style={{height: 90, width: 60}}
-          />
-        </View>
-        <View style={style.userInfoContainer}>
-          <Text style={style.userName}>{name}</Text>
-          <Text style={style.userRole}>{email}</Text>
-        </View>
+      <View>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('User');
+          }}>
+          <View style={style.userProfileCardContainer}>
+            <View style={style.userProfileImageContainer}>
+              <Image
+                source={require('../assets/images/avatar.png')}
+                style={{height: 90, width: 60}}
+              />
+            </View>
+            <View style={style.userInfoContainer}>
+              <Text style={style.userName}>{name}</Text>
+              <Text style={style.userRole}>{email}</Text>
+            </View>
+          </View>
+        </TouchableOpacity>
       </View>
     );
   };
@@ -87,9 +92,14 @@ const HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
   const SymptomsCard: React.FC = () => {
     return (
       <View style={style.mainCardContainer}>
-        <View style={style.userInfoContainer}>
-          <Text style={style.mainFunction}>Symptoms Questionnaire</Text>
-        </View>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('Work_screen');
+          }}>
+          <View style={style.userInfoContainer}>
+            <Text style={style.mainFunction}>Symptoms Questionnaire</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     );
   };
@@ -117,12 +127,7 @@ const HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
           <Text style={{color:COLORS.primary,fontSize:26,fontWeight:'bold',paddingVertical:10,paddingHorizontal:20}}>Welcome {name}</Text>
         </View> */}
         <View>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('User');
-            }}>
-            <UserProfileCard />
-          </TouchableOpacity>
+          <UserProfileCard />
           <SymptomsCard />
           <Text style={style.sectionTitle}>Suggestion</Text>
           <ImageSlider />
@@ -154,11 +159,11 @@ const style = StyleSheet.create({
     color: 'gray',
   },
   userProfileCardContainer: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: COLORS.lightblue,
     borderRadius: 10,
-    overflow: 'hidden',
     margin: 20,
     shadowColor: 'gray',
     elevation: 20,
