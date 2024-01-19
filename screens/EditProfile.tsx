@@ -117,7 +117,8 @@ const EditProfile: React.FC = ({navigation}: any) => {
         console.log(response.data.data);
         if(response.data.data.status == 200)
         {
-          Alert.alert('data successfully Updated');
+          Alert.alert('data successfully Updated please login again to see changes');
+          navigation.navigate('Home1');
           return;
         }
 
@@ -358,7 +359,9 @@ const EditProfile: React.FC = ({navigation}: any) => {
               padding: 10,
               margin: 10,
             }}
+            disabled={!flag}
             onPress={validate}>
+            
             <Text
               style={{
                 color: COLORS.dark,
