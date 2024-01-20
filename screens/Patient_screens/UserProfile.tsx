@@ -2,11 +2,10 @@ import React,{useState} from 'react';
 import {View, SafeAreaView, StyleSheet, Image} from 'react-native';
 import {
   Title,
-  Caption,
   Text,
   TouchableRipple,
 } from 'react-native-paper';
-import COLORS from '../const/color';
+import COLORS from '../../const/color';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon2 from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -22,11 +21,8 @@ const UserProfile: React.FC = ({navigation}: any) => {
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem('body');
-      //const value1 = await AsyncStorage.getItem('dob');
       if (value !== null) {
-       // console.log(value);
         const data = JSON.parse(value);
-        
         setEmail(data['email']);
         setName(data['name']);
         setCity(data['address']);
@@ -36,9 +32,7 @@ const UserProfile: React.FC = ({navigation}: any) => {
     } catch (e) {
       console.log(e);
     }
-
   };
-
   getData();
 
   return (
@@ -57,7 +51,7 @@ const UserProfile: React.FC = ({navigation}: any) => {
         <View style={styles.userInfoSection}>
           <View style={{flexDirection: 'row', marginTop: 15}}>
             <Image
-              source={require('../assets/images/avatar.png')}
+              source={require('../../assets/images/avatar.png')}
               style={{
                 width: 100,
                 height: 100,
@@ -96,7 +90,7 @@ const UserProfile: React.FC = ({navigation}: any) => {
             </Text>
           </View>
           <View style={styles.row}>
-            <Icon name="email" color="#777777" size={20} />
+            <Icon1 name="square" color="#777777" size={20} />
             <Text style={{color: '#777777', marginLeft: 20}}>
               {Gender}
             </Text>
@@ -118,12 +112,12 @@ const UserProfile: React.FC = ({navigation}: any) => {
           <TouchableRipple onPress={() => {navigation.navigate('Work_screen')}}>
             <View style={styles.menuItem}>
               <Icon name="credit-card" color="#FF6347" size={25} />
-              <Text style={styles.menuItemText}>Payment</Text>
+              <Text style={styles.menuItemText}>Your Appointments</Text>
             </View>
           </TouchableRipple>
         </View>
         <View style={styles.box}>
-          <TouchableRipple onPress={() => {navigation.navigate('Work_screen')}}>
+          <TouchableRipple onPress={() => {navigation.navigate('Support')}}>
             <View style={styles.menuItem}>
               <Icon name="account-check-outline" color="#FF6347" size={25} />
               <Text style={styles.menuItemText}>Support</Text>
@@ -131,7 +125,7 @@ const UserProfile: React.FC = ({navigation}: any) => {
           </TouchableRipple>
         </View>
         <View style={styles.box}>
-          <TouchableRipple onPress={() => {navigation.navigate('Work_screen')}}>
+          <TouchableRipple onPress={() => {navigation.navigate('Settings')}}>
             <View style={styles.menuItem}>
               <Icon2 name="settings" color="#FF6347" size={25} />
               <Text style={styles.menuItemText}>Settings</Text>
@@ -185,27 +179,9 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
   },
-  caption: {
-    fontSize: 14,
-    lineHeight: 14,
-    fontWeight: '500',
-  },
   row: {
     flexDirection: 'row',
     marginBottom: 10,
-  },
-  infoBoxWrapper: {
-    borderBottomColor: '#dddddd',
-    borderBottomWidth: 1,
-    borderTopColor: '#dddddd',
-    borderTopWidth: 1,
-    flexDirection: 'row',
-    height: 100,
-  },
-  infoBox: {
-    width: '50%',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   menuItem: {
     flexDirection: 'row',

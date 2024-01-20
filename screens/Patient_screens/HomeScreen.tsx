@@ -13,14 +13,11 @@ import 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Swiper from 'react-native-swiper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import COLORS from '../const/color';
-import {formToJSON} from 'axios';
+import COLORS from '../../const/color';
+
 
 const {width} = Dimensions.get('screen');
 
-interface ImageSliderProps {
-  images: string[];
-}
 
 const HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
   const [name, setName] = useState('');
@@ -29,11 +26,8 @@ const HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem('body');
-      //const value1 = await AsyncStorage.getItem('dob');
       if (value !== null) {
-        //console.log(value);
         const data = JSON.parse(value);
-        //console.log(data);
         setEmail(data['email']);
         setName(data['name']);
       }
@@ -54,7 +48,7 @@ const HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
           <View style={style.userProfileCardContainer}>
             <View style={style.userProfileImageContainer}>
               <Image
-                source={require('../assets/images/avatar.png')}
+                source={require('../../assets/images/avatar.png')}
                 style={{height: 90, width: 60}}
               />
             </View>
@@ -73,15 +67,15 @@ const HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
       <View style={style.container}>
         <Swiper showsButtons={false} autoplay={true}>
           <Image
-            source={require('../assets/images/item1.jpg')}
+            source={require('../../assets/images/item1.jpg')}
             style={style.slideImage}
           />
           <Image
-            source={require('../assets/images/item2.jpg')}
+            source={require('../../assets/images/item2.jpg')}
             style={style.slideImage}
           />
           <Image
-            source={require('../assets/images/item3.jpg')}
+            source={require('../../assets/images/item3.jpg')}
             style={style.slideImage}
           />
         </Swiper>
@@ -123,9 +117,6 @@ const HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
             />
           </View>
         </View>
-        {/* <View>
-          <Text style={{color:COLORS.primary,fontSize:26,fontWeight:'bold',paddingVertical:10,paddingHorizontal:20}}>Welcome {name}</Text>
-        </View> */}
         <View>
           <UserProfileCard />
           <SymptomsCard />
@@ -138,14 +129,7 @@ const HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
 };
 
 const style = StyleSheet.create({
-  // The existing styles remain the same
-  header: {
-    paddingVertical: 20,
-    paddingHorizontal: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    backgroundColor: COLORS.primary,
-  },
+  
   headerTitle: {
     color: COLORS.white,
     fontWeight: 'bold',

@@ -28,7 +28,6 @@ const DatePicker = ({setDob,Dob}: any ) => {
 
   const storeData = async (value: any) => {
     try {
-      // await AsyncStorage.removeItem('body')
       await AsyncStorage.setItem('dob', value);
     } catch (e) {
       console.log(e);

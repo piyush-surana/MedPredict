@@ -20,6 +20,7 @@ const LoginScreen = ({navigation}: any) => {
   const [emailError, setEmailError] = useState<boolean>(false);
   const [passwordError, setPasswordError] = useState<boolean>(false);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
+  const [user, setUser]=useState('');
 
   const validate = () => {
     if (!email) {
@@ -58,7 +59,10 @@ const LoginScreen = ({navigation}: any) => {
           console.log(response.data.data);
           if(response.data.data.status == 200)
           {
+            setUser(response.data.data['user_type']);
             storeData(response.data['data']);
+            setEmail('');
+            setPassword("");
             handleSubmit();
             return;
           }
@@ -83,47 +87,27 @@ const LoginScreen = ({navigation}: any) => {
         });
       });
 
-    // try {
-    //   console.log('code', (await result).data['status']);
-    //   if ((await result).data['status'] == 200) {
-    //     storeData((await result).data['data']);
-    //     handleSubmit();
-    //   }
-    //   if ((await result).data['status'] == 401) {
-    //     Snackbar.show({
-    //       text: 'User does not exists',
-    //       duration: Snackbar.LENGTH_SHORT,
-    //       textColor: 'white',
-    //       backgroundColor: 'red',
-    //     });
-    //   }
-    //   if ((await result).data['status'] == 403) {
-    //     Snackbar.show({
-    //       text: 'Invaild credentials',
-    //       duration: Snackbar.LENGTH_SHORT,
-    //       textColor: 'white',
-    //       backgroundColor: 'red',
-    //     });
-    //   }
-    // } catch {
-    //   console.log('catch', (await result).error);
-    // }
   };
 
   const storeData = async (value: any) => {
     try {
-      // await AsyncStorage.removeItem('body')
-      //console.log(value);
       await AsyncStorage.setItem('body', JSON.stringify(value));
     } catch (e) {
       console.log(e);
     }
   };
 
+
   const handleSubmit = () => {
     if (!emailError && !passwordError) {
       console.log('login successful');
+      if(user == "Patient"){
+        console.log('Patient_part');
       navigation.navigate('Home1');
+      }else{
+        console.log('Doctor_part');
+        navigation.navigate('Doctor_Home');   
+      }
     } else {
       console.log('There is some problem');
     }

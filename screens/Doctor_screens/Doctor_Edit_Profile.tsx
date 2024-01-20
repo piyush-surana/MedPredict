@@ -11,47 +11,42 @@ import {
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Dropdown} from 'react-native-element-dropdown';
 import Snackbar from 'react-native-snackbar';
-import COLORS from '../const/color';
+import COLORS from '../../const/color';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {makeApiRequest} from '../auth/helpers';
-import DatePicker from '../utils/datepicker';
+import {makeApiRequest} from '../../auth/helpers';
+import DatePicker from '../../utils/datepicker';
 
-const EditProfile: React.FC = ({navigation}: any) => {
+const Doctor_EditProfile: React.FC = ({navigation}: any) => {
   const [name, setName] = useState('');
+  const [Lname, setLName] = useState('');
   const [email, setEmail] = useState('');
   const [address, setcity] = useState('');
-  const [gender, setGender] = useState('');
   const [phone_no, setPhone] = useState('');
-  const [date_of_birth, setDob] = useState('');
-
-  const [DobError, setDobError] = useState<boolean>(false);
+  const [hospitalname, setHospital] = useState('');
+  const [special, setSpecial] = useState('');
+  const [LnameError, setLnameError] = useState<boolean>(false);
   const [CityError, setCityError] = useState<boolean>(false);
-  const [GenderError, setGenderError] = useState<boolean>(false);
+  const [hospitalError, sethosiptalError] = useState<boolean>(false);
+  const [specialError, setspecialError] = useState<boolean>(false);
   const [PhoneError, setPhoneError] = useState<boolean>(false);
   const [flag, setFlag] = useState(false);
 
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem('body');
-      //const value1 = await AsyncStorage.getItem('dob');
-      //console.log(value);
       if (value !== null) {
-        
         const data = JSON.parse(value);
-        //console.log(data.is_empty);
-        if (data.is_empty == 1) { 
+        if (data.is_empty == 1) {
           setEmail(data['email']);
           setName(data['name']);
           setFlag(true);
-        }
-        else{
+        } else {
           setEmail(data['email']);
           setName(data['name']);
           setcity(data['address']);
           setPhone(data['phone_no']);
-          setGender(data['gender']);
-          setDob(data['date_of_birth']);
         }
       }
     } catch (e) {
@@ -62,7 +57,16 @@ const EditProfile: React.FC = ({navigation}: any) => {
   getData();
 
   const validate = () => {
-  
+    if (!Lname) {
+      setLnameError(true);
+      return false;
+    } else if (!/^[A-Za-z]+$/.test(address)) {
+      setLnameError(true);
+      return false;
+    } else {
+      setLnameError(false);
+    }
+
     if (!address) {
       setCityError(true);
       return false;
@@ -73,21 +77,24 @@ const EditProfile: React.FC = ({navigation}: any) => {
       setCityError(false);
     }
 
-    if (!date_of_birth) {
-      setDobError(true);
+    if (!hospitalname) {
+      sethosiptalError(true);
+      return false;
+    } else if (!/^[A-Za-z]+$/.test(hospitalname)) {
+      sethosiptalError(true);
       return false;
     } else {
-      setDobError(false);
+      sethosiptalError(false);
     }
 
-    if (!gender) {
-      setGenderError(true);
+    if (!special) {
+      setspecialError(true);
       return false;
-    } else if (!/^[A-Za-z]+$/.test(gender)) {
-      setGenderError(true);
+    } else if (!/^[A-Za-z]+$/.test(special)) {
+      setspecialError(true);
       return false;
     } else {
-      setGenderError(false);
+      setspecialError(false);
     }
 
     if (!phone_no) {
@@ -106,59 +113,42 @@ const EditProfile: React.FC = ({navigation}: any) => {
   };
 
   const collectData = async () => {
-    const is_empty=0;
-    const data = {email, date_of_birth, address, gender, phone_no,is_empty};
+    const is_empty = 0;
+    const data = {email, address, phone_no, is_empty};
     makeApiRequest({
       method: 'post',
       urlPath: 'fill',
       body: data,
-    }).then(response => {
-      if (response.data['status']== 200) {
-        console.log(response.data.data);
-        if(response.data.data.status == 200)
-        {
-          Alert.alert('data successfully Updated please login again to see changes');
-          navigation.navigate('Home1');
-          return;
-        }
+    })
+      .then(response => {
+        if (response.data['status'] == 200) {
+          console.log(response.data.data);
+          if (response.data.data.status == 200) {
+            Alert.alert(
+              'data successfully Updated please login again to see changes',
+            );
+            navigation.navigate('Home1');
+            return;
+          }
 
-          console.log({resp : response.data.data.status})
+          console.log({resp: response.data.data.status});
           Snackbar.show({
             text: response.data.data.message,
             duration: Snackbar.LENGTH_SHORT,
             textColor: 'white',
             backgroundColor: 'red',
           });
-        
-      }
-    }
-    ).catch(error => {
-      console.log('Error in api', error);
-      Snackbar.show({
-        text: 'Internal error',
-        duration: Snackbar.LENGTH_SHORT,
-        textColor: 'white',  
-        backgroundColor: 'red',
+        }
+      })
+      .catch(error => {
+        console.log('Error in api', error);
+        Snackbar.show({
+          text: 'Internal error',
+          duration: Snackbar.LENGTH_SHORT,
+          textColor: 'white',
+          backgroundColor: 'red',
+        });
       });
-    });
-    // try {
-    //   if ((await result).data['status'] == 401) {
-    //     Snackbar.show({
-    //       text: 'Invalid Credentials',
-    //       duration: Snackbar.LENGTH_SHORT,
-    //       textColor: 'white',
-    //       backgroundColor: 'red',
-    //     });
-    //   }
-    //   if ((await result).data['status'] == 200) {
-    //     // console.log((await result).data['data']);
-    //     //storeData((await result).data['data']);
-    //     //handleSubmit();
-    //     Alert.alert('data successfully Updated');
-    //   }
-    // } catch {
-    //   //console.log((await result).error);
-    // }
   };
 
   return (
@@ -203,7 +193,7 @@ const EditProfile: React.FC = ({navigation}: any) => {
               borderRadius: 85,
             }}>
             <Image
-              source={require('../assets/images/avatar.png')}
+              source={require('../../assets/images/avatar.png')}
               style={{
                 height: 120,
                 width: 120,
@@ -212,15 +202,6 @@ const EditProfile: React.FC = ({navigation}: any) => {
                 borderColor: COLORS.primary,
               }}
             />
-            {/* <View
-              style={{
-                position: 'absolute',
-                bottom: 0,
-                right: 10,
-                zIndex: 9999,
-              }}>
-              <Icon name="camera" size={25} color={COLORS.secondary} />
-            </View> */}
           </TouchableOpacity>
         </View>
 
@@ -243,6 +224,31 @@ const EditProfile: React.FC = ({navigation}: any) => {
               }}
             />
           </View>
+          <View
+            style={{
+              flexDirection: 'column',
+            }}>
+            <Text style={{color: 'black', marginLeft: 20}}>Last Name</Text>
+            <TextInput
+              value={Lname}
+              placeholder="Enter Last Name"
+              placeholderTextColor={COLORS.grey}
+              onChangeText={value => setLName(value)}
+              editable={flag}
+              style={{
+                padding: 10,
+                backgroundColor: '#f3f4f6',
+                borderRadius: 15,
+                margin: 10,
+                color: 'black',
+              }}
+            />
+          </View>
+          {LnameError ? (
+            <Text style={{color: 'red', fontSize: 14, marginLeft: 20}}>
+              Please Enter Valid Value
+            </Text>
+          ) : null}
           <View
             style={{
               flexDirection: 'column',
@@ -291,24 +297,14 @@ const EditProfile: React.FC = ({navigation}: any) => {
             style={{
               flexDirection: 'column',
             }}>
-            <Text style={{color: 'black', marginLeft: 20}}>Date of Birth</Text>
-            <DatePicker setDob={setDob} Dob={date_of_birth} />
-          </View>
-          {DobError ? (
-            <Text style={{color: 'red', fontSize: 14, marginLeft: 20}}>
-              Please Enter Valid Value
+            <Text style={{color: 'black', marginLeft: 20}}>
+              Hospital / Clinic Name
             </Text>
-          ) : null}
-          <View
-            style={{
-              flexDirection: 'column',
-            }}>
-            <Text style={{color: 'black', marginLeft: 20}}>Gender</Text>
             <TextInput
-              value={gender}
-              placeholder="Select Gender"
+              value={hospitalname}
+              placeholder="Enter Name"
               placeholderTextColor={COLORS.grey}
-              onChangeText={value => setGender(value)}
+              onChangeText={value => setHospital(value)}
               editable={flag}
               style={{
                 padding: 10,
@@ -319,11 +315,38 @@ const EditProfile: React.FC = ({navigation}: any) => {
               }}
             />
           </View>
-          {GenderError ? (
+          {hospitalError ? (
             <Text style={{color: 'red', fontSize: 14, marginLeft: 20}}>
               Please Enter Valid Value
             </Text>
           ) : null}
+
+          <View
+            style={{
+              flexDirection: 'column',
+            }}>
+            <Text style={{color: 'black', marginLeft: 20}}>Specialization</Text>
+            <TextInput
+              value={special}
+              placeholder="Enter Name"
+              placeholderTextColor={COLORS.grey}
+              onChangeText={value => setSpecial(value)}
+              editable={flag}
+              style={{
+                padding: 10,
+                backgroundColor: '#f3f4f6',
+                borderRadius: 15,
+                margin: 10,
+                color: 'black',
+              }}
+            />
+          </View>
+          {specialError ? (
+            <Text style={{color: 'red', fontSize: 14, marginLeft: 20}}>
+              Please Enter Valid Value
+            </Text>
+          ) : null}
+
           <View
             style={{
               flexDirection: 'column',
@@ -349,6 +372,7 @@ const EditProfile: React.FC = ({navigation}: any) => {
               Please Enter Valid Value
             </Text>
           ) : null}
+
           <TouchableOpacity
             style={{
               backgroundColor: COLORS.yellow,
@@ -361,7 +385,6 @@ const EditProfile: React.FC = ({navigation}: any) => {
             }}
             disabled={!flag}
             onPress={validate}>
-            
             <Text
               style={{
                 color: COLORS.dark,
@@ -383,26 +406,6 @@ const style = StyleSheet.create({
     fontSize: 23,
     paddingLeft: 10,
   },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  label: {
-    fontSize: 18,
-    marginBottom: 10,
-  },
-  datePicker: {
-    width: 200,
-    marginBottom: 20,
-  },
-  button: {
-    marginTop: 20,
-    padding: 10,
-    backgroundColor: 'blue',
-    color: 'white',
-    borderRadius: 5,
-  },
 });
 
-export default EditProfile;
+export default Doctor_EditProfile;

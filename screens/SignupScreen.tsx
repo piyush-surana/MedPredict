@@ -27,7 +27,7 @@ const SignUpScreen = ({navigation}: any) => {
   const [emailError, setEmailError] = useState<boolean>(false);
   const [passwordError, setPasswordError] = useState<boolean>(false);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
-  const [user_Type, setValue] = useState('Patient');
+  const [user_Type, setValue] = useState('');
   const [isFocus, setIsFocus] = useState(false);
 
   const validate = () => {
@@ -76,6 +76,10 @@ const SignUpScreen = ({navigation}: any) => {
         console.log(response.data.data);
         if(response.data.data.status == 200)
         {
+          setEmail('');
+          setName('');
+          setPassword('');
+          setValue('');
           handlesubmit();
           return;
         }
@@ -98,17 +102,6 @@ const SignUpScreen = ({navigation}: any) => {
         backgroundColor: 'red',
       });
     });
-
-    // if ((await result).data['status'] == 200) {
-    //   handlesubmit();
-    // } else {
-    //   Snackbar.show({
-    //     text: 'Enter Valid Details',
-    //     duration: Snackbar.LENGTH_SHORT,
-    //     textColor: 'white',
-    //     backgroundColor: 'red',
-    //   });
-    // }
   };
 
   const handlesubmit = () => {
@@ -313,14 +306,6 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     padding: 10,
-  },
-  dropdown: {
-    height: 50,
-    borderColor: 'gray',
-    borderWidth: 0.5,
-    borderRadius: 8,
-    paddingHorizontal: 8,
-    color: 'black',
   },
   placeholderStyle: {
     fontSize: 16,

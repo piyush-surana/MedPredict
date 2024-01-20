@@ -5,14 +5,13 @@ import {
   TouchableOpacity,
   Image,
   TextInput,
-  KeyboardAvoidingView,
-  Platform,
   StyleSheet,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {themeColors} from '../theme';
-import {useNavigation} from '@react-navigation/native';
 import { ScrollView } from 'react-native-gesture-handler';
+import Snackbar from 'react-native-snackbar';
+import { makeApiRequest } from '../auth/helpers';
 
 const ForgotpwdScreen = ({navigation}: any) => {
   const [email, setEmail] = useState<string>('');
@@ -57,10 +56,43 @@ const ForgotpwdScreen = ({navigation}: any) => {
     } else {
       setCPasswordError(false);
     }
-
-    handlesubmit();
+    collectData();
     return true;
   };
+
+  const collectData= async()=>{
+  const data = {email, password};
+  makeApiRequest({
+    method: 'post',
+    urlPath: 'forgot',
+    body: data,
+  }).then(response => {
+      if (response.data['status']== 200) {
+        console.log(response.data.data);
+        if(response.data.data.status == 200)
+        {
+          handlesubmit();
+          return;
+        }
+          console.log({resp : response.data.data.status})
+          Snackbar.show({
+            text: response.data.data.message,
+            duration: Snackbar.LENGTH_SHORT,
+            textColor: 'white',
+            backgroundColor: 'red',
+          }); 
+      }
+    }
+    ).catch(error => {
+      console.log('Error in api', error);
+      Snackbar.show({
+        text: 'Internal error',
+        duration: Snackbar.LENGTH_SHORT,
+        textColor: 'white',  
+        backgroundColor: 'red',
+      });
+    });
+  }
 
   const handlesubmit = () => {
     if (setEmailError.toString()) {
