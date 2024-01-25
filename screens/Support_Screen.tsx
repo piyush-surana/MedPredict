@@ -39,7 +39,7 @@ const Support_Screen: React.FC = ({navigation}: any) => {
           </TouchableRipple>
         </View>
         <View style={styles.box}>
-          <TouchableRipple>
+          <TouchableRipple onPress={()=>{}}>
             <View style={styles.menuItem}>
             <Icon1 name='question-mark' color='orange' size={25} style={{paddingRight:10}}/>
               <Text style={styles.menuItemText}>FAQs</Text>

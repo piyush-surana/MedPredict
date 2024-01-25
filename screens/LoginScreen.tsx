@@ -20,9 +20,9 @@ const LoginScreen = ({navigation}: any) => {
   const [emailError, setEmailError] = useState<boolean>(false);
   const [passwordError, setPasswordError] = useState<boolean>(false);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
-  const [user, setUser]=useState('');
 
   const validate = () => {
+    AsyncStorage.removeItem('body');
     if (!email) {
       setEmailError(true);
       return false;
@@ -54,39 +54,35 @@ const LoginScreen = ({navigation}: any) => {
       method: 'post',
       urlPath: 'login',
       body: data,
-    }).then(response => {
-        if (response.data['status']== 200) {
+    })
+      .then(response => {
+        if (response.data['status'] == 200) {
           console.log(response.data.data);
-          if(response.data.data.status == 200)
-          {
-            setUser(response.data.data['user_type']);
+          if (response.data.data.status == 200) {
             storeData(response.data['data']);
             setEmail('');
-            setPassword("");
-            handleSubmit();
+            setPassword('');
+            handleSubmit(response);
             return;
           }
-
-            console.log({resp : response.data.data.status})
-            Snackbar.show({
-              text: response.data.data.message,
-              duration: Snackbar.LENGTH_SHORT,
-              textColor: 'white',
-              backgroundColor: 'red',
-            });
-          
+          console.log({resp: response.data.data.status});
+          Snackbar.show({
+            text: response.data.data.message,
+            duration: Snackbar.LENGTH_SHORT,
+            textColor: 'white',
+            backgroundColor: 'red',
+          });
         }
-      }
-      ).catch(error => {
+      })
+      .catch(error => {
         console.log('Error in api', error);
         Snackbar.show({
           text: 'Internal error',
           duration: Snackbar.LENGTH_SHORT,
-          textColor: 'white',  
+          textColor: 'white',
           backgroundColor: 'red',
         });
       });
-
   };
 
   const storeData = async (value: any) => {
@@ -97,19 +93,25 @@ const LoginScreen = ({navigation}: any) => {
     }
   };
 
-
-  const handleSubmit = () => {
+  const handleSubmit = (response : any) => {
     if (!emailError && !passwordError) {
-      console.log('login successful');
-      if(user == "Patient"){
-        console.log('Patient_part');
-      navigation.navigate('Home1');
-      }else{
-        console.log('Doctor_part');
-        navigation.navigate('Doctor_Home');   
+      if (response.data.data['user_type'] == 'Patient') {
+        console.log('Patient_Entered');
+        navigation.navigate('Home1');
+        // setUser('');
+      } else if(response.data.data['user_type'] == "Doctor")  {
+        console.log('Doctor_Entered');
+        navigation.navigate('Doctor_Home');
+        // setUser('');
       }
     } else {
-      console.log('There is some problem');
+      // console.log('There is some problem');
+      Snackbar.show({
+        text: 'Unauthorised user',
+        duration: Snackbar.LENGTH_SHORT,
+        textColor: 'white',
+        backgroundColor: 'red',
+      });
     }
   };
 
