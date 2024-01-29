@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {themeColors} from '../theme';
 import {useNavigation} from '@react-navigation/native';
+import COLORS from '../const/color';
 
 const WelcomeScreen = ({navigation}: any) => {
   const goToDetails = () => {
@@ -10,14 +10,14 @@ const WelcomeScreen = ({navigation}: any) => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: themeColors.bg}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.primary}}>
       <View style={styles.view}>
         <Text
           style={{
             color: 'white',
-            fontWeight: 'bold',
             fontSize: 32,
             textAlign: 'center',
+            fontFamily: 'Outfit-Bold',
           }}>
           Let's Get Started!
         </Text>
@@ -39,7 +39,7 @@ const WelcomeScreen = ({navigation}: any) => {
             <Text
               style={{
                 fontSize: 24,
-                fontWeight: 'bold',
+                fontFamily: 'Outfit-Bold',
                 textAlign: 'center',
                 color: 'black',
               }}>

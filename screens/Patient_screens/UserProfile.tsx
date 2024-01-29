@@ -68,22 +68,22 @@ const UserProfile: React.FC = ({navigation}: any) => {
                 ]}>
                 {name}
               </Title>
-              <Text style={{color: COLORS.grey}}>{email}</Text>
+              <Text style={{color: COLORS.grey,fontFamily: 'Outfit-Regular',}}>{email}</Text>
             </View>
           </View>
         </View>
         <View style={styles.userInfoSection}>
           <View style={styles.row}>
             <Icon name="map-marker-radius" color="#777777" size={20} />
-            <Text style={{color: COLORS.grey, marginLeft: 20}}>{city}</Text>
+            <Text style={{color: COLORS.grey, marginLeft: 20,fontFamily: 'Outfit-Regular',}}>{city}</Text>
           </View>
           <View style={styles.row}>
             <Icon name="phone" color={COLORS.grey} size={20} />
-            <Text style={{color: COLORS.grey, marginLeft: 20}}>{phone}</Text>
+            <Text style={{color: COLORS.grey, marginLeft: 20,fontFamily: 'Outfit-Regular',}}>{phone}</Text>
           </View>
           <View style={styles.row}>
             <Icon1 name="square" color={COLORS.grey} size={20} />
-            <Text style={{color: COLORS.grey, marginLeft: 20}}>{Gender}</Text>
+            <Text style={{color: COLORS.grey, marginLeft: 20,fontFamily: 'Outfit-Regular',}}>{Gender}</Text>
           </View>
         </View>
       </View>
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     color: COLORS.white,
-    fontWeight: 'bold',
+    fontFamily: 'Outfit-Bold',
     fontSize: 23,
   },
   userInfoSection: {
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontFamily: 'Outfit-Bold',
   },
   row: {
     flexDirection: 'row',
@@ -194,8 +194,8 @@ const styles = StyleSheet.create({
   menuItemText: {
     color: '#777777',
     marginLeft: 20,
-    fontWeight: '600',
     fontSize: 16,
+    fontFamily: 'Outfit-Regular',
     lineHeight: 26,
   },
 });

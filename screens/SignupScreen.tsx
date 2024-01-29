@@ -8,11 +8,11 @@ import {
   StyleSheet,
 } from 'react-native';
 import {makeApiRequest} from '../auth/helpers';
-import {themeColors} from '../theme';
 import {Dropdown} from 'react-native-element-dropdown';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {ScrollView} from 'react-native-gesture-handler';
 import Snackbar from 'react-native-snackbar';
+import COLORS from '../const/color';
 
 const data = [
   {label: 'Patient', value: 'Patient'},
@@ -117,7 +117,7 @@ const SignUpScreen = ({navigation}: any) => {
   };
 
   return (
-    <View style={{flex: 1, backgroundColor: themeColors.bg}}>
+    <View style={{flex: 1, backgroundColor: COLORS.primary}}>
       <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
@@ -149,12 +149,13 @@ const SignUpScreen = ({navigation}: any) => {
             paddingTop: 10,
           }}>
           <View style={{marginVertical: 2}}>
-            <Text style={{color: 'black', marginLeft: 20}}>Name</Text>
+            <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>Name</Text>
             <TextInput
               style={{
                 padding: 16,
                 backgroundColor: '#f3f4f6',
                 borderRadius: 20,
+                fontFamily: 'Outfit-Regular',
                 margin: 10,
                 color: 'black',
               }}
@@ -164,16 +165,17 @@ const SignUpScreen = ({navigation}: any) => {
               onChangeText={setName}
             />
             {nameError ? (
-              <Text style={{color: 'red', fontSize: 14}}>
+              <Text style={{color: 'red', fontSize: 14,fontFamily: 'Outfit-Regular',}}>
                 Please Enter Valid Value
               </Text>
             ) : null}
-            <Text style={{color: 'black', marginLeft: 20}}>Email</Text>
+            <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>Email</Text>
             <TextInput
               style={{
                 padding: 16,
                 backgroundColor: '#f3f4f6',
                 borderRadius: 20,
+                fontFamily: 'Outfit-Regular',
                 margin: 10,
                 color: 'black',
               }}
@@ -183,11 +185,11 @@ const SignUpScreen = ({navigation}: any) => {
               onChangeText={setEmail}
             />
             {emailError ? (
-              <Text style={{color: 'red', fontSize: 14}}>
+              <Text style={{color: 'red', fontSize: 14,fontFamily: 'Outfit-Regular',}}>
                 Please Enter Valid Value
               </Text>
             ) : null}
-            <Text style={{color: 'black', marginLeft: 20}}>User Type</Text>
+            <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>User Type</Text>
             <Dropdown
               style={{
                 padding: 16,
@@ -198,7 +200,7 @@ const SignUpScreen = ({navigation}: any) => {
               placeholderStyle={styles.placeholderStyle}
               selectedTextStyle={styles.selectedTextStyle}
               data={data}
-              itemTextStyle={{color: 'gray'}}
+              itemTextStyle={{color: 'gray',fontFamily: 'Outfit-Regular',}}
               maxHeight={300}
               labelField="label"
               valueField="value"
@@ -211,7 +213,7 @@ const SignUpScreen = ({navigation}: any) => {
               }}
             />
 
-            <Text style={{color: 'black', marginLeft: 20}}>Password</Text>
+            <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>Password</Text>
             <View style={styles.container}>
               <TextInput
                 style={styles.input}
@@ -232,12 +234,12 @@ const SignUpScreen = ({navigation}: any) => {
               </TouchableOpacity>
             </View>
             {passwordError ? (
-              <Text style={{color: 'red', fontSize: 14}}>
+              <Text style={{color: 'red', fontSize: 14,fontFamily: 'Outfit-Regular',}}>
                 Please Enter Valid Value
               </Text>
             ) : null}
 
-            <Text style={{fontSize: 10, textAlign: 'center', color: 'gray'}}>
+            <Text style={{fontSize: 10, textAlign: 'center', color: 'gray',fontFamily: 'Outfit-Regular',}}>
               *Password should be of minimum of 6 character and should have
               atleast 1 Captial letter,1 Small letter,1 digit
             </Text>
@@ -252,9 +254,9 @@ const SignUpScreen = ({navigation}: any) => {
                 <Text
                   style={{
                     fontSize: 22,
-                    fontWeight: 'bold',
                     color: 'black',
                     textAlign: 'center',
+                    fontFamily: 'Outfit-Bold',
                   }}>
                   Sign Up
                 </Text>
@@ -265,7 +267,7 @@ const SignUpScreen = ({navigation}: any) => {
           <Text
             style={{
               fontSize: 18,
-              fontWeight: 'bold',
+              fontFamily: 'Outfit-Bold',
               color: 'gray',
               textAlign: 'center',
               paddingVertical: 5,
@@ -278,11 +280,11 @@ const SignUpScreen = ({navigation}: any) => {
               justifyContent: 'center',
               paddingBottom: 15,
             }}>
-            <Text style={{color: 'gray', fontWeight: 'bold'}}>
+            <Text style={{color: 'gray', fontFamily: 'Outfit-Regular',}}>
               Already have an account?
             </Text>
             <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-              <Text style={{fontWeight: 'bold', color: 'black'}}> Login</Text>
+              <Text style={{ color: 'black',fontFamily: 'Outfit-Bold',}}> Login</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -302,6 +304,7 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: '#f3f4f6',
     borderRadius: 20,
+    fontFamily: 'Outfit-Regular',
     margin: 10,
   },
   iconContainer: {
@@ -310,10 +313,12 @@ const styles = StyleSheet.create({
   placeholderStyle: {
     fontSize: 16,
     color: 'black',
+    fontFamily: 'Outfit-Regular',
   },
   selectedTextStyle: {
     fontSize: 16,
     color: 'black',
+    fontFamily: 'Outfit-Regular',
   },
 });
 

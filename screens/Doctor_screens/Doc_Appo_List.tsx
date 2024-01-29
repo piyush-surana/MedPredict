@@ -71,10 +71,10 @@ const Doc_Appo_List: React.FC = ({navigation}: any) => {
                 ]}>
                 {name}
               </Title>
-              <Text style={{color: COLORS.grey, marginBottom: 5}}>
+              <Text style={{color: COLORS.grey, marginBottom: 5,fontFamily: 'Outfit-Regular',}}>
                 Day & Time{' '}
               </Text>
-              <Text style={{color: COLORS.grey}}>Diseases </Text>
+              <Text style={{color: COLORS.grey,fontFamily: 'Outfit-Regular',}}>Diseases </Text>
             </View>
           </View>
         </View>
@@ -103,10 +103,10 @@ const Doc_Appo_List: React.FC = ({navigation}: any) => {
                 ]}>
                 {name}
               </Title>
-              <Text style={{color: COLORS.grey, marginBottom: 5}}>
+              <Text style={{color: COLORS.grey, marginBottom: 5,fontFamily: 'Outfit-Regular',}}>
                 Day & Time{' '}
               </Text>
-              <Text style={{color: COLORS.grey}}>Diseases </Text>
+              <Text style={{color: COLORS.grey,fontFamily: 'Outfit-Regular',}}>Diseases </Text>
             </View>
           </View>
         </View>
@@ -135,10 +135,10 @@ const Doc_Appo_List: React.FC = ({navigation}: any) => {
                 ]}>
                 {name}
               </Title>
-              <Text style={{color: COLORS.grey, marginBottom: 5}}>
+              <Text style={{color: COLORS.grey, marginBottom: 5,fontFamily: 'Outfit-Regular',}}>
                 Day & Time{' '}
               </Text>
-              <Text style={{color: COLORS.grey}}>Diseases </Text>
+              <Text style={{color: COLORS.grey,fontFamily: 'Outfit-Regular',}}>Diseases </Text>
             </View>
           </View>
         </View>
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     color: COLORS.white,
     paddingLeft:10,
-    fontWeight: 'bold',
+    fontFamily: 'Outfit-Bold',
     fontSize: 23,
   },
   userInfoSection: {
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontFamily: 'Outfit-Bold',
   },
 });
 

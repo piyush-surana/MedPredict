@@ -205,7 +205,7 @@ const EditProfile: React.FC = ({navigation}: any) => {
             style={{
               flexDirection: 'column',
             }}>
-            <Text style={{color: 'black', marginLeft: 20}}>First Name</Text>
+            <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>First Name</Text>
             <TextInput
               value={name}
               onChangeText={value => setName(value)}
@@ -215,6 +215,7 @@ const EditProfile: React.FC = ({navigation}: any) => {
                 backgroundColor: '#f3f4f6',
                 borderRadius: 15,
                 margin: 10,
+                fontFamily: 'Outfit-Regular',
                 color: 'black',
               }}
             />
@@ -223,7 +224,7 @@ const EditProfile: React.FC = ({navigation}: any) => {
             style={{
               flexDirection: 'column',
             }}>
-            <Text style={{color: 'black', marginLeft: 20}}>Email</Text>
+            <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>Email</Text>
             <TextInput
               value={email}
               onChangeText={value => setEmail(value)}
@@ -233,6 +234,7 @@ const EditProfile: React.FC = ({navigation}: any) => {
                 backgroundColor: '#f3f4f6',
                 borderRadius: 15,
                 margin: 10,
+                fontFamily: 'Outfit-Regular',
                 color: 'black',
               }}
             />
@@ -242,7 +244,7 @@ const EditProfile: React.FC = ({navigation}: any) => {
             style={{
               flexDirection: 'column',
             }}>
-            <Text style={{color: 'black', marginLeft: 20}}>City</Text>
+            <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>City</Text>
             <TextInput
               value={address}
               placeholder="Enter city"
@@ -254,12 +256,13 @@ const EditProfile: React.FC = ({navigation}: any) => {
                 backgroundColor: '#f3f4f6',
                 borderRadius: 15,
                 margin: 10,
+                fontFamily: 'Outfit-Regular',
                 color: 'black',
               }}
             />
           </View>
           {CityError ? (
-            <Text style={{color: 'red', fontSize: 14, marginLeft: 20}}>
+            <Text style={{color: 'red', fontSize: 14, marginLeft: 20,fontFamily: 'Outfit-Regular',}}>
               Please Enter Valid Value
             </Text>
           ) : null}
@@ -267,11 +270,11 @@ const EditProfile: React.FC = ({navigation}: any) => {
             style={{
               flexDirection: 'column',
             }}>
-            <Text style={{color: 'black', marginLeft: 20}}>Date of Birth</Text>
+            <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>Date of Birth</Text>
             <DatePicker setDob={setDob} Dob={date_of_birth} />
           </View>
           {DobError ? (
-            <Text style={{color: 'red', fontSize: 14, marginLeft: 20}}>
+            <Text style={{fontFamily: 'Outfit-Regular',color: 'red', fontSize: 14, marginLeft: 20}}>
               Please Enter Valid Value
             </Text>
           ) : null}
@@ -279,7 +282,7 @@ const EditProfile: React.FC = ({navigation}: any) => {
             style={{
               flexDirection: 'column',
             }}>
-            <Text style={{color: 'black', marginLeft: 20}}>Gender</Text>
+            <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>Gender</Text>
             <Dropdown
               style={{
                 padding: 16,
@@ -290,7 +293,7 @@ const EditProfile: React.FC = ({navigation}: any) => {
               placeholderStyle={style.placeholderStyle}
               selectedTextStyle={style.selectedTextStyle}
               data={data}
-              itemTextStyle={{color: 'gray'}}
+              itemTextStyle={{color: 'gray',fontFamily: 'Outfit-Regular',}}
               maxHeight={300}
               labelField="label"
               valueField="value"
@@ -304,7 +307,7 @@ const EditProfile: React.FC = ({navigation}: any) => {
             />
           </View>
           {GenderError ? (
-            <Text style={{color: 'red', fontSize: 14, marginLeft: 20}}>
+            <Text style={{color: 'red', fontSize: 14, marginLeft: 20,fontFamily: 'Outfit-Regular',}}>
               Please Enter Valid Value
             </Text>
           ) : null}
@@ -312,7 +315,7 @@ const EditProfile: React.FC = ({navigation}: any) => {
             style={{
               flexDirection: 'column',
             }}>
-            <Text style={{color: 'black', marginLeft: 20}}>Phone</Text>
+            <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>Phone</Text>
             <TextInput
               value={phone_no}
               placeholder="Enter Phone Number"
@@ -325,11 +328,12 @@ const EditProfile: React.FC = ({navigation}: any) => {
                 borderRadius: 15,
                 margin: 10,
                 color: 'black',
+                fontFamily: 'Outfit-Regular',
               }}
             />
           </View>
           {PhoneError ? (
-            <Text style={{color: 'red', fontSize: 14, marginLeft: 20}}>
+            <Text style={{color: 'red', fontSize: 14, marginLeft: 20,fontFamily: 'Outfit-Regular',}}>
               Please Enter Valid Value
             </Text>
           ) : null}
@@ -349,7 +353,8 @@ const EditProfile: React.FC = ({navigation}: any) => {
             <Text
               style={{
                 color: COLORS.dark,
-                fontWeight: 'bold',
+                fontFamily: 'Outfit-Bold',
+                fontSize:18
               }}>
               Save Changes
             </Text>
@@ -363,17 +368,19 @@ const EditProfile: React.FC = ({navigation}: any) => {
 const style = StyleSheet.create({
   headerTitle: {
     color: COLORS.white,
-    fontWeight: 'bold',
+    fontFamily: 'Outfit-Bold',
     fontSize: 23,
     paddingLeft: 10,
   },
   placeholderStyle: {
     fontSize: 16,
     color: 'black',
+    fontFamily: 'Outfit-Regular',
   },
   selectedTextStyle: {
     fontSize: 16,
     color: 'black',
+    fontFamily: 'Outfit-Regular',
   },
 });
 

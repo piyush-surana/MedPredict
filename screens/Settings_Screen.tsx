@@ -95,9 +95,9 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     color: COLORS.white,
-    fontWeight: 'bold',
     fontSize: 23,
-    paddingLeft:10,
+    paddingLeft: 10,
+    fontFamily: 'Outfit-Bold',
   },
   menuItem: {
     flexDirection: 'row',
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   menuItemText: {
     color: 'black',
     marginLeft: 5,
-    fontWeight: 'bold',
+    fontFamily: 'Outfit-SemiBold',
     fontSize: 16,
     lineHeight: 26,
   },

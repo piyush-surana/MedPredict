@@ -9,16 +9,14 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import { TouchableRipple } from 'react-native-paper';
+import {TouchableRipple} from 'react-native-paper';
 import 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Swiper from 'react-native-swiper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../../const/color';
 
-
 const {width} = Dimensions.get('screen');
-
 
 const HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
   const [name, setName] = useState('');
@@ -130,16 +128,15 @@ const HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
 };
 
 const style = StyleSheet.create({
-  
   headerTitle: {
     color: COLORS.white,
-    fontWeight: 'bold',
+    fontFamily: 'Outfit-Bold',
     fontSize: 23,
   },
   sectionTitle: {
     marginHorizontal: 20,
     marginVertical: 10,
-    fontWeight: 'bold',
+    fontFamily: 'Outfit-SemiBold',
     fontSize: 20,
     color: 'gray',
   },
@@ -168,11 +165,12 @@ const style = StyleSheet.create({
   userName: {
     color: 'black',
     fontSize: 24,
-    fontWeight: 'bold',
+    fontFamily: 'Outfit-Bold',
   },
   userRole: {
     color: 'gray',
     fontSize: 16,
+    fontFamily: 'Outfit-Regular',
   },
   mainCardContainer: {
     alignItems: 'center',
@@ -188,7 +186,7 @@ const style = StyleSheet.create({
     color: 'black',
     padding: 30,
     fontSize: 20,
-    fontWeight: 'bold',
+    fontFamily: 'Outfit-SemiBold',
   },
   container: {
     height: 200,

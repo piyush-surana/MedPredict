@@ -210,7 +210,7 @@ const Doctor_EditProfile: React.FC = ({navigation}: any) => {
             style={{
               flexDirection: 'column',
             }}>
-            <Text style={{color: 'black', marginLeft: 20}}>First Name</Text>
+            <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>First Name</Text>
             <TextInput
               value={name}
               onChangeText={value => setName(value)}
@@ -221,6 +221,7 @@ const Doctor_EditProfile: React.FC = ({navigation}: any) => {
                 borderRadius: 15,
                 margin: 10,
                 color: 'black',
+                fontFamily: 'Outfit-Regular',
               }}
             />
           </View>
@@ -228,7 +229,7 @@ const Doctor_EditProfile: React.FC = ({navigation}: any) => {
             style={{
               flexDirection: 'column',
             }}>
-            <Text style={{color: 'black', marginLeft: 20}}>Last Name</Text>
+            <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>Last Name</Text>
             <TextInput
               value={Lname}
               placeholder="Enter Last Name"
@@ -241,11 +242,12 @@ const Doctor_EditProfile: React.FC = ({navigation}: any) => {
                 borderRadius: 15,
                 margin: 10,
                 color: 'black',
+                fontFamily: 'Outfit-Regular',
               }}
             />
           </View>
           {LnameError ? (
-            <Text style={{color: 'red', fontSize: 14, marginLeft: 20}}>
+            <Text style={{color: 'red', fontSize: 14, marginLeft: 20,fontFamily: 'Outfit-Regular',}}>
               Please Enter Valid Value
             </Text>
           ) : null}
@@ -253,7 +255,7 @@ const Doctor_EditProfile: React.FC = ({navigation}: any) => {
             style={{
               flexDirection: 'column',
             }}>
-            <Text style={{color: 'black', marginLeft: 20}}>Email</Text>
+            <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>Email</Text>
             <TextInput
               value={email}
               onChangeText={value => setEmail(value)}
@@ -264,6 +266,7 @@ const Doctor_EditProfile: React.FC = ({navigation}: any) => {
                 borderRadius: 15,
                 margin: 10,
                 color: 'black',
+                fontFamily: 'Outfit-Regular',
               }}
             />
           </View>
@@ -272,7 +275,7 @@ const Doctor_EditProfile: React.FC = ({navigation}: any) => {
             style={{
               flexDirection: 'column',
             }}>
-            <Text style={{color: 'black', marginLeft: 20}}>City</Text>
+            <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>City</Text>
             <TextInput
               value={address}
               placeholder="Enter city"
@@ -285,11 +288,12 @@ const Doctor_EditProfile: React.FC = ({navigation}: any) => {
                 borderRadius: 15,
                 margin: 10,
                 color: 'black',
+                fontFamily: 'Outfit-Regular',
               }}
             />
           </View>
           {CityError ? (
-            <Text style={{color: 'red', fontSize: 14, marginLeft: 20}}>
+            <Text style={{color: 'red', fontSize: 14, marginLeft: 20,fontFamily: 'Outfit-Regular',}}>
               Please Enter Valid Value
             </Text>
           ) : null}
@@ -297,7 +301,7 @@ const Doctor_EditProfile: React.FC = ({navigation}: any) => {
             style={{
               flexDirection: 'column',
             }}>
-            <Text style={{color: 'black', marginLeft: 20}}>
+            <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>
               Hospital / Clinic Name
             </Text>
             <TextInput
@@ -312,11 +316,12 @@ const Doctor_EditProfile: React.FC = ({navigation}: any) => {
                 borderRadius: 15,
                 margin: 10,
                 color: 'black',
+                fontFamily: 'Outfit-Regular',
               }}
             />
           </View>
           {hospitalError ? (
-            <Text style={{color: 'red', fontSize: 14, marginLeft: 20}}>
+            <Text style={{color: 'red', fontSize: 14, marginLeft: 20,fontFamily: 'Outfit-Regular',}}>
               Please Enter Valid Value
             </Text>
           ) : null}
@@ -325,7 +330,7 @@ const Doctor_EditProfile: React.FC = ({navigation}: any) => {
             style={{
               flexDirection: 'column',
             }}>
-            <Text style={{color: 'black', marginLeft: 20}}>Specialization</Text>
+            <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>Specialization</Text>
             <TextInput
               value={special}
               placeholder="Enter Name"
@@ -338,11 +343,12 @@ const Doctor_EditProfile: React.FC = ({navigation}: any) => {
                 borderRadius: 15,
                 margin: 10,
                 color: 'black',
+                fontFamily: 'Outfit-Regular',
               }}
             />
           </View>
           {specialError ? (
-            <Text style={{color: 'red', fontSize: 14, marginLeft: 20}}>
+            <Text style={{color: 'red', fontSize: 14, marginLeft: 20,fontFamily: 'Outfit-Regular',}}>
               Please Enter Valid Value
             </Text>
           ) : null}
@@ -351,7 +357,7 @@ const Doctor_EditProfile: React.FC = ({navigation}: any) => {
             style={{
               flexDirection: 'column',
             }}>
-            <Text style={{color: 'black', marginLeft: 20}}>Phone</Text>
+            <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>Phone</Text>
             <TextInput
               value={phone_no}
               placeholder="Enter Phone Number"
@@ -364,11 +370,12 @@ const Doctor_EditProfile: React.FC = ({navigation}: any) => {
                 borderRadius: 15,
                 margin: 10,
                 color: 'black',
+                fontFamily: 'Outfit-Regular',
               }}
             />
           </View>
           {PhoneError ? (
-            <Text style={{color: 'red', fontSize: 14, marginLeft: 20}}>
+            <Text style={{color: 'red', fontSize: 14, marginLeft: 20,fontFamily: 'Outfit-Regular',}}>
               Please Enter Valid Value
             </Text>
           ) : null}
@@ -388,7 +395,8 @@ const Doctor_EditProfile: React.FC = ({navigation}: any) => {
             <Text
               style={{
                 color: COLORS.dark,
-                fontWeight: 'bold',
+                fontFamily: 'Outfit-Bold',
+                fontSize:18
               }}>
               Save Changes
             </Text>
@@ -402,7 +410,7 @@ const Doctor_EditProfile: React.FC = ({navigation}: any) => {
 const style = StyleSheet.create({
   headerTitle: {
     color: COLORS.white,
-    fontWeight: 'bold',
+    fontFamily: 'Outfit-Bold',
     fontSize: 23,
     paddingLeft: 10,
   },

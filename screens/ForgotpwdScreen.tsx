@@ -8,10 +8,10 @@ import {
   StyleSheet,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {themeColors} from '../theme';
 import { ScrollView } from 'react-native-gesture-handler';
 import Snackbar from 'react-native-snackbar';
 import { makeApiRequest } from '../auth/helpers';
+import COLORS from '../const/color';
 
 const ForgotpwdScreen = ({navigation}: any) => {
   const [email, setEmail] = useState<string>('');
@@ -107,7 +107,7 @@ const ForgotpwdScreen = ({navigation}: any) => {
   };
 
   return (
-    <View style={{flex: 1, backgroundColor: themeColors.bg}}>
+    <View style={{flex: 1, backgroundColor: COLORS.primary}}>
       <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
@@ -138,12 +138,13 @@ const ForgotpwdScreen = ({navigation}: any) => {
           paddingTop: 20,
         }}>
         <View style={{marginVertical: 2}}>
-          <Text style={{color: 'black', marginLeft: 20}}>Email</Text>
+          <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>Email</Text>
           <TextInput
             style={{
               padding: 16,
               backgroundColor: '#f3f4f6',
               borderRadius: 20,
+              fontFamily: 'Outfit-Regular',
               margin: 10,
               color:'black'
             }}
@@ -153,11 +154,11 @@ const ForgotpwdScreen = ({navigation}: any) => {
             onChangeText={setEmail}
           />
           {emailError ? (
-            <Text style={{color: 'red', fontSize: 14}}>
+            <Text style={{color: 'red', fontSize: 14,fontFamily: 'Outfit-Regular',}}>
               Please Enter Valid Value
             </Text>
           ) : null}
-          <Text style={{color: 'black', marginLeft: 20}}>New Password</Text>
+          <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>New Password</Text>
           <View style={styles.container}>
                 <TextInput
                   style={styles.input}
@@ -178,28 +179,30 @@ const ForgotpwdScreen = ({navigation}: any) => {
                 </TouchableOpacity>
               </View>
               {passwordError ? (
-                <Text style={{color: 'red', fontSize: 14}}>
+                <Text style={{color: 'red', fontSize: 14,fontFamily: 'Outfit-Regular',}}>
                   Please Enter Valid Value
                 </Text>
               ) : null}
 
-          <Text style={{color: 'black', marginLeft: 20}}>Confirm Password</Text>
+          <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>Confirm Password</Text>
         
           <TextInput
             style={{
               padding: 16,
               backgroundColor: '#f3f4f6',
               borderRadius: 20,
+              fontFamily: 'Outfit-Regular',
               margin: 10,
             }}
             secureTextEntry
             placeholder="Password"
+            placeholderTextColor={COLORS.grey}
             value={Cpassword}
             onChangeText={setCPassword}
           />
           
           {CpasswordError ? (
-            <Text style={{color: 'red', fontSize: 14}}>
+            <Text style={{color: 'red', fontSize: 14,fontFamily: 'Outfit-Regular',}}>
               Please Enter Valid Value
             </Text>
           ) : null}
@@ -208,7 +211,7 @@ const ForgotpwdScreen = ({navigation}: any) => {
             <TouchableOpacity
               style={{padding: 24, backgroundColor: 'yellow', borderRadius: 20}}
               onPress={validate}>
-              <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
+              <Text style={{fontSize: 20, color: 'black',fontFamily: 'Outfit-Bold',}}>
                 Reset Password
               </Text>
             </TouchableOpacity>
@@ -229,6 +232,7 @@ const styles = StyleSheet.create({
     flex: 1,
     color: 'black',
     padding: 16,
+    fontFamily: 'Outfit-Regular',
     backgroundColor: '#f3f4f6',
     borderRadius: 20,
     margin: 10,

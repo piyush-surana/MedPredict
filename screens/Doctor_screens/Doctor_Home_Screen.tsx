@@ -129,7 +129,7 @@ const style = StyleSheet.create({
   
   headerTitle: {
     color: COLORS.white,
-    fontWeight: 'bold',
+    fontFamily: 'Outfit-Bold',
     fontSize: 23,
   },
   userProfileCardContainer: {
@@ -157,11 +157,12 @@ const style = StyleSheet.create({
   userName: {
     color: 'black',
     fontSize: 24,
-    fontWeight: 'bold',
+    fontFamily: 'Outfit-Bold',
   },
   userRole: {
     color: 'gray',
     fontSize: 16,
+    fontFamily: 'Outfit-Regular',
   },
   mainCardContainer: {
     alignItems: 'center',
@@ -177,7 +178,7 @@ const style = StyleSheet.create({
     color: 'black',
     padding: 30,
     fontSize: 20,
-    fontWeight: 'bold',
+    fontFamily: 'Outfit-SemiBold',
   },
 });
 

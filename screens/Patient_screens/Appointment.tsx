@@ -73,10 +73,10 @@ const Appo_List: React.FC = ({navigation}: any) => {
                 ]}>
                 Dr.{name}
               </Title>
-              <Text style={{color: COLORS.grey, marginBottom: 5}}>
+              <Text style={{color: COLORS.grey, marginBottom: 5,fontFamily: 'Outfit-Regular',}}>
                 Type
               </Text>
-              <Text style={{color: COLORS.grey}}>Address </Text>
+              <Text style={{color: COLORS.grey,fontFamily: 'Outfit-Regular',}}>Address </Text>
             </View>
           </View>
         </View>
@@ -105,10 +105,10 @@ const Appo_List: React.FC = ({navigation}: any) => {
                 ]}>
                 Dr.{name}
               </Title>
-              <Text style={{color: COLORS.grey, marginBottom: 5}}>
+              <Text style={{color: COLORS.grey, marginBottom: 5,fontFamily: 'Outfit-Regular',}}>
                 Type
               </Text>
-              <Text style={{color: COLORS.grey}}>Address </Text>
+              <Text style={{color: COLORS.grey,fontFamily: 'Outfit-Regular',}}>Address </Text>
             </View>
           </View>
         </View>
@@ -137,10 +137,10 @@ const Appo_List: React.FC = ({navigation}: any) => {
                 ]}>
                 Dr.{name}
               </Title>
-              <Text style={{color: COLORS.grey, marginBottom: 5}}>
+              <Text style={{color: COLORS.grey, marginBottom: 5,fontFamily: 'Outfit-Regular',}}>
                 Type
               </Text>
-              <Text style={{color: COLORS.grey}}>Address </Text>
+              <Text style={{color: COLORS.grey,fontFamily: 'Outfit-Regular',}}>Address </Text>
             </View>
           </View>
         </View>
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     color: COLORS.white,
     paddingLeft: 10,
-    fontWeight: 'bold',
+    fontFamily: 'Outfit-Bold',
     fontSize: 23,
   },
   userInfoSection: {
@@ -182,14 +182,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontFamily: 'Outfit-Bold',
   },
   heading:{
     fontSize:20,
     paddingVertical:10,
     paddingHorizontal:20,
-    color:COLORS.dark   ,
-    fontWeight:'bold',
+    color:COLORS.dark,
+    fontFamily: 'Outfit-SemiBold',
   },
 });
 
