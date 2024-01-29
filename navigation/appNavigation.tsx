@@ -2,23 +2,28 @@ import {View, Text} from 'react-native';
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import HomeScreen from '../screens/Patient_screens/HomeScreen';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import COLORS from '../const/color';
+
 import WelcomeScreen from '../screens/WelcomeScreen';
 import LoginScreen from '../screens/LoginScreen';
 import SignUpScreen from '../screens/SignupScreen';
 import ForgotpwdScreen from '../screens/ForgotpwdScreen';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import UserProfile from '../screens/Patient_screens/UserProfile';
-import EditProfile from '../screens/Patient_screens/EditProfile';
+import Settings_Screen from '../screens/Settings_Screen';
+import Support_Screen from '../screens/Support_Screen';
 import ContactScreen from '../screens/ContactScreen';
 import WorkScreen from '../screens/work_in_progress';
+
+import UserProfile from '../screens/Patient_screens/UserProfile';
+import EditProfile from '../screens/Patient_screens/EditProfile';
+import HomeScreen from '../screens/Patient_screens/HomeScreen';
+import Appo_List from '../screens/Patient_screens/Appointment';
+
 import Doctor_UserProfile from '../screens/Doctor_screens/Doctor_User_Profile';
 import Doctor_EditProfile from '../screens/Doctor_screens/Doctor_Edit_Profile';
 import Doctor_HomeScreen from '../screens/Doctor_screens/Doctor_Home_Screen';
-import Settings_Screen from '../screens/Settings_Screen';
-import Support_Screen from '../screens/Support_Screen';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import COLORS from '../const/color';
+import Doc_Appo_List from '../screens/Doctor_screens/Doc_Appo_List';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -160,6 +165,16 @@ function StackNavigator() {
         name="Support"
         options={{headerShown: false}}
         component={Support_Screen}
+      />
+      <Stack.Screen
+        name="Doc_Appointment"
+        options={{headerShown: false}}
+        component={Doc_Appo_List}
+      />
+      <Stack.Screen
+        name="Appointment"
+        options={{headerShown: false}}
+        component={Appo_List}
       />
     </Stack.Navigator>
   );

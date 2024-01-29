@@ -5,8 +5,7 @@ import COLORS from '../../const/color';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon1 from 'react-native-vector-icons/FontAwesome';
 
-
-const Doc_Appo_List: React.FC = ({navigation}: any) => {
+const Appo_List: React.FC = ({navigation}: any) => {
   const [name, setName] = useState('');
 
   const getData = async () => {
@@ -29,9 +28,9 @@ const Doc_Appo_List: React.FC = ({navigation}: any) => {
           backgroundColor: COLORS.primary,
           height: 70,
           padding: 10,
-          marginBottom:10,
+          marginBottom: 10,
         }}>
-        <View style={{flex: 1, flexDirection: 'row',alignItems: 'center'}}>
+        <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
           <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
             <TouchableRipple
               onPress={() => navigation.goBack()}
@@ -47,6 +46,9 @@ const Doc_Appo_List: React.FC = ({navigation}: any) => {
           <Text style={styles.headerTitle}>Your Health, Your Way</Text>
         </View>
       </View>
+      <View>
+        <Text style={styles.heading}>Nearby Doctor</Text>
+      </View>
       <View style={styles.profile}>
         <View style={styles.userInfoSection}>
           <View style={{flexDirection: 'row', marginTop: 15}}>
@@ -69,12 +71,12 @@ const Doc_Appo_List: React.FC = ({navigation}: any) => {
                     color: COLORS.grey,
                   },
                 ]}>
-                {name}
+                Dr.{name}
               </Title>
               <Text style={{color: COLORS.grey, marginBottom: 5}}>
-                Day & Time{' '}
+                Type
               </Text>
-              <Text style={{color: COLORS.grey}}>Diseases </Text>
+              <Text style={{color: COLORS.grey}}>Address </Text>
             </View>
           </View>
         </View>
@@ -101,12 +103,12 @@ const Doc_Appo_List: React.FC = ({navigation}: any) => {
                     color: COLORS.grey,
                   },
                 ]}>
-                {name}
+                Dr.{name}
               </Title>
               <Text style={{color: COLORS.grey, marginBottom: 5}}>
-                Day & Time{' '}
+                Type
               </Text>
-              <Text style={{color: COLORS.grey}}>Diseases </Text>
+              <Text style={{color: COLORS.grey}}>Address </Text>
             </View>
           </View>
         </View>
@@ -133,12 +135,12 @@ const Doc_Appo_List: React.FC = ({navigation}: any) => {
                     color: COLORS.grey,
                   },
                 ]}>
-                {name}
+                Dr.{name}
               </Title>
               <Text style={{color: COLORS.grey, marginBottom: 5}}>
-                Day & Time{' '}
+                Type
               </Text>
-              <Text style={{color: COLORS.grey}}>Diseases </Text>
+              <Text style={{color: COLORS.grey}}>Address </Text>
             </View>
           </View>
         </View>
@@ -170,7 +172,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     color: COLORS.white,
-    paddingLeft:10,
+    paddingLeft: 10,
     fontWeight: 'bold',
     fontSize: 23,
   },
@@ -182,6 +184,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
   },
+  heading:{
+    fontSize:20,
+    paddingVertical:10,
+    paddingHorizontal:20,
+    color:COLORS.dark   ,
+    fontWeight:'bold',
+  },
 });
 
-export default Doc_Appo_List;
+export default Appo_List;

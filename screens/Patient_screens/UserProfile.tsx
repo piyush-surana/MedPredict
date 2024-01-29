@@ -1,10 +1,6 @@
-import React,{useState} from 'react';
+import React, {useState} from 'react';
 import {View, SafeAreaView, StyleSheet, Image} from 'react-native';
-import {
-  Title,
-  Text,
-  TouchableRipple,
-} from 'react-native-paper';
+import {Title, Text, TouchableRipple} from 'react-native-paper';
 import COLORS from '../../const/color';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon2 from 'react-native-vector-icons/MaterialIcons';
@@ -67,41 +63,36 @@ const UserProfile: React.FC = ({navigation}: any) => {
                   {
                     marginTop: 15,
                     marginBottom: 5,
-                    color:COLORS.grey
+                    color: COLORS.grey,
                   },
                 ]}>
                 {name}
               </Title>
-              <Text style={{color:COLORS.grey}}>{email}</Text>
+              <Text style={{color: COLORS.grey}}>{email}</Text>
             </View>
           </View>
         </View>
         <View style={styles.userInfoSection}>
           <View style={styles.row}>
             <Icon name="map-marker-radius" color="#777777" size={20} />
-            <Text style={{color:COLORS.grey, marginLeft: 20}}>
-              {city}
-            </Text>
+            <Text style={{color: COLORS.grey, marginLeft: 20}}>{city}</Text>
           </View>
           <View style={styles.row}>
-            <Icon name="phone" color="#777777" size={20} />
-            <Text style={{color: '#777777', marginLeft: 20}}>
-              {phone}
-            </Text>
+            <Icon name="phone" color={COLORS.grey} size={20} />
+            <Text style={{color: COLORS.grey, marginLeft: 20}}>{phone}</Text>
           </View>
           <View style={styles.row}>
-            <Icon1 name="square" color="#777777" size={20} />
-            <Text style={{color: '#777777', marginLeft: 20}}>
-              {Gender}
-            </Text>
+            <Icon1 name="square" color={COLORS.grey} size={20} />
+            <Text style={{color: COLORS.grey, marginLeft: 20}}>{Gender}</Text>
           </View>
         </View>
       </View>
       <View>
         <View style={styles.box}>
-          <TouchableRipple onPress={() => {
-            navigation.navigate('Edit_profile');
-          }}>
+          <TouchableRipple
+            onPress={() => {
+              navigation.navigate('Edit_profile');
+            }}>
             <View style={styles.menuItem}>
               <Icon1 name="user" color="#FF6347" size={25} />
               <Text style={styles.menuItemText}>Edit Profile</Text>
@@ -109,7 +100,10 @@ const UserProfile: React.FC = ({navigation}: any) => {
           </TouchableRipple>
         </View>
         <View style={styles.box}>
-          <TouchableRipple onPress={() => {navigation.navigate('Work_screen')}}>
+          <TouchableRipple
+            onPress={() => {
+              navigation.navigate('Appointment');
+            }}>
             <View style={styles.menuItem}>
               <Icon name="credit-card" color="#FF6347" size={25} />
               <Text style={styles.menuItemText}>Your Appointments</Text>
@@ -117,7 +111,10 @@ const UserProfile: React.FC = ({navigation}: any) => {
           </TouchableRipple>
         </View>
         <View style={styles.box}>
-          <TouchableRipple onPress={() => {navigation.navigate('Support')}}>
+          <TouchableRipple
+            onPress={() => {
+              navigation.navigate('Support');
+            }}>
             <View style={styles.menuItem}>
               <Icon name="account-check-outline" color="#FF6347" size={25} />
               <Text style={styles.menuItemText}>Support</Text>
@@ -125,7 +122,10 @@ const UserProfile: React.FC = ({navigation}: any) => {
           </TouchableRipple>
         </View>
         <View style={styles.box}>
-          <TouchableRipple onPress={() => {navigation.navigate('Settings')}}>
+          <TouchableRipple
+            onPress={() => {
+              navigation.navigate('Settings');
+            }}>
             <View style={styles.menuItem}>
               <Icon2 name="settings" color="#FF6347" size={25} />
               <Text style={styles.menuItemText}>Settings</Text>
@@ -133,7 +133,10 @@ const UserProfile: React.FC = ({navigation}: any) => {
           </TouchableRipple>
         </View>
         <View style={styles.box}>
-          <TouchableRipple onPress={() => {navigation.navigate('Welcome')}}>
+          <TouchableRipple
+            onPress={() => {
+              navigation.navigate('Welcome');
+            }}>
             <View style={styles.menuItem}>
               <Icon2 name="logout" color="#FF6347" size={25} />
               <Text style={styles.menuItemText}>Log-Out</Text>

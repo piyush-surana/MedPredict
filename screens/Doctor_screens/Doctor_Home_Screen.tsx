@@ -64,15 +64,15 @@ const Doctor_HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
 
 
 
-  const SymptomsCard: React.FC = () => {
+  const AppointmentCard: React.FC = () => {
     return (
       <View style={style.mainCardContainer}>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('Work_screen');
+            navigation.navigate('Doc_Appointment');
           }}>
           <View style={style.userInfoContainer}>
-            <Text style={style.mainFunction}>Appointment's</Text>
+            <Text style={style.mainFunction}>Appointments</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -87,7 +87,7 @@ const Doctor_HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
             navigation.navigate('Work_screen');
           }}>
           <View style={style.userInfoContainer}>
-            <Text style={style.mainFunction}>Payment's</Text>
+            <Text style={style.mainFunction}>Payments</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -115,7 +115,7 @@ const Doctor_HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
         </View>
         <View>
           <UserProfileCard />
-          <SymptomsCard />
+          <AppointmentCard />
           <PaymentsCard/>
           {/* <Text style={style.sectionTitle}>Suggestion</Text>
           <ImageSlider /> */}

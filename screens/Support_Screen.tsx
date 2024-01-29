@@ -1,21 +1,33 @@
 import React, {useState} from 'react';
-import {View, SafeAreaView, StyleSheet, Switch} from 'react-native';
-import { Text, TouchableRipple} from 'react-native-paper';
+import {View, SafeAreaView, StyleSheet} from 'react-native';
+import {Text, TouchableRipple} from 'react-native-paper';
 import COLORS from '../const/color';
-import  Icon  from 'react-native-vector-icons/FontAwesome5';
-import  Icon1  from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import Icon1 from 'react-native-vector-icons/MaterialIcons';
+import Icon2 from 'react-native-vector-icons/FontAwesome';
 
 const Support_Screen: React.FC = ({navigation}: any) => {
-
   return (
     <SafeAreaView style={styles.container}>
       <View
         style={{
           backgroundColor: COLORS.primary,
-          height: 65,
-          padding: 15,
+          height: 70,
+          padding: 10,
         }}>
-        <View style={{flex: 1, flexDirection: 'row'}}>
+        <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+          <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
+            <TouchableRipple
+              onPress={() => navigation.goBack()}
+              style={{
+                backgroundColor: 'yellow',
+                padding: 10,
+                borderRadius: 6,
+                margin: 5,
+              }}>
+              <Icon2 name="arrow-left" size={18} color={'black'}></Icon2>
+            </TouchableRipple>
+          </View>
           <Text style={styles.headerTitle}>Support</Text>
         </View>
       </View>
@@ -23,27 +35,57 @@ const Support_Screen: React.FC = ({navigation}: any) => {
         <View style={styles.box}>
           <TouchableRipple>
             <View style={styles.menuItem}>
-               <Icon1 name='support-agent' color='orange' size={25} style={{paddingRight:10}}/> 
+              <Icon1
+                name="support-agent"
+                color="orange"
+                size={25}
+                style={{paddingRight: 10}}
+              />
               <Text style={styles.menuItemText}>Contact Live chat</Text>
-              <Icon name="angle-right" color="black" size={25} style={{paddingLeft:90}} />
+              <Icon
+                name="angle-right"
+                color="black"
+                size={25}
+                style={{paddingLeft: 90}}
+              />
             </View>
           </TouchableRipple>
         </View>
         <View style={styles.box}>
           <TouchableRipple>
             <View style={styles.menuItem}>
-            <Icon1 name='mail' color='orange' size={25} style={{paddingRight:10}}/>
+              <Icon1
+                name="mail"
+                color="orange"
+                size={25}
+                style={{paddingRight: 10}}
+              />
               <Text style={styles.menuItemText}>Sent us an E-mail</Text>
-              <Icon name="angle-right" color="black" size={25} style={{paddingLeft:90}} />
+              <Icon
+                name="angle-right"
+                color="black"
+                size={25}
+                style={{paddingLeft: 90}}
+              />
             </View>
           </TouchableRipple>
         </View>
         <View style={styles.box}>
-          <TouchableRipple onPress={()=>{}}>
+          <TouchableRipple onPress={() => {}}>
             <View style={styles.menuItem}>
-            <Icon1 name='question-mark' color='orange' size={25} style={{paddingRight:10}}/>
+              <Icon1
+                name="question-mark"
+                color="orange"
+                size={25}
+                style={{paddingRight: 10}}
+              />
               <Text style={styles.menuItemText}>FAQs</Text>
-              <Icon name="angle-right" color="black" size={25} style={{paddingLeft:180}} />
+              <Icon
+                name="angle-right"
+                color="black"
+                size={25}
+                style={{paddingLeft: 180}}
+              />
             </View>
           </TouchableRipple>
         </View>
@@ -69,12 +111,13 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     fontWeight: 'bold',
     fontSize: 23,
+    paddingLeft: 10,
   },
   menuItem: {
     flexDirection: 'row',
     paddingVertical: 15,
     paddingHorizontal: 15,
-    alignContent:'space-between',
+    alignContent: 'space-between',
   },
   menuItemText: {
     color: 'black',

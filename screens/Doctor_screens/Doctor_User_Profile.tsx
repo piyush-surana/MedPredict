@@ -109,7 +109,7 @@ const Doctor_UserProfile: React.FC = ({navigation}: any) => {
           </TouchableRipple>
         </View>
         <View style={styles.box}>
-          <TouchableRipple onPress={() => {navigation.navigate('Work_screen')}}>
+          <TouchableRipple onPress={() => {navigation.navigate('Doc_Appointment')}}>
             <View style={styles.menuItem}>
               <Icon name="credit-card" color="#FF6347" size={25} />
               <Text style={styles.menuItemText}>Appointments</Text>

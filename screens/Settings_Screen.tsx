@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {View, SafeAreaView, StyleSheet, Switch} from 'react-native';
-import { Text, TouchableRipple} from 'react-native-paper';
+import {Text, TouchableRipple} from 'react-native-paper';
 import COLORS from '../const/color';
+import Icon1 from 'react-native-vector-icons/FontAwesome';
 
 const Settings_Screen: React.FC = ({navigation}: any) => {
   const [isEnabled, setIsEnabled] = useState(true);
@@ -14,10 +15,22 @@ const Settings_Screen: React.FC = ({navigation}: any) => {
       <View
         style={{
           backgroundColor: COLORS.primary,
-          height: 65,
-          padding: 15,
+          height: 70,
+          padding: 10,
         }}>
-        <View style={{flex: 1, flexDirection: 'row'}}>
+        <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+          <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
+            <TouchableRipple
+              onPress={() => navigation.goBack()}
+              style={{
+                backgroundColor: 'yellow',
+                padding: 10,
+                borderRadius: 6,
+                margin: 5,
+              }}>
+              <Icon1 name="arrow-left" size={18} color={'black'}></Icon1>
+            </TouchableRipple>
+          </View>
           <Text style={styles.headerTitle}>Settings</Text>
         </View>
       </View>
@@ -32,7 +45,7 @@ const Settings_Screen: React.FC = ({navigation}: any) => {
                 ios_backgroundColor="#3e3e3e"
                 onValueChange={toggleSwitch}
                 value={isEnabled}
-                style={{paddingLeft:105}}
+                style={{paddingLeft: 105}}
               />
             </View>
           </TouchableRipple>
@@ -47,7 +60,7 @@ const Settings_Screen: React.FC = ({navigation}: any) => {
                 ios_backgroundColor="#3e3e3e"
                 onValueChange={toggleSwitch2}
                 value={isEnabled2}
-                style={{paddingLeft:145}}
+                style={{paddingLeft: 145}}
               />
             </View>
           </TouchableRipple>
@@ -84,12 +97,13 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     fontWeight: 'bold',
     fontSize: 23,
+    paddingLeft:10,
   },
   menuItem: {
     flexDirection: 'row',
     paddingVertical: 15,
     paddingHorizontal: 15,
-    alignContent:'space-between',
+    alignContent: 'space-between',
   },
   menuItemText: {
     color: 'black',

@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
+import { TouchableRipple } from 'react-native-paper';
 import 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Swiper from 'react-native-swiper';
@@ -41,7 +42,7 @@ const HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
   const UserProfileCard: React.FC = () => {
     return (
       <View>
-        <TouchableOpacity
+        <TouchableRipple
           onPress={() => {
             navigation.navigate('User');
           }}>
@@ -57,7 +58,7 @@ const HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
               <Text style={style.userRole}>{email}</Text>
             </View>
           </View>
-        </TouchableOpacity>
+        </TouchableRipple>
       </View>
     );
   };
