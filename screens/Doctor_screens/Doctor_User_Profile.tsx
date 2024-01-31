@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import {View, SafeAreaView, StyleSheet, Image} from 'react-native';
+import {View, SafeAreaView, StyleSheet, Image, ScrollView} from 'react-native';
 import {
   Title,
   Text,
@@ -37,6 +37,7 @@ const Doctor_UserProfile: React.FC = ({navigation}: any) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <ScrollView>
       <View
         style={{
           backgroundColor: COLORS.primary,
@@ -149,6 +150,7 @@ const Doctor_UserProfile: React.FC = ({navigation}: any) => {
           </TouchableRipple>
         </View>
       </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

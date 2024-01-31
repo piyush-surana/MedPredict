@@ -5,151 +5,18 @@ import {
   TouchableOpacity,
   ScrollView,
   Image,
-  TextInput,
   StyleSheet,
-  Alert,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Dropdown} from 'react-native-element-dropdown';
-import Snackbar from 'react-native-snackbar';
 import COLORS from '../../const/color';
+import Personal from './Doc_personal';
+import Proff from './Doc_proff';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {makeApiRequest} from '../../auth/helpers';
-import DatePicker from '../../utils/datepicker';
+import {Switch} from 'react-native-switch';
 
 const Doctor_EditProfile: React.FC = ({navigation}: any) => {
-  const [name, setName] = useState('');
-  const [Lname, setLName] = useState('');
-  const [email, setEmail] = useState('');
-  const [address, setcity] = useState('');
-  const [phone_no, setPhone] = useState('');
-  const [hospitalname, setHospital] = useState('');
-  const [special, setSpecial] = useState('');
-  const [LnameError, setLnameError] = useState<boolean>(false);
-  const [CityError, setCityError] = useState<boolean>(false);
-  const [hospitalError, sethosiptalError] = useState<boolean>(false);
-  const [specialError, setspecialError] = useState<boolean>(false);
-  const [PhoneError, setPhoneError] = useState<boolean>(false);
-  const [flag, setFlag] = useState(false);
-
-  const getData = async () => {
-    try {
-      const value = await AsyncStorage.getItem('body');
-      if (value !== null) {
-        const data = JSON.parse(value);
-        if (data.is_empty == 1) {
-          setEmail(data['email']);
-          setName(data['name']);
-          setFlag(true);
-        } else {
-          setEmail(data['email']);
-          setName(data['name']);
-          setcity(data['address']);
-          setPhone(data['phone_no']);
-        }
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  getData();
-
-  const validate = () => {
-    if (!Lname) {
-      setLnameError(true);
-      return false;
-    } else if (!/^[A-Za-z]+$/.test(address)) {
-      setLnameError(true);
-      return false;
-    } else {
-      setLnameError(false);
-    }
-
-    if (!address) {
-      setCityError(true);
-      return false;
-    } else if (!/^[A-Za-z]+$/.test(address)) {
-      setCityError(true);
-      return false;
-    } else {
-      setCityError(false);
-    }
-
-    if (!hospitalname) {
-      sethosiptalError(true);
-      return false;
-    } else if (!/^[A-Za-z]+$/.test(hospitalname)) {
-      sethosiptalError(true);
-      return false;
-    } else {
-      sethosiptalError(false);
-    }
-
-    if (!special) {
-      setspecialError(true);
-      return false;
-    } else if (!/^[A-Za-z]+$/.test(special)) {
-      setspecialError(true);
-      return false;
-    } else {
-      setspecialError(false);
-    }
-
-    if (!phone_no) {
-      setPhoneError(true);
-      return false;
-    } else if (!/^[0-9]+$/.test(phone_no)) {
-      setPhoneError(true);
-      return false;
-    } else if (phone_no.length !== 10) {
-      setPhoneError(true);
-      return false;
-    } else {
-      setPhoneError(false);
-    }
-    collectData();
-  };
-
-  const collectData = async () => {
-    const is_empty = 0;
-    const data = {email, address, phone_no, is_empty};
-    makeApiRequest({
-      method: 'post',
-      urlPath: 'fill',
-      body: data,
-    })
-      .then(response => {
-        if (response.data['status'] == 200) {
-          console.log(response.data.data);
-          if (response.data.data.status == 200) {
-            Alert.alert(
-              'data successfully Updated please login again to see changes',
-            );
-            navigation.navigate('Home1');
-            return;
-          }
-
-          console.log({resp: response.data.data.status});
-          Snackbar.show({
-            text: response.data.data.message,
-            duration: Snackbar.LENGTH_SHORT,
-            textColor: 'white',
-            backgroundColor: 'red',
-          });
-        }
-      })
-      .catch(error => {
-        console.log('Error in api', error);
-        Snackbar.show({
-          text: 'Internal error',
-          duration: Snackbar.LENGTH_SHORT,
-          textColor: 'white',
-          backgroundColor: 'red',
-        });
-      });
-  };
+  const [isDark, setDark] = useState(true);
+  const toggleSwitch2 = () => setDark(previousState => !previousState);
 
   return (
     <SafeAreaView
@@ -204,204 +71,37 @@ const Doctor_EditProfile: React.FC = ({navigation}: any) => {
             />
           </TouchableOpacity>
         </View>
-
-        <View style={{padding: 10}}>
-          <View
-            style={{
-              flexDirection: 'column',
-            }}>
-            <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>First Name</Text>
-            <TextInput
-              value={name}
-              onChangeText={value => setName(value)}
-              editable={false}
-              style={{
-                padding: 10,
-                backgroundColor: '#f3f4f6',
-                borderRadius: 15,
-                margin: 10,
-                color: 'black',
-                fontFamily: 'Outfit-Regular',
-              }}
-            />
-          </View>
-          <View
-            style={{
-              flexDirection: 'column',
-            }}>
-            <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>Last Name</Text>
-            <TextInput
-              value={Lname}
-              placeholder="Enter Last Name"
-              placeholderTextColor={COLORS.grey}
-              onChangeText={value => setLName(value)}
-              editable={flag}
-              style={{
-                padding: 10,
-                backgroundColor: '#f3f4f6',
-                borderRadius: 15,
-                margin: 10,
-                color: 'black',
-                fontFamily: 'Outfit-Regular',
-              }}
-            />
-          </View>
-          {LnameError ? (
-            <Text style={{color: 'red', fontSize: 14, marginLeft: 20,fontFamily: 'Outfit-Regular',}}>
-              Please Enter Valid Value
-            </Text>
-          ) : null}
-          <View
-            style={{
-              flexDirection: 'column',
-            }}>
-            <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>Email</Text>
-            <TextInput
-              value={email}
-              onChangeText={value => setEmail(value)}
-              editable={false}
-              style={{
-                padding: 10,
-                backgroundColor: '#f3f4f6',
-                borderRadius: 15,
-                margin: 10,
-                color: 'black',
-                fontFamily: 'Outfit-Regular',
-              }}
-            />
-          </View>
-
-          <View
-            style={{
-              flexDirection: 'column',
-            }}>
-            <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>City</Text>
-            <TextInput
-              value={address}
-              placeholder="Enter city"
-              placeholderTextColor={COLORS.grey}
-              onChangeText={value => setcity(value)}
-              editable={flag}
-              style={{
-                padding: 10,
-                backgroundColor: '#f3f4f6',
-                borderRadius: 15,
-                margin: 10,
-                color: 'black',
-                fontFamily: 'Outfit-Regular',
-              }}
-            />
-          </View>
-          {CityError ? (
-            <Text style={{color: 'red', fontSize: 14, marginLeft: 20,fontFamily: 'Outfit-Regular',}}>
-              Please Enter Valid Value
-            </Text>
-          ) : null}
-          <View
-            style={{
-              flexDirection: 'column',
-            }}>
-            <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>
-              Hospital / Clinic Name
-            </Text>
-            <TextInput
-              value={hospitalname}
-              placeholder="Enter Name"
-              placeholderTextColor={COLORS.grey}
-              onChangeText={value => setHospital(value)}
-              editable={flag}
-              style={{
-                padding: 10,
-                backgroundColor: '#f3f4f6',
-                borderRadius: 15,
-                margin: 10,
-                color: 'black',
-                fontFamily: 'Outfit-Regular',
-              }}
-            />
-          </View>
-          {hospitalError ? (
-            <Text style={{color: 'red', fontSize: 14, marginLeft: 20,fontFamily: 'Outfit-Regular',}}>
-              Please Enter Valid Value
-            </Text>
-          ) : null}
-
-          <View
-            style={{
-              flexDirection: 'column',
-            }}>
-            <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>Specialization</Text>
-            <TextInput
-              value={special}
-              placeholder="Enter Name"
-              placeholderTextColor={COLORS.grey}
-              onChangeText={value => setSpecial(value)}
-              editable={flag}
-              style={{
-                padding: 10,
-                backgroundColor: '#f3f4f6',
-                borderRadius: 15,
-                margin: 10,
-                color: 'black',
-                fontFamily: 'Outfit-Regular',
-              }}
-            />
-          </View>
-          {specialError ? (
-            <Text style={{color: 'red', fontSize: 14, marginLeft: 20,fontFamily: 'Outfit-Regular',}}>
-              Please Enter Valid Value
-            </Text>
-          ) : null}
-
-          <View
-            style={{
-              flexDirection: 'column',
-            }}>
-            <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>Phone</Text>
-            <TextInput
-              value={phone_no}
-              placeholder="Enter Phone Number"
-              placeholderTextColor={COLORS.grey}
-              onChangeText={value => setPhone(value)}
-              editable={flag}
-              style={{
-                padding: 10,
-                backgroundColor: '#f3f4f6',
-                borderRadius: 15,
-                margin: 10,
-                color: 'black',
-                fontFamily: 'Outfit-Regular',
-              }}
-            />
-          </View>
-          {PhoneError ? (
-            <Text style={{color: 'red', fontSize: 14, marginLeft: 20,fontFamily: 'Outfit-Regular',}}>
-              Please Enter Valid Value
-            </Text>
-          ) : null}
-
-          <TouchableOpacity
-            style={{
-              backgroundColor: COLORS.yellow,
-              height: 44,
-              borderRadius: 15,
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: 10,
-              margin: 10,
+        <View style={{paddingVertical: 10, alignItems: 'center'}}>
+          <Switch
+            activeTextStyle={{
+              fontFamily: 'OutFit-Bold',
+              fontSize: 22,
+              color: COLORS.dark,
             }}
-            disabled={!flag}
-            onPress={validate}>
-            <Text
-              style={{
-                color: COLORS.dark,
-                fontFamily: 'Outfit-Bold',
-                fontSize:18
-              }}>
-              Save Changes
-            </Text>
-          </TouchableOpacity>
+            inactiveTextStyle={{
+              fontFamily: 'OutFit-Bold',
+              fontSize: 22,
+              color: COLORS.dark,
+            }}
+            value={isDark}
+            onValueChange={toggleSwitch2}
+            activeText={'Personal'}
+            inActiveText={'Proffessional'}
+            circleSize={35}
+            barHeight={45}
+            backgroundActive={COLORS.yellow}
+            backgroundInactive={COLORS.yellow}
+            circleActiveColor={COLORS.primary}
+            circleInActiveColor={COLORS.primary} // custom component to render inside the Switch circle (Text, Image, etc.)
+            changeValueImmediately={true} // if rendering inside circle, change state immediately or wait for animation to complete
+            renderActiveText={true}
+            renderInActiveText={true}
+            switchLeftPx={30} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider
+            switchRightPx={60} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider
+            switchWidthMultiplier={5.5} // multiplied by the `circleSize` prop to calculate total width of the Switch
+          />
         </View>
+        {isDark ? <Personal /> : <Proff />}
       </ScrollView>
     </SafeAreaView>
   );

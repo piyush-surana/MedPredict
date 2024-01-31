@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, SafeAreaView, StyleSheet, Switch} from 'react-native';
 import {Text, TouchableRipple} from 'react-native-paper';
 import COLORS from '../const/color';
@@ -7,8 +7,14 @@ import Icon1 from 'react-native-vector-icons/FontAwesome';
 const Settings_Screen: React.FC = ({navigation}: any) => {
   const [isEnabled, setIsEnabled] = useState(true);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-  const [isEnabled2, setIsEnabled2] = useState(false);
-  const toggleSwitch2 = () => setIsEnabled2(previousState => !previousState);
+  const [isDark, setDark] = useState(false);
+  const toggleSwitch2 = () => setDark(previousState => !previousState);
+
+  useEffect(()=>{
+    if(isDark==true){
+         
+    }
+  },[isDark])
 
   return (
     <SafeAreaView style={styles.container}>
@@ -18,7 +24,7 @@ const Settings_Screen: React.FC = ({navigation}: any) => {
           height: 70,
           padding: 10,
         }}>
-        <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+        <View  style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
           <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
             <TouchableRipple
               onPress={() => navigation.goBack()}
@@ -56,10 +62,10 @@ const Settings_Screen: React.FC = ({navigation}: any) => {
               <Text style={styles.menuItemText}>Dark Mode</Text>
               <Switch
                 trackColor={{false: '#767577', true: '#81b0ff'}}
-                thumbColor={isEnabled2 ? '#f5dd4b' : '#f4f3f4'}
+                thumbColor={isDark ? '#f5dd4b' : '#f4f3f4'}
                 ios_backgroundColor="#3e3e3e"
                 onValueChange={toggleSwitch2}
-                value={isEnabled2}
+                value={isDark}
                 style={{paddingLeft: 145}}
               />
             </View>
@@ -83,7 +89,7 @@ const Settings_Screen: React.FC = ({navigation}: any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: COLORS.white,
   },
   box: {
     padding: 10,
