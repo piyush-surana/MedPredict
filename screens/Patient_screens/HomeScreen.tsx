@@ -87,7 +87,7 @@ const HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
       <View style={style.mainCardContainer}>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('Work_screen');
+            navigation.navigate('Question');
           }}>
           <View style={style.userInfoContainer}>
             <Text style={style.mainFunction}>Symptoms Questionnaire</Text>

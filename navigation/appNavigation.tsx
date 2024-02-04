@@ -19,6 +19,7 @@ import UserProfile from '../screens/Patient_screens/UserProfile';
 import EditProfile from '../screens/Patient_screens/EditProfile';
 import HomeScreen from '../screens/Patient_screens/HomeScreen';
 import Appo_List from '../screens/Patient_screens/Appointment';
+import Question from '../screens/Patient_screens/question';
 
 import Doctor_UserProfile from '../screens/Doctor_screens/Doctor_User_Profile';
 import Doctor_EditProfile from '../screens/Doctor_screens/Doctor_Edit_Profile';
@@ -175,6 +176,11 @@ function StackNavigator() {
         name="Appointment"
         options={{headerShown: false}}
         component={Appo_List}
+      />
+      <Stack.Screen
+      name="Question"
+        options={{headerShown: false}}
+        component={Question}
       />
     </Stack.Navigator>
   );
