@@ -28,6 +28,7 @@ const Doctor_HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
       const value = await AsyncStorage.getItem('body');
       if (value !== null) {
         const data = JSON.parse(value);
+        await AsyncStorage.setItem('email_global', data['email']);
         setEmail(data['email']);
         setName(data['name']);
       }

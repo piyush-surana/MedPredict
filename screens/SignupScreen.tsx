@@ -212,7 +212,7 @@ const SignUpScreen = ({navigation}: any) => {
                 setIsFocus(false);
               }}
             />
-
+              
             <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>Password</Text>
             <View style={styles.container}>
               <TextInput

@@ -35,13 +35,8 @@ const Doc_Appo_List: React.FC = ({navigation}: any) => {
           <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
             <TouchableRipple
               onPress={() => navigation.goBack()}
-              style={{
-                backgroundColor: 'yellow',
-                padding: 10,
-                borderRadius: 6,
-                margin: 5,
-              }}>
-              <Icon1 name="arrow-left" size={18} color={'black'}></Icon1>
+              >
+              <Icon1 name="chevron-left" size={18} color={COLORS.white} style={{padding:5}}></Icon1>
             </TouchableRipple>
           </View>
           <Text style={styles.headerTitle}>Your Health, Your Way</Text>

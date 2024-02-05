@@ -1,10 +1,6 @@
 import React from 'react';
 import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {themeColors} from '../theme';
-import {useNavigation} from '@react-navigation/native';
-
-import { StackNavigationProp } from '@react-navigation/stack';
 import COLORS from '../const/color';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -17,14 +13,8 @@ const WorkScreen= ({navigation}: any) => {
       <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
-          style={{
-            backgroundColor: 'yellow',
-            padding: 12,
-            borderRadius: 6,
-            marginLeft: 15,
-            marginTop: 15,
-          }}>
-          <Icon name="arrow-left" size={18} color={'black'}></Icon>
+          >
+          <Icon name="chevron-left" size={18} color={COLORS.dark} style={{padding:25}}></Icon>
         </TouchableOpacity>
       </View>
     </View>  

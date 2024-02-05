@@ -10,11 +10,10 @@ const Settings_Screen: React.FC = ({navigation}: any) => {
   const [isDark, setDark] = useState(false);
   const toggleSwitch2 = () => setDark(previousState => !previousState);
 
-  useEffect(()=>{
-    if(isDark==true){
-         
+  useEffect(() => {
+    if (isDark == true) {
     }
-  },[isDark])
+  }, [isDark]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -24,17 +23,10 @@ const Settings_Screen: React.FC = ({navigation}: any) => {
           height: 70,
           padding: 10,
         }}>
-        <View  style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+        <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
           <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
-            <TouchableRipple
-              onPress={() => navigation.goBack()}
-              style={{
-                backgroundColor: 'yellow',
-                padding: 10,
-                borderRadius: 6,
-                margin: 5,
-              }}>
-              <Icon1 name="arrow-left" size={18} color={'black'}></Icon1>
+            <TouchableRipple onPress={() => navigation.goBack()}>
+              <Icon1 name="chevron-left" size={18} color={COLORS.white} style={{padding:5}}></Icon1>
             </TouchableRipple>
           </View>
           <Text style={styles.headerTitle}>Settings</Text>

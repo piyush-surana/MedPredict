@@ -46,6 +46,8 @@ const Settings_Screen: React.FC = ({navigation}: any) => {
         } else {
           setEmail(data['email']);
           setName(data['name']);
+          setDob(data['date_of_birth']);
+          setGender(data['gender']);
           setcity(data['address']);
           setPhone(data['phone_no']);
         }
@@ -97,12 +99,15 @@ const Settings_Screen: React.FC = ({navigation}: any) => {
     } else {
       setPhoneError(false);
     }
+    //console.log('entered0');
     collectData();
   };
 
   const collectData = async () => {
+   // console.log('entered1');
     const is_empty = 0;
-    const data = {email, address, phone_no, is_empty};
+    const data = {email, address, phone_no, date_of_birth,gender, is_empty};
+    //console.log(data);
     makeApiRequest({
       method: 'post',
       urlPath: 'fill',
@@ -115,7 +120,7 @@ const Settings_Screen: React.FC = ({navigation}: any) => {
             Alert.alert(
               'data successfully Updated please login again to see changes',
             );
-            navigation.navigate('Home1');
+            navigation.navigate('Doctor_Home');
             return;
           }
 

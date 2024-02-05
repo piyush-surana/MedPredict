@@ -32,15 +32,12 @@ const Doctor_EditProfile: React.FC = ({navigation}: any) => {
         }}>
         <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
           <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
-            <TouchableOpacity
-              onPress={() => navigation.goBack()}
-              style={{
-                backgroundColor: 'yellow',
-                padding: 10,
-                borderRadius: 6,
-                margin: 5,
-              }}>
-              <Icon name="arrow-left" size={18} color={'black'}></Icon>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Icon
+                name="chevron-left"
+                size={18}
+                color={COLORS.white}
+                style={{padding: 5}}></Icon>
             </TouchableOpacity>
           </View>
           <Text style={style.headerTitle}>Your Health, Your Way</Text>

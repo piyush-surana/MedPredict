@@ -14,14 +14,8 @@ const ContactScreen= ({navigation}: any) => {
       <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
-          style={{
-            backgroundColor: 'yellow',
-            padding: 12,
-            borderRadius: 6,
-            marginLeft: 15,
-            marginTop: 15,
-          }}>
-          <Icon name="arrow-left" size={18} color={'black'}></Icon>
+          >
+          <Icon name="chevron-left" size={18} color={'black'} style={{padding:25}}></Icon>
         </TouchableOpacity>
       </View>
     </View>  

@@ -17,15 +17,12 @@ const Support_Screen: React.FC = ({navigation}: any) => {
         }}>
         <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
           <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
-            <TouchableRipple
-              onPress={() => navigation.goBack()}
-              style={{
-                backgroundColor: 'yellow',
-                padding: 10,
-                borderRadius: 6,
-                margin: 5,
-              }}>
-              <Icon2 name="arrow-left" size={18} color={'black'}></Icon2>
+            <TouchableRipple onPress={() => navigation.goBack()}>
+              <Icon2
+                name="chevron-left"
+                size={18}
+                color={COLORS.white}
+                style={{padding: 5}}></Icon2>
             </TouchableRipple>
           </View>
           <Text style={styles.headerTitle}>Support</Text>

@@ -106,12 +106,8 @@ const Question = ({navigation}: any) => {
           <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
             <TouchableRipple
               onPress={() => navigation.goBack()}
-              style={{
-                backgroundColor: 'yellow',
-                padding: 6,
-                borderRadius: 6,
-              }}>
-              <Icon1 name="arrow-left" size={18} color={'black'}></Icon1>
+              >
+              <Icon1 name="chevron-left" size={18} color={COLORS.dark} style={{padding:5}}></Icon1>
             </TouchableRipple>
           </View>
           <Text style={styles.headerTitle}>Your Health, Your Way</Text>

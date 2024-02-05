@@ -162,13 +162,8 @@ const EditProfile: React.FC = ({navigation}: any) => {
           <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
             <TouchableOpacity
               onPress={() => navigation.goBack()}
-              style={{
-                backgroundColor: 'yellow',
-                padding: 10,
-                borderRadius: 6,
-                margin: 5,
-              }}>
-              <Icon name="arrow-left" size={18} color={'black'}></Icon>
+              >
+              <Icon name="chevron-left" size={18} color={COLORS.white} style={{padding:5}}></Icon>
             </TouchableOpacity>
           </View>
           <Text style={style.headerTitle}>Your Health, Your Way</Text>

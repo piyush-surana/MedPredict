@@ -8,9 +8,9 @@ import {
   StyleSheet,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { ScrollView } from 'react-native-gesture-handler';
+import {ScrollView} from 'react-native-gesture-handler';
 import Snackbar from 'react-native-snackbar';
-import { makeApiRequest } from '../auth/helpers';
+import {makeApiRequest} from '../auth/helpers';
 import COLORS from '../const/color';
 
 const ForgotpwdScreen = ({navigation}: any) => {
@@ -60,39 +60,39 @@ const ForgotpwdScreen = ({navigation}: any) => {
     return true;
   };
 
-  const collectData= async()=>{
-  const data = {email, password};
-  makeApiRequest({
-    method: 'post',
-    urlPath: 'forgot',
-    body: data,
-  }).then(response => {
-      if (response.data['status']== 200) {
-        console.log(response.data.data);
-        if(response.data.data.status == 200)
-        {
-          handlesubmit();
-          return;
-        }
-          console.log({resp : response.data.data.status})
+  const collectData = async () => {
+    const data = {email, password};
+    makeApiRequest({
+      method: 'post',
+      urlPath: 'forgot',
+      body: data,
+    })
+      .then(response => {
+        if (response.data['status'] == 200) {
+          console.log(response.data.data);
+          if (response.data.data.status == 200) {
+            handlesubmit();
+            return;
+          }
+          console.log({resp: response.data.data.status});
           Snackbar.show({
             text: response.data.data.message,
             duration: Snackbar.LENGTH_SHORT,
             textColor: 'white',
             backgroundColor: 'red',
-          }); 
-      }
-    }
-    ).catch(error => {
-      console.log('Error in api', error);
-      Snackbar.show({
-        text: 'Internal error',
-        duration: Snackbar.LENGTH_SHORT,
-        textColor: 'white',  
-        backgroundColor: 'red',
+          });
+        }
+      })
+      .catch(error => {
+        console.log('Error in api', error);
+        Snackbar.show({
+          text: 'Internal error',
+          duration: Snackbar.LENGTH_SHORT,
+          textColor: 'white',
+          backgroundColor: 'red',
+        });
       });
-    });
-  }
+  };
 
   const handlesubmit = () => {
     if (setEmailError.toString()) {
@@ -109,16 +109,8 @@ const ForgotpwdScreen = ({navigation}: any) => {
   return (
     <View style={{flex: 1, backgroundColor: COLORS.primary}}>
       <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={{
-            backgroundColor: 'yellow',
-            padding: 12,
-            borderRadius: 6,
-            marginLeft: 15,
-            marginTop: 15,
-          }}>
-          <Icon name="arrow-left" size={18} color={'black'}></Icon>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Icon name="chevron-left" size={18} color={COLORS.white} style={{padding:5}}></Icon>
         </TouchableOpacity>
       </View>
       <View style={{flexDirection: 'row', justifyContent: 'center'}}>
@@ -128,96 +120,142 @@ const ForgotpwdScreen = ({navigation}: any) => {
         />
       </View>
       <ScrollView>
-      <View
-        style={{
-          borderTopLeftRadius: 50,
-          borderTopRightRadius: 50,
-          flex: 1,
-          backgroundColor: 'white',
-          paddingHorizontal: 20,
-          paddingTop: 20,
-        }}>
-        <View style={{marginVertical: 2}}>
-          <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>Email</Text>
-          <TextInput
-            style={{
-              padding: 16,
-              backgroundColor: '#f3f4f6',
-              borderRadius: 20,
-              fontFamily: 'Outfit-Regular',
-              margin: 10,
-              color:'black'
-            }}
-            placeholder="Email"
-            placeholderTextColor={'gray'}
-            value={email}
-            onChangeText={setEmail}
-          />
-          {emailError ? (
-            <Text style={{color: 'red', fontSize: 14,fontFamily: 'Outfit-Regular',}}>
-              Please Enter Valid Value
+        <View
+          style={{
+            borderTopLeftRadius: 50,
+            borderTopRightRadius: 50,
+            flex: 1,
+            backgroundColor: 'white',
+            paddingHorizontal: 20,
+            paddingTop: 20,
+          }}>
+          <View style={{marginVertical: 2}}>
+            <Text
+              style={{
+                color: 'black',
+                marginLeft: 20,
+                fontFamily: 'Outfit-Regular',
+              }}>
+              Email
             </Text>
-          ) : null}
-          <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>New Password</Text>
-          <View style={styles.container}>
-                <TextInput
-                  style={styles.input}
-                  secureTextEntry={!passwordVisibility}
-                  placeholderTextColor={'gray'}
-                  placeholder="Password"
-                  value={password}
-                  onChangeText={setPassword}
-                />
-                <TouchableOpacity
-                  style={styles.iconContainer}
-                  onPress={() => setPasswordVisibility(!passwordVisibility)}>
-                  <Icon
-                    name={passwordVisibility ? 'eye-slash' : 'eye'}
-                    size={20}
-                    color="black"
-                  />
-                </TouchableOpacity>
-              </View>
-              {passwordError ? (
-                <Text style={{color: 'red', fontSize: 14,fontFamily: 'Outfit-Regular',}}>
-                  Please Enter Valid Value
-                </Text>
-              ) : null}
-
-          <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>Confirm Password</Text>
-        
-          <TextInput
-            style={{
-              padding: 16,
-              backgroundColor: '#f3f4f6',
-              borderRadius: 20,
-              fontFamily: 'Outfit-Regular',
-              margin: 10,
-            }}
-            secureTextEntry
-            placeholder="Password"
-            placeholderTextColor={COLORS.grey}
-            value={Cpassword}
-            onChangeText={setCPassword}
-          />
-          
-          {CpasswordError ? (
-            <Text style={{color: 'red', fontSize: 14,fontFamily: 'Outfit-Regular',}}>
-              Please Enter Valid Value
-            </Text>
-          ) : null}
-
-          <View style={{paddingTop: 16,alignItems:'center' ,paddingBottom:90}}>
-            <TouchableOpacity
-              style={{padding: 24, backgroundColor: 'yellow', borderRadius: 20}}
-              onPress={validate}>
-              <Text style={{fontSize: 20, color: 'black',fontFamily: 'Outfit-Bold',}}>
-                Reset Password
+            <TextInput
+              style={{
+                padding: 16,
+                backgroundColor: '#f3f4f6',
+                borderRadius: 20,
+                fontFamily: 'Outfit-Regular',
+                margin: 10,
+                color: 'black',
+              }}
+              placeholder="Email"
+              placeholderTextColor={'gray'}
+              value={email}
+              onChangeText={setEmail}
+            />
+            {emailError ? (
+              <Text
+                style={{
+                  color: 'red',
+                  fontSize: 14,
+                  fontFamily: 'Outfit-Regular',
+                }}>
+                Please Enter Valid Value
               </Text>
-            </TouchableOpacity>
+            ) : null}
+            <Text
+              style={{
+                color: 'black',
+                marginLeft: 20,
+                fontFamily: 'Outfit-Regular',
+              }}>
+              New Password
+            </Text>
+            <View style={styles.container}>
+              <TextInput
+                style={styles.input}
+                secureTextEntry={!passwordVisibility}
+                placeholderTextColor={'gray'}
+                placeholder="Password"
+                value={password}
+                onChangeText={setPassword}
+              />
+              <TouchableOpacity
+                style={styles.iconContainer}
+                onPress={() => setPasswordVisibility(!passwordVisibility)}>
+                <Icon
+                  name={passwordVisibility ? 'eye-slash' : 'eye'}
+                  size={20}
+                  color="black"
+                />
+              </TouchableOpacity>
+            </View>
+            {passwordError ? (
+              <Text
+                style={{
+                  color: 'red',
+                  fontSize: 14,
+                  fontFamily: 'Outfit-Regular',
+                }}>
+                Please Enter Valid Value
+              </Text>
+            ) : null}
+
+            <Text
+              style={{
+                color: 'black',
+                marginLeft: 20,
+                fontFamily: 'Outfit-Regular',
+              }}>
+              Confirm Password
+            </Text>
+
+            <TextInput
+              style={{
+                padding: 16,
+                backgroundColor: '#f3f4f6',
+                borderRadius: 20,
+                fontFamily: 'Outfit-Regular',
+                margin: 10,
+              }}
+              secureTextEntry
+              placeholder="Password"
+              placeholderTextColor={COLORS.grey}
+              value={Cpassword}
+              onChangeText={setCPassword}
+            />
+
+            {CpasswordError ? (
+              <Text
+                style={{
+                  color: 'red',
+                  fontSize: 14,
+                  fontFamily: 'Outfit-Regular',
+                }}>
+                Please Enter Valid Value
+              </Text>
+            ) : null}
+
+            <View
+              style={{paddingTop: 16, alignItems: 'center', paddingBottom: 90}}>
+              <TouchableOpacity
+                style={{
+                  padding: 24,
+                  backgroundColor: 'yellow',
+                  borderRadius: 20,
+                }}
+                onPress={validate}>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: 'black',
+                    fontFamily: 'Outfit-Bold',
+                  }}>
+                  Reset Password
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
-      </View>
       </ScrollView>
     </View>
   );
