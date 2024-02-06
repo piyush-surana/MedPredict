@@ -90,7 +90,6 @@ const Question = ({navigation}: any) => {
         selectedId4,
         selectedId5,
       );
-      
     }
   };
 
@@ -104,10 +103,12 @@ const Question = ({navigation}: any) => {
         }}>
         <View style={{flex: 1, flexDirection: 'row'}}>
           <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
-            <TouchableRipple
-              onPress={() => navigation.goBack()}
-              >
-              <Icon1 name="chevron-left" size={18} color={COLORS.dark} style={{padding:5}}></Icon1>
+            <TouchableRipple onPress={() => navigation.goBack()}>
+              <Icon1
+                name="chevron-left"
+                size={18}
+                color={COLORS.dark}
+                style={{padding: 5}}></Icon1>
             </TouchableRipple>
           </View>
           <Text style={styles.headerTitle}>Your Health, Your Way</Text>

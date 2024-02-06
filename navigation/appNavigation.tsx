@@ -25,6 +25,8 @@ import Doctor_UserProfile from '../screens/Doctor_screens/Doctor_User_Profile';
 import Doctor_EditProfile from '../screens/Doctor_screens/Doctor_Edit_Profile';
 import Doctor_HomeScreen from '../screens/Doctor_screens/Doctor_Home_Screen';
 import Doc_Appo_List from '../screens/Doctor_screens/Doc_Appo_List';
+import ContactScreen2 from '../screens/Patient_screens/ContactScreen2';
+import FAQScreen from '../screens/FAQscreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -76,7 +78,7 @@ function DoctorTabNavigator() {
         tabBarStyle: {height: 65, paddingBottom: 15, paddingTop: 10},
       }}>
       <Tab.Screen
-        name="Doc_Home"
+        name="DHome"
         component={Doctor_HomeScreen}
         options={{
           headerShown: false,
@@ -86,7 +88,7 @@ function DoctorTabNavigator() {
         }}
       />
       <Tab.Screen
-        name="Doc_User"
+        name="DUser"
         component={Doctor_UserProfile}
         options={{
           headerShown: false,
@@ -96,7 +98,7 @@ function DoctorTabNavigator() {
         }}
       />
       <Tab.Screen
-        name="Contact"
+        name="DContact"
         component={ContactScreen}
         options={{
           headerShown: false,
@@ -178,9 +180,19 @@ function StackNavigator() {
         component={Appo_List}
       />
       <Stack.Screen
-      name="Question"
+        name="Question"
         options={{headerShown: false}}
         component={Question}
+      />
+      <Stack.Screen
+        name="Contact2"
+        options={{headerShown: false}}
+        component={ContactScreen2}
+      />
+      <Stack.Screen
+        name="FAQ"
+        options={{headerShown: false}}
+        component={FAQScreen}
       />
     </Stack.Navigator>
   );

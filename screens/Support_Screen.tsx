@@ -22,7 +22,7 @@ const Support_Screen: React.FC = ({navigation}: any) => {
                 name="chevron-left"
                 size={18}
                 color={COLORS.white}
-                style={{padding: 5}}></Icon2>
+                style={{padding: 15}}></Icon2>
             </TouchableRipple>
           </View>
           <Text style={styles.headerTitle}>Support</Text>
@@ -30,7 +30,7 @@ const Support_Screen: React.FC = ({navigation}: any) => {
       </View>
       <View style={{padding: 20}}>
         <View style={styles.box}>
-          <TouchableRipple>
+          <TouchableRipple onPress={()=>{navigation.navigate('Contact2')}}>
             <View style={styles.menuItem}>
               <Icon1
                 name="support-agent"
@@ -38,18 +38,18 @@ const Support_Screen: React.FC = ({navigation}: any) => {
                 size={25}
                 style={{paddingRight: 10}}
               />
-              <Text style={styles.menuItemText}>Contact Live chat</Text>
+              <Text style={styles.menuItemText}>Contact Us</Text>
               <Icon
                 name="angle-right"
                 color="black"
                 size={25}
-                style={{paddingLeft: 90}}
+                style={{paddingLeft: 130}}
               />
             </View>
           </TouchableRipple>
         </View>
         <View style={styles.box}>
-          <TouchableRipple>
+          <TouchableRipple onPress={()=>{navigation.navigate('Work_screen')}}>
             <View style={styles.menuItem}>
               <Icon1
                 name="mail"
@@ -68,7 +68,7 @@ const Support_Screen: React.FC = ({navigation}: any) => {
           </TouchableRipple>
         </View>
         <View style={styles.box}>
-          <TouchableRipple onPress={() => {}}>
+          <TouchableRipple onPress={() => {navigation.navigate('FAQ')}}>
             <View style={styles.menuItem}>
               <Icon1
                 name="question-mark"

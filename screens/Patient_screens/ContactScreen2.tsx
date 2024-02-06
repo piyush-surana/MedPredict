@@ -2,10 +2,10 @@ import React from 'react';
 import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
-import COLORS from '../const/color';
+import COLORS from '../../const/color';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const ContactScreen = ({navigation}: any) => {
+const ContactScreen2 = ({navigation}: any) => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
       <View
@@ -21,7 +21,7 @@ const ContactScreen = ({navigation}: any) => {
                 name="chevron-left"
                 size={18}
                 color={COLORS.white}
-                style={{padding: 5}}></Icon>
+                style={{paddingHorizontal: 15,paddingVertical:5}}></Icon>
             </TouchableOpacity>
           </View>
           <Text style={styles.headerTitle}>Contact Us</Text>
@@ -80,7 +80,7 @@ const ContactScreen = ({navigation}: any) => {
             </View>
           </View>
         </View>
-        <View style={styles.box}>
+        <View style={styles.box2}>
           <Text style={{color: COLORS.grey, paddingBottom: 10,fontFamily:'Outfit-Regular'}}>
             Social Media
           </Text>
@@ -182,14 +182,24 @@ const styles = StyleSheet.create({
   },
   box: {
     justifyContent: 'space-between',
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.lightblue,
     borderRadius: 10,
     paddingVertical: 10,
     paddingHorizontal: 10,
     margin: 20,
     shadowColor: 'gray',
-    elevation: 5,
+    elevation: 10,
+  },
+  box2: {
+    justifyContent: 'space-between',
+    backgroundColor: COLORS.lightpink,
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    margin: 20,
+    shadowColor: 'gray',
+    elevation: 10,
   },
 });
 
-export default ContactScreen;
+export default ContactScreen2;

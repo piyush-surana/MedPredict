@@ -288,6 +288,7 @@ const EditProfile: React.FC = ({navigation}: any) => {
               placeholderStyle={style.placeholderStyle}
               selectedTextStyle={style.selectedTextStyle}
               data={data}
+              disable={flag}
               itemTextStyle={{color: 'gray',fontFamily: 'Outfit-Regular',}}
               maxHeight={300}
               labelField="label"
