@@ -1,5 +1,12 @@
 import React, {useMemo, useState} from 'react';
-import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+  Modal,
+} from 'react-native';
 import {TouchableRipple} from 'react-native-paper';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
@@ -7,6 +14,9 @@ import RadioGroup from 'react-native-radio-buttons-group';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon1 from 'react-native-vector-icons/FontAwesome';
 import COLORS from '../../const/color';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {makeApiRequest} from '../../auth/helpers';
+import Snackbar from 'react-native-snackbar';
 
 const Question = ({navigation}: any) => {
   const radioButtons = useMemo(
@@ -24,51 +34,68 @@ const Question = ({navigation}: any) => {
     ],
     [],
   );
-  const [selectedId1, setSelectedId1] = useState<string | undefined>();
-  const [selectedId2, setSelectedId2] = useState<string | undefined>();
-  const [selectedId3, setSelectedId3] = useState<string | undefined>();
-  const [selectedId4, setSelectedId4] = useState<string | undefined>();
-  const [selectedId5, setSelectedId5] = useState<string | undefined>();
+  const [cough, setSelectedId1] = useState<string | undefined>();
+  const [headache, setSelectedId2] = useState<string | undefined>();
+  const [fever, setSelectedId3] = useState<string | undefined>();
+  const [sore_throat, setSelectedId4] = useState<string | undefined>();
+  const [fatigue, setSelectedId5] = useState<string | undefined>();
   const [error1, seterror1] = useState(false);
   const [error2, seterror2] = useState(false);
   const [error3, seterror3] = useState(false);
   const [error4, seterror4] = useState(false);
   const [error5, seterror5] = useState(false);
+  const [uid, setUid] = useState<string | undefined>();
+  const [modalVisible, setModalVisible] = useState(false);
+  const [disease, setDisease] = useState('');
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('userid_global');
+      if (value !== null) {
+        //console.log(value);
+        setUid(value);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  getData();
 
   const goToDetails = () => {
     navigation.navigate('SignUp');
   };
 
   const submit = () => {
-    if (selectedId1 == null) {
+    if (cough == null) {
       seterror1(true);
       return false;
     } else {
       seterror1(false);
     }
 
-    if (selectedId2 == null) {
+    if (headache == null) {
       seterror2(true);
       return false;
     } else {
       seterror2(false);
     }
 
-    if (selectedId3 == null) {
+    if (fever == null) {
       seterror3(true);
       return false;
     } else {
       seterror3(false);
     }
 
-    if (selectedId4 == null) {
+    if (sore_throat == null) {
       seterror4(true);
       return false;
     } else {
       seterror4(false);
     }
 
-    if (selectedId5 == null) {
+    if (fatigue == null) {
       seterror5(true);
       return false;
     } else {
@@ -82,19 +109,80 @@ const Question = ({navigation}: any) => {
       error4 == false &&
       error5 == false
     ) {
-      navigation.navigate('Appointment');
-      console.log(
-        selectedId1,
-        selectedId2,
-        selectedId3,
-        selectedId4,
-        selectedId5,
-      );
+      collectData();
     }
+  };
+
+  const collectData = async () => {
+    const data = {uid, cough, headache, fever, sore_throat, fatigue};
+    makeApiRequest({
+      method: 'post',
+      urlPath: 'disease',
+      body: data,
+    })
+      .then(response => {
+        if (response.data['status'] == 200) {
+          // console.log(response.data.data.pdisease);
+          if (response.data.data.status == 200) {
+            setDisease(response.data.data.pdisease);
+            setModalVisible(true);
+            return;
+          }
+          //console.log({resp: response.data.data.status});
+          Snackbar.show({
+            text: response.data.data.message,
+            duration: Snackbar.LENGTH_SHORT,
+            textColor: 'white',
+            backgroundColor: 'red',
+          });
+        }
+      })
+      .catch(error => {
+        console.log('Error in api', error);
+        Snackbar.show({
+          text: 'Internal error',
+          duration: Snackbar.LENGTH_SHORT,
+          textColor: 'white',
+          backgroundColor: 'red',
+        });
+      });
+  };
+
+  const handleSubmit = () => {
+    
+    navigation.navigate('Appointment');
   };
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: COLORS.primary}}>
+      <View>
+        <Modal visible={modalVisible} transparent={true} animationType="slide">
+          <View style={styles.modalView}>
+            <Text style={styles.sentence2}>
+              Based on the calculations we are predicting you are suffering from
+              : {disease}
+            </Text>
+            <Text style={styles.sentence3}>
+              It is just prediction made using a machine. so please don't get
+              stressed and consult the doctor for further checkup
+            </Text>
+            <TouchableOpacity
+              onPress={() => {
+                handleSubmit();
+                setModalVisible(false);
+              }}
+              style={{
+                backgroundColor: COLORS.yellow,
+                padding: 10,
+                borderRadius: 15,
+                marginTop: 15,
+                paddingHorizontal: 15,
+              }}>
+              <Text style={{color: COLORS.dark}}>OK</Text>
+            </TouchableOpacity>
+          </View>
+        </Modal>
+      </View>
       <View
         style={{
           backgroundColor: COLORS.white,
@@ -127,7 +215,7 @@ const Question = ({navigation}: any) => {
             <RadioGroup
               radioButtons={radioButtons}
               onPress={setSelectedId1}
-              selectedId={selectedId1}
+              selectedId={cough}
               layout="row"
               labelStyle={{color: COLORS.dark}}
             />
@@ -147,7 +235,7 @@ const Question = ({navigation}: any) => {
             <RadioGroup
               radioButtons={radioButtons}
               onPress={setSelectedId2}
-              selectedId={selectedId2}
+              selectedId={headache}
               layout="row"
               labelStyle={{color: COLORS.dark}}
             />
@@ -167,7 +255,7 @@ const Question = ({navigation}: any) => {
             <RadioGroup
               radioButtons={radioButtons}
               onPress={setSelectedId3}
-              selectedId={selectedId3}
+              selectedId={fever}
               layout="row"
               labelStyle={{color: COLORS.dark}}
             />
@@ -187,7 +275,7 @@ const Question = ({navigation}: any) => {
             <RadioGroup
               radioButtons={radioButtons}
               onPress={setSelectedId4}
-              selectedId={selectedId4}
+              selectedId={sore_throat}
               layout="row"
               labelStyle={{color: COLORS.dark}}
             />
@@ -207,7 +295,7 @@ const Question = ({navigation}: any) => {
             <RadioGroup
               radioButtons={radioButtons}
               onPress={setSelectedId5}
-              selectedId={selectedId5}
+              selectedId={fatigue}
               layout="row"
               labelStyle={{color: COLORS.dark}}
             />
@@ -266,7 +354,7 @@ const styles = StyleSheet.create({
   },
   mainheading: {
     color: COLORS.dark,
-    textAlign: 'justify',
+    textAlign: 'center',
     fontFamily: 'Outfit-SemiBold',
     fontSize: 24,
   },
@@ -280,6 +368,38 @@ const styles = StyleSheet.create({
     color: COLORS.dark,
     fontFamily: 'Outfit-Medium',
     fontSize: 22,
+  },
+  modalView: {
+    margin: 15,
+    backgroundColor: COLORS.lightpink,
+    borderRadius: 20,
+    padding: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 350,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  sentence2: {
+    fontFamily: 'Outfit-Regular',
+    fontSize: 22,
+    color: COLORS.dark,
+    justifyContent: 'center',
+    textAlign: 'justify',
+  },
+  sentence3: {
+    fontFamily: 'Outfit-Regular',
+    fontSize: 14,
+    color: 'red',
+    justifyContent: 'center',
+    textAlign: 'justify',
+    paddingTop:10,
   },
 });
 

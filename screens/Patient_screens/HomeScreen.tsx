@@ -21,12 +21,16 @@ const {width} = Dimensions.get('screen');
 const HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [uid, setUid] = useState('');
 
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem('body');
       if (value !== null) {
         const data = JSON.parse(value);
+        setUid(data['userid']);
+        await AsyncStorage.setItem('userid_global',uid.toString());
+        //console.log(data['userid']);
         setEmail(data['email']);
         setName(data['name']);
       }
