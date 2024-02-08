@@ -14,6 +14,8 @@ import Settings_Screen from '../screens/Settings_Screen';
 import Support_Screen from '../screens/Support_Screen';
 import ContactScreen from '../screens/ContactScreen';
 import WorkScreen from '../screens/work_in_progress';
+import FAQScreen from '../screens/FAQscreen';
+import ContactScreen2 from '../screens/Patient_screens/ContactScreen2';
 
 import UserProfile from '../screens/Patient_screens/UserProfile';
 import EditProfile from '../screens/Patient_screens/EditProfile';
@@ -21,13 +23,12 @@ import HomeScreen from '../screens/Patient_screens/HomeScreen';
 import Appo_List from '../screens/Patient_screens/Appointment';
 import Question from '../screens/Patient_screens/question';
 import Book_Appo from '../screens/Patient_screens/book_appo';
+import My_Appo from '../screens/Patient_screens/my_appo';
 
 import Doctor_UserProfile from '../screens/Doctor_screens/Doctor_User_Profile';
 import Doctor_EditProfile from '../screens/Doctor_screens/Doctor_Edit_Profile';
 import Doctor_HomeScreen from '../screens/Doctor_screens/Doctor_Home_Screen';
 import Doc_Appo_List from '../screens/Doctor_screens/Doc_Appo_List';
-import ContactScreen2 from '../screens/Patient_screens/ContactScreen2';
-import FAQScreen from '../screens/FAQscreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -199,6 +200,11 @@ function StackNavigator() {
         name="Book_appo"
         options={{headerShown: false}}
         component={Book_Appo}
+      />
+      <Stack.Screen
+        name="My_appo"
+        options={{headerShown: false}}
+        component={My_Appo}
       />
     </Stack.Navigator>
   );

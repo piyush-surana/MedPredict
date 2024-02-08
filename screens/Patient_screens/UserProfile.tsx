@@ -126,7 +126,7 @@ const UserProfile: React.FC = ({navigation}: any) => {
         <View style={styles.box}>
           <TouchableRipple
             onPress={() => {
-              navigation.navigate('Appointment');
+              navigation.navigate('My_appo');
             }}>
             <View style={styles.menuItem}>
               <Icon name="credit-card" color="#FF6347" size={25} />
