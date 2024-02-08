@@ -109,7 +109,12 @@ const Question = ({navigation}: any) => {
       error4 == false &&
       error5 == false
     ) {
-      collectData();
+      if (cough && headache && fever && sore_throat && fatigue == '0') {
+        setDisease('No Diseases');
+        setModalVisible(true);
+      } else {
+        collectData();
+      }
     }
   };
 
@@ -135,7 +140,7 @@ const Question = ({navigation}: any) => {
             textColor: 'white',
             backgroundColor: 'red',
           });
-        }
+        } //9137342818
       })
       .catch(error => {
         console.log('Error in api', error);
@@ -149,7 +154,6 @@ const Question = ({navigation}: any) => {
   };
 
   const handleSubmit = () => {
-    
     navigation.navigate('Appointment');
   };
 
@@ -399,7 +403,7 @@ const styles = StyleSheet.create({
     color: 'red',
     justifyContent: 'center',
     textAlign: 'justify',
-    paddingTop:10,
+    paddingTop: 10,
   },
 });
 

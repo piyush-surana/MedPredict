@@ -68,22 +68,46 @@ const UserProfile: React.FC = ({navigation}: any) => {
                 ]}>
                 {name}
               </Title>
-              <Text style={{color: COLORS.grey,fontFamily: 'Outfit-Regular',}}>{email}</Text>
+              <Text style={{color: COLORS.grey, fontFamily: 'Outfit-Regular'}}>
+                {email}
+              </Text>
             </View>
           </View>
         </View>
         <View style={styles.userInfoSection}>
           <View style={styles.row}>
             <Icon name="map-marker-radius" color="#777777" size={20} />
-            <Text style={{color: COLORS.grey, marginLeft: 20,fontFamily: 'Outfit-Regular',}}>{city}</Text>
+            <Text
+              style={{
+                color: COLORS.grey,
+                marginLeft: 20,
+                fontFamily: 'Outfit-Regular',
+              }}>
+              {city}
+            </Text>
           </View>
           <View style={styles.row}>
             <Icon name="phone" color={COLORS.grey} size={20} />
-            <Text style={{color: COLORS.grey, marginLeft: 20,fontFamily: 'Outfit-Regular',}}>{phone}</Text>
+            <Text
+              style={{
+                color: COLORS.grey,
+                marginLeft: 20,
+                fontFamily: 'Outfit-Regular',
+              }}>
+              {phone}
+            </Text>
           </View>
           <View style={styles.row}>
-            <Icon1 name="square" color={COLORS.grey} size={20} />
-            <Text style={{color: COLORS.grey, marginLeft: 20,fontFamily: 'Outfit-Regular',}}>{Gender}</Text>
+            <Icon1 name={Gender== 'Male' ? 'male' : 'female'} color={COLORS.grey} size={20} style={{paddingLeft:5}}/>
+            <Text
+              style={{
+                color: COLORS.grey,
+                marginLeft: 20,
+                fontFamily: 'Outfit-Regular',
+                paddingLeft:5
+              }}>
+              {Gender}
+            </Text>
           </View>
         </View>
       </View>
@@ -121,7 +145,7 @@ const UserProfile: React.FC = ({navigation}: any) => {
             </View>
           </TouchableRipple>
         </View>
-        <View style={styles.box}>
+        {/* <View style={styles.box}>
           <TouchableRipple
             onPress={() => {
               navigation.navigate('Settings');
@@ -131,7 +155,7 @@ const UserProfile: React.FC = ({navigation}: any) => {
               <Text style={styles.menuItemText}>Settings</Text>
             </View>
           </TouchableRipple>
-        </View>
+        </View> */}
         <View style={styles.box}>
           <TouchableRipple
             onPress={() => {

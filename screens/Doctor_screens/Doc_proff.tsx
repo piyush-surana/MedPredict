@@ -39,15 +39,15 @@ const Doc_proff_Screen: React.FC = ({navigation}: any) => {
       const value = await AsyncStorage.getItem('body');
       const emailValue = await AsyncStorage.getItem('email_global');
       setEmail(emailValue!);
-      if (value !== null) {
-        const data = JSON.parse(value);
-        if (data.is_empty == 1) {
-          setFlag(false);
-        } else {
-          //setcity(data['address']);
-          //setPhone(data['phone_no']);
-        }
-      }
+      // if (value !== null) {
+      //   const data = JSON.parse(value);
+      //   if (data.is_empty == 1) {
+      //     setFlag(false);
+      //   } else {
+      //     //setcity(data['address']);
+      //     //setPhone(data['phone_no']);
+      //   }
+      // }
     } catch (e) {
       console.log(e);
     }

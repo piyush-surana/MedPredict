@@ -120,7 +120,6 @@ const Settings_Screen: React.FC = ({navigation}: any) => {
             Alert.alert(
               'data successfully Updated please login again to see changes',
             );
-            navigation.navigate('Doctor_Home');
             return;
           }
 

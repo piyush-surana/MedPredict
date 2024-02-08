@@ -71,71 +71,7 @@ const Appo_List: React.FC = ({navigation}: any) => {
               <Text style={{color: COLORS.grey, marginBottom: 5,fontFamily: 'Outfit-Regular',}}>
                 Type
               </Text>
-              <Text style={{color: COLORS.grey,fontFamily: 'Outfit-Regular',}}>Experience</Text>
-            </View>
-          </View>
-        </View>
-      </View>
-      <View style={styles.profile}>
-        <View style={styles.userInfoSection}>
-          <View style={{flexDirection: 'row', marginTop: 15}}>
-            <Image
-              source={require('../../assets/images/avatar.png')}
-              style={{
-                width: 100,
-                height: 100,
-                borderRadius: 30,
-                backgroundColor: 'yellow',
-                padding: 20,
-              }}
-            />
-            <View style={{marginLeft: 20}}>
-              <Title
-                style={[
-                  styles.title,
-                  {
-                    marginBottom: 5,
-                    color: COLORS.grey,
-                  },
-                ]}>
-                Dr.{name}
-              </Title>
-              <Text style={{color: COLORS.grey, marginBottom: 5,fontFamily: 'Outfit-Regular',}}>
-                Type
-              </Text>
-              <Text style={{color: COLORS.grey,fontFamily: 'Outfit-Regular',}}>Experience</Text>
-            </View>
-          </View>
-        </View>
-      </View>
-      <View style={styles.profile}>
-        <View style={styles.userInfoSection}>
-          <View style={{flexDirection: 'row', marginTop: 15}}>
-            <Image
-              source={require('../../assets/images/avatar.png')}
-              style={{
-                width: 100,
-                height: 100,
-                borderRadius: 30,
-                backgroundColor: 'yellow',
-                padding: 20,
-              }}
-            />
-            <View style={{marginLeft: 20}}>
-              <Title
-                style={[
-                  styles.title,
-                  {
-                    marginBottom: 5,
-                    color: COLORS.grey,
-                  },
-                ]}>
-                Dr.{name}
-              </Title>
-              <Text style={{color: COLORS.grey, marginBottom: 5,fontFamily: 'Outfit-Regular',}}>
-                Type
-              </Text>
-              <Text style={{color: COLORS.grey,fontFamily: 'Outfit-Regular',}}>Experience</Text>
+              <Text style={{color: COLORS.grey,fontFamily: 'Outfit-Regular',}}>Address </Text>
             </View>
           </View>
         </View>
