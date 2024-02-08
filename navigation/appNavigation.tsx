@@ -20,6 +20,7 @@ import EditProfile from '../screens/Patient_screens/EditProfile';
 import HomeScreen from '../screens/Patient_screens/HomeScreen';
 import Appo_List from '../screens/Patient_screens/Appointment';
 import Question from '../screens/Patient_screens/question';
+import Book_Appo from '../screens/Patient_screens/book_appo';
 
 import Doctor_UserProfile from '../screens/Doctor_screens/Doctor_User_Profile';
 import Doctor_EditProfile from '../screens/Doctor_screens/Doctor_Edit_Profile';
@@ -193,6 +194,11 @@ function StackNavigator() {
         name="FAQ"
         options={{headerShown: false}}
         component={FAQScreen}
+      />
+      <Stack.Screen
+        name="Book_appo"
+        options={{headerShown: false}}
+        component={Book_Appo}
       />
     </Stack.Navigator>
   );

@@ -109,7 +109,7 @@ const Question = ({navigation}: any) => {
       error4 == false &&
       error5 == false
     ) {
-      if (cough && headache && fever && sore_throat && fatigue == '0') {
+      if (cough== '0' && headache== '0' && fever== '0' && sore_throat== '0' && fatigue == '0') {
         setDisease('No Diseases');
         setModalVisible(true);
       } else {
@@ -167,8 +167,7 @@ const Question = ({navigation}: any) => {
               : {disease}
             </Text>
             <Text style={styles.sentence3}>
-              It is just prediction made using a machine. so please don't get
-              stressed and consult the doctor for further checkup
+              It is just a prediction made using a machine. Please consult to doctor for further guidance and medication. 
             </Text>
             <TouchableOpacity
               onPress={() => {

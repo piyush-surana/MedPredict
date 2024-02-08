@@ -77,6 +77,7 @@ const Appo_List: React.FC = ({navigation}: any) => {
         </View>
       </View>
       <View style={styles.profile}>
+      <TouchableRipple onPress={()=>{navigation.navigate('Book_appo')}} >
         <View style={styles.userInfoSection}>
           <View style={{flexDirection: 'row', marginTop: 15}}>
             <Image
@@ -107,6 +108,7 @@ const Appo_List: React.FC = ({navigation}: any) => {
             </View>
           </View>
         </View>
+      </TouchableRipple>
       </View>
       <View style={styles.profile}>
         <View style={styles.userInfoSection}>
