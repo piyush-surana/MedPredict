@@ -5,9 +5,9 @@ import COLORS from '../../const/color';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon1 from 'react-native-vector-icons/FontAwesome';
 
-
 const Doc_Appo_List: React.FC = ({navigation}: any) => {
   const [name, setName] = useState('');
+  const [confirm, setConfirm] = useState(true);
 
   const getData = async () => {
     try {
@@ -29,22 +29,28 @@ const Doc_Appo_List: React.FC = ({navigation}: any) => {
           backgroundColor: COLORS.primary,
           height: 70,
           padding: 10,
-          marginBottom:10,
+          marginBottom: 10,
         }}>
-        <View style={{flex: 1, flexDirection: 'row',alignItems: 'center'}}>
+        <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
           <View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
-            <TouchableRipple
-              onPress={() => navigation.goBack()}
-              >
-              <Icon1 name="chevron-left" size={18} color={COLORS.white} style={{padding:5}}></Icon1>
+            <TouchableRipple onPress={() => navigation.goBack()}>
+              <Icon1
+                name="chevron-left"
+                size={18}
+                color={COLORS.white}
+                style={{padding: 5}}></Icon1>
             </TouchableRipple>
           </View>
           <Text style={styles.headerTitle}>Your Health, Your Way</Text>
         </View>
       </View>
+      <View>
+        <Text style={styles.heading}>Appointment's</Text>
+      </View>
       <View style={styles.profile}>
         <View style={styles.userInfoSection}>
-          <View style={{flexDirection: 'row', marginTop: 15}}>
+          <View
+            style={{flexDirection: 'row', marginTop: 15, alignItems: 'center'}}>
             <Image
               source={require('../../assets/images/avatar.png')}
               style={{
@@ -61,22 +67,66 @@ const Doc_Appo_List: React.FC = ({navigation}: any) => {
                   styles.title,
                   {
                     marginBottom: 5,
-                    color: COLORS.grey,
+                    color: COLORS.dark,
                   },
                 ]}>
-                {name}
+                Patient Name
               </Title>
-              <Text style={{color: COLORS.grey, marginBottom: 5,fontFamily: 'Outfit-Regular',}}>
-                Day & Time{' '}
+              <Text
+                style={{
+                  color: COLORS.grey,
+                  fontFamily: 'Outfit-Regular',
+                }}>
+                Date & Time
               </Text>
-              <Text style={{color: COLORS.grey,fontFamily: 'Outfit-Regular',}}>Diseases </Text>
+              <Text style={{color: COLORS.grey, fontFamily: 'Outfit-Regular'}}>
+                Disease Predicted
+              </Text>
+              <View
+                style={[
+                  {
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    paddingVertical: 10,
+                  },
+                ]}>
+                <TouchableRipple
+                  style={{
+                    backgroundColor: 'green',
+                    borderRadius: 10,
+                    marginRight: 10,
+                  }}>
+                  <Text
+                    style={{
+                      fontFamily: 'Outfit-Regular',
+                      fontSize: 20,
+                      color: COLORS.white,
+                      padding: 10,
+                    }}>
+                    Confirm
+                  </Text>
+                </TouchableRipple>
+                <TouchableRipple
+                  style={{backgroundColor: 'red', borderRadius: 10}}>
+                  <Text
+                    style={{
+                      fontFamily: 'Outfit-Regular',
+                      fontSize: 20,
+                      color: COLORS.white,
+                      padding: 10,
+                    }}>
+                    Cancel
+                  </Text>
+                </TouchableRipple>
+              </View>
             </View>
           </View>
         </View>
       </View>
       <View style={styles.profile}>
         <View style={styles.userInfoSection}>
-          <View style={{flexDirection: 'row', marginTop: 15}}>
+          <View
+            style={{flexDirection: 'row', marginTop: 15, alignItems: 'center'}}>
             <Image
               source={require('../../assets/images/avatar.png')}
               style={{
@@ -93,47 +143,58 @@ const Doc_Appo_List: React.FC = ({navigation}: any) => {
                   styles.title,
                   {
                     marginBottom: 5,
-                    color: COLORS.grey,
+                    color: COLORS.dark,
                   },
                 ]}>
-                {name}
+                Patient Name
               </Title>
-              <Text style={{color: COLORS.grey, marginBottom: 5,fontFamily: 'Outfit-Regular',}}>
-                Day & Time{' '}
+              <Text
+                style={{
+                  color: COLORS.grey,
+                  fontFamily: 'Outfit-Regular',
+                }}>
+                Date & Time
               </Text>
-              <Text style={{color: COLORS.grey,fontFamily: 'Outfit-Regular',}}>Diseases </Text>
-            </View>
-          </View>
-        </View>
-      </View>
-      <View style={styles.profile}>
-        <View style={styles.userInfoSection}>
-          <View style={{flexDirection: 'row', marginTop: 15}}>
-            <Image
-              source={require('../../assets/images/avatar.png')}
-              style={{
-                width: 100,
-                height: 100,
-                borderRadius: 30,
-                backgroundColor: 'yellow',
-                padding: 20,
-              }}
-            />
-            <View style={{marginLeft: 20}}>
-              <Title
+              <Text style={{color: COLORS.grey, fontFamily: 'Outfit-Regular'}}>
+                Disease Predicted
+              </Text>
+              <View
                 style={[
-                  styles.title,
                   {
-                    marginBottom: 5,
-                    color: COLORS.grey,
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    paddingVertical: 10,
                   },
                 ]}>
-                {name}
-              </Title>
-              <Text style={{color: COLORS.grey, marginBottom: 5,fontFamily: 'Outfit-Regular',}}>
-                Day & Time{' '}
-              </Text>
-              <Text style={{color: COLORS.grey,fontFamily: 'Outfit-Regular',}}>Diseases </Text>
+                <TouchableRipple
+                  style={{
+                    backgroundColor: 'green',
+                    borderRadius: 10,
+                    marginRight: 10,
+                  }}>
+                  <Text
+                    style={{
+                      fontFamily: 'Outfit-Regular',
+                      fontSize: 20,
+                      color: COLORS.white,
+                      padding: 10,
+                    }}>
+                    Confirm
+                  </Text>
+                </TouchableRipple>
+                <TouchableRipple
+                  style={{backgroundColor: 'red', borderRadius: 10}}>
+                  <Text
+                    style={{
+                      fontFamily: 'Outfit-Regular',
+                      fontSize: 20,
+                      color: COLORS.white,
+                      padding: 10,
+                    }}>
+                    Cancel
+                  </Text>
+                </TouchableRipple>
+              </View>
             </View>
           </View>
         </View>
@@ -147,14 +208,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
-  box: {
-    padding: 5,
-    backgroundColor: '#f3f4f6',
-    borderRadius: 15,
-    marginHorizontal: 15,
-    marginVertical: 5,
-    color: 'black',
-  },
   profile: {
     backgroundColor: COLORS.lightblue,
     borderRadius: 15,
@@ -165,17 +218,31 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     color: COLORS.white,
-    paddingLeft:10,
+    paddingLeft: 10,
     fontFamily: 'Outfit-Bold',
     fontSize: 23,
   },
   userInfoSection: {
     paddingHorizontal: 20,
-    marginBottom: 15,
+    marginBottom: 5,
   },
   title: {
     fontSize: 24,
     fontFamily: 'Outfit-Bold',
+  },
+  heading: {
+    fontSize: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    color: COLORS.dark,
+    fontFamily: 'Outfit-SemiBold',
+  },
+  heading1: {
+    fontSize: 18,
+    paddingVertical: 5,
+    paddingHorizontal: 20,
+    color: COLORS.grey,
+    fontFamily: 'Outfit-SemiBold',
   },
 });
 

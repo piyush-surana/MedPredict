@@ -70,7 +70,7 @@ const My_Appo: React.FC = ({navigation}: any) => {
                   styles.title,
                   {
                     marginBottom: 5,
-                    color: COLORS.grey,
+                    color: COLORS.dark,
                   },
                 ]}>
                 Dr.{name}
@@ -128,7 +128,7 @@ const My_Appo: React.FC = ({navigation}: any) => {
                   styles.title,
                   {
                     marginBottom: 5,
-                    color: COLORS.grey,
+                    color: COLORS.dark,
                   },
                 ]}>
                 Dr.{name}
@@ -171,14 +171,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-  },
-  box: {
-    padding: 5,
-    backgroundColor: '#f3f4f6',
-    borderRadius: 15,
-    marginHorizontal: 15,
-    marginVertical: 5,
-    color: 'black',
   },
   profile: {
     backgroundColor: COLORS.lightblue,

@@ -44,7 +44,7 @@ const Doctor_HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
       <View>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('Doc_User');
+            navigation.navigate('DUser');
           }}>
           <View style={style.userProfileCardContainer}>
             <View style={style.userProfileImageContainer}>
