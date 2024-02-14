@@ -38,7 +38,7 @@ const Doc_Appo_List: React.FC = ({navigation}: any) => {
                 name="chevron-left"
                 size={18}
                 color={COLORS.white}
-                style={{padding: 5}}></Icon1>
+                style={{padding: 15}}></Icon1>
             </TouchableRipple>
           </View>
           <Text style={styles.headerTitle}>Your Health, Your Way</Text>

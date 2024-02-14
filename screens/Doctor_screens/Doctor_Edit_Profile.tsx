@@ -37,7 +37,7 @@ const Doctor_EditProfile: React.FC = ({navigation}: any) => {
                 name="chevron-left"
                 size={18}
                 color={COLORS.white}
-                style={{padding: 5}}></Icon>
+                style={{padding: 15}}></Icon>
             </TouchableOpacity>
           </View>
           <Text style={style.headerTitle}>Your Health, Your Way</Text>

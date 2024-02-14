@@ -52,7 +52,6 @@ const Question = ({navigation}: any) => {
     try {
       const value = await AsyncStorage.getItem('userid_global');
       if (value !== null) {
-        //console.log(value);
         setUid(value);
       }
     } catch (e) {
@@ -130,10 +129,10 @@ const Question = ({navigation}: any) => {
           // console.log(response.data.data.pdisease);
           if (response.data.data.status == 200) {
             setDisease(response.data.data.pdisease);
+            console.log(response.data.data);
             setModalVisible(true);
             return;
           }
-          //console.log({resp: response.data.data.status});
           Snackbar.show({
             text: response.data.data.message,
             duration: Snackbar.LENGTH_SHORT,
@@ -199,7 +198,7 @@ const Question = ({navigation}: any) => {
                 name="chevron-left"
                 size={18}
                 color={COLORS.dark}
-                style={{padding: 5}}></Icon1>
+                style={{padding: 15}}></Icon1>
             </TouchableRipple>
           </View>
           <Text style={styles.headerTitle}>Your Health, Your Way</Text>

@@ -17,7 +17,7 @@ import DatePicker from '../../utils/datepicker';
 const Settings_Screen: React.FC = ({navigation}: any) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [address, setcity] = useState('');
+  const [city, setcity] = useState('');
   const [phone_no, setPhone] = useState('');
   const [gender, setGender] = useState('');
   const [date_of_birth, setDob] = useState('');
@@ -48,7 +48,7 @@ const Settings_Screen: React.FC = ({navigation}: any) => {
           setName(data['name']);
           setDob(data['date_of_birth']);
           setGender(data['gender']);
-          setcity(data['address']);
+          setcity(data['city']);
           setPhone(data['phone_no']);
         }
       }
@@ -60,10 +60,10 @@ const Settings_Screen: React.FC = ({navigation}: any) => {
   getData();
 
   const validate = () => {
-    if (!address) {
+    if (!city) {
       setCityError(true);
       return false;
-    } else if (!/^[A-Za-z]+$/.test(address)) {
+    } else if (!/^[A-Za-z]+$/.test(city)) {
       setCityError(true);
       return false;
     } else {
@@ -106,7 +106,7 @@ const Settings_Screen: React.FC = ({navigation}: any) => {
   const collectData = async () => {
    // console.log('entered1');
     const is_empty = 0;
-    const data = {email, address, phone_no, date_of_birth,gender, is_empty};
+    const data = {email, city, phone_no, date_of_birth,gender, is_empty};
     //console.log(data);
     makeApiRequest({
       method: 'post',
@@ -211,7 +211,7 @@ const Settings_Screen: React.FC = ({navigation}: any) => {
           City
         </Text>
         <TextInput
-          value={address}
+          value={city}
           placeholder="Enter city"
           placeholderTextColor={COLORS.grey}
           onChangeText={value => setcity(value)}

@@ -21,7 +21,7 @@ const Doctor_UserProfile: React.FC = ({navigation}: any) => {
         const data = JSON.parse(value);
         setEmail(data['email']);
         setName(data['name']);
-        setCity(data['address']);
+        setCity(data['city']);
         setPhone(data['phone_no']);
         setGender(data['gender']);
       }

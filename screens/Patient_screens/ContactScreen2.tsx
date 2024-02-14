@@ -21,7 +21,7 @@ const ContactScreen2 = ({navigation}: any) => {
                 name="chevron-left"
                 size={18}
                 color={COLORS.white}
-                style={{paddingHorizontal: 15,paddingVertical:5}}></Icon>
+                style={{paddingHorizontal: 15,paddingVertical:15}}></Icon>
             </TouchableOpacity>
           </View>
           <Text style={styles.headerTitle}>Contact Us</Text>

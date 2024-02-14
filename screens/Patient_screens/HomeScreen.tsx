@@ -22,6 +22,7 @@ const HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [uid, setUid] = useState('');
+  const [city, setcity] = useState('');
 
   const getData = async () => {
     try {
@@ -29,8 +30,9 @@ const HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
       if (value !== null) {
         const data = JSON.parse(value);
         setUid(data['userid']);
+        setcity(data['city']);
         await AsyncStorage.setItem('userid_global',uid.toString());
-        //console.log(data['userid']);
+        await AsyncStorage.setItem('city_global',city);
         setEmail(data['email']);
         setName(data['name']);
       }

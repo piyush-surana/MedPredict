@@ -110,7 +110,7 @@ const ForgotpwdScreen = ({navigation}: any) => {
     <View style={{flex: 1, backgroundColor: COLORS.primary}}>
       <View style={{flexDirection: 'row', justifyContent: 'flex-start', margin:15}}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Icon name="chevron-left" size={18} color={COLORS.white} style={{padding:5}}></Icon>
+          <Icon name="chevron-left" size={18} color={COLORS.white} style={{padding:15}}></Icon>
         </TouchableOpacity>
       </View>
       <View style={{flexDirection: 'row', justifyContent: 'center'}}>

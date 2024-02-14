@@ -19,7 +19,7 @@ import DocumentPicker, {
 
 const Doc_proff_Screen: React.FC = ({navigation}: any) => {
   const [email, setEmail] = useState('');
-  const [address, setcity] = useState('');
+  const [city, setcity] = useState('');
   const [contact_no, setPhone] = useState('');
   const [hospital, setHospital] = useState('');
   const [specialization, setSpecial] = useState('');
@@ -90,10 +90,10 @@ const Doc_proff_Screen: React.FC = ({navigation}: any) => {
       setspecialError(false);
     }
 
-    if (!address) {
+    if (!city) {
       setCityError(true);
       return false;
-    } else if (!/^[A-Za-z]+$/.test(address)) {
+    } else if (!/^[A-Za-z]+$/.test(city)) {
       setCityError(true);
       return false;
     } else {
@@ -139,7 +139,7 @@ const Doc_proff_Screen: React.FC = ({navigation}: any) => {
     const data = new FormData();
     const body1 = {
       email,
-      address,
+      city,
       contact_no,
       exp,
       specialization,
@@ -276,10 +276,10 @@ const Doc_proff_Screen: React.FC = ({navigation}: any) => {
             marginLeft: 20,
             fontFamily: 'Outfit-Regular',
           }}>
-          Address
+          City
         </Text>
         <TextInput
-          value={address}
+          value={city}
           placeholder="Enter city"
           placeholderTextColor={COLORS.grey}
           onChangeText={value => setcity(value)}

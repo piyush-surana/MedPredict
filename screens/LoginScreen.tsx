@@ -119,7 +119,7 @@ const LoginScreen = ({navigation}: any) => {
     <View style={{flex: 1, backgroundColor: COLORS.primary}}>
       <View style={{flexDirection: 'row', justifyContent: 'flex-start', margin:15}}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Icon name="chevron-left" size={18} color={COLORS.white} style={{padding:5}}></Icon>
+          <Icon name="chevron-left" size={18} color={COLORS.white} style={{padding:10}}></Icon>
         </TouchableOpacity>
       </View>
       <View

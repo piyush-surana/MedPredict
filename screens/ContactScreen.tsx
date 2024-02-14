@@ -21,7 +21,7 @@ const ContactScreen = ({navigation}: any) => {
                 name="chevron-left"
                 size={18}
                 color={COLORS.white}
-                style={{padding: 5}}></Icon>
+                style={{padding: 15}}></Icon>
             </TouchableOpacity>
           </View>
           <Text style={styles.headerTitle}>Contact Us</Text>
@@ -80,7 +80,7 @@ const ContactScreen = ({navigation}: any) => {
             </View>
           </View>
         </View>
-        <View style={styles.box}>
+        <View style={styles.box1}>
           <Text style={{color: COLORS.grey, paddingBottom: 10,fontFamily:'Outfit-Regular'}}>
             Social Media
           </Text>
@@ -182,7 +182,17 @@ const styles = StyleSheet.create({
   },
   box: {
     justifyContent: 'space-between',
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.lightblue,
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    margin: 20,
+    shadowColor: 'gray',
+    elevation: 5,
+  },
+  box1: {
+    justifyContent: 'space-between',
+    backgroundColor: COLORS.lightpink,
     borderRadius: 10,
     paddingVertical: 10,
     paddingHorizontal: 10,

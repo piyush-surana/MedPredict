@@ -21,7 +21,7 @@ import DatePicker from '../../utils/datepicker';
 const EditProfile: React.FC = ({navigation}: any) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [address, setcity] = useState('');
+  const [city, setcity] = useState('');
   const [gender, setGender] = useState('');
   const [phone_no, setPhone] = useState('');
   const [date_of_birth, setDob] = useState('');
@@ -51,7 +51,7 @@ const EditProfile: React.FC = ({navigation}: any) => {
         else{
           setEmail(data['email']);
           setName(data['name']);
-          setcity(data['address']);
+          setcity(data['city']);
           setPhone(data['phone_no']);
           setGender(data['gender']);
           setDob(data['date_of_birth']);
@@ -66,10 +66,10 @@ const EditProfile: React.FC = ({navigation}: any) => {
 
   const validate = () => {
   
-    if (!address) {
+    if (!city) {
       setCityError(true);
       return false;
-    } else if (!/^[A-Za-z]+$/.test(address)) {
+    } else if (!/^[A-Za-z]+$/.test(city)) {
       setCityError(true);
       return false;
     } else {
@@ -110,7 +110,7 @@ const EditProfile: React.FC = ({navigation}: any) => {
 
   const collectData = async () => {
     const is_empty=0;
-    const data = {email, date_of_birth, address, gender, phone_no,is_empty};
+    const data = {email, date_of_birth, city, gender, phone_no,is_empty};
     makeApiRequest({
       method: 'post',
       urlPath: 'fill',
@@ -163,7 +163,7 @@ const EditProfile: React.FC = ({navigation}: any) => {
             <TouchableOpacity
               onPress={() => navigation.goBack()}
               >
-              <Icon name="chevron-left" size={18} color={COLORS.white} style={{padding:5}}></Icon>
+              <Icon name="chevron-left" size={18} color={COLORS.white} style={{padding:15}}></Icon>
             </TouchableOpacity>
           </View>
           <Text style={style.headerTitle}>Your Health, Your Way</Text>
@@ -241,7 +241,7 @@ const EditProfile: React.FC = ({navigation}: any) => {
             }}>
             <Text style={{color: 'black', marginLeft: 20,fontFamily: 'Outfit-Regular',}}>City</Text>
             <TextInput
-              value={address}
+              value={city}
               placeholder="Enter city"
               placeholderTextColor={COLORS.grey}
               onChangeText={value => setcity(value)}
@@ -288,7 +288,6 @@ const EditProfile: React.FC = ({navigation}: any) => {
               placeholderStyle={style.placeholderStyle}
               selectedTextStyle={style.selectedTextStyle}
               data={data}
-              disable={flag}
               itemTextStyle={{color: 'gray',fontFamily: 'Outfit-Regular',}}
               maxHeight={300}
               labelField="label"
