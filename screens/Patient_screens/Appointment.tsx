@@ -107,54 +107,60 @@ const Appo_List: React.FC = ({navigation}: any) => {
         renderItem={({item, index}) => {
           return (
             <View style={styles.profile}>
-              <View style={styles.userInfoSection}>
-                <View style={{flexDirection: 'row', marginTop: 15}}>
-                  <Image
-                    source={require('../../assets/images/avatar.png')}
-                    style={{
-                      width: 100,
-                      height: 100,
-                      borderRadius: 30,
-                      backgroundColor: 'yellow',
-                      padding: 20,
-                    }}
-                  />
-                  <View style={{marginLeft: 15}}>
-                    <Title
-                      style={[
-                        styles.title,
-                        {
-                          marginBottom: 5,
+              <TouchableRipple
+                onPress={() => {
+                  // console.log(item);
+                  navigation.navigate('Book_appo',{details: item});
+                }}>
+                <View style={styles.userInfoSection}>
+                  <View style={{flexDirection: 'row', marginTop: 15}}>
+                    <Image
+                      source={require('../../assets/images/avatar.png')}
+                      style={{
+                        width: 100,
+                        height: 100,
+                        borderRadius: 30,
+                        backgroundColor: 'yellow',
+                        padding: 20,
+                      }}
+                    />
+                    <View style={{marginLeft: 15}}>
+                      <Title
+                        style={[
+                          styles.title,
+                          {
+                            marginBottom: 5,
+                            color: COLORS.grey,
+                          },
+                        ]}>
+                        Dr.{item.name}
+                      </Title>
+                      <Text
+                        style={{
                           color: COLORS.grey,
-                        },
-                      ]}>
-                      Dr.{item.name}
-                    </Title>
-                    <Text
-                      style={{
-                        color: COLORS.grey,
-                        marginBottom: 2,
-                        fontFamily: 'Outfit-Regular',
-                      }}>
-                      Type : {item.specialization}
-                    </Text>
-                    <Text
-                      style={{
-                        color: COLORS.grey,
-                        fontFamily: 'Outfit-Regular',
-                      }}>
-                      Experience : {item.experience} Years
-                    </Text>
-                    <Text
-                      style={{
-                        color: COLORS.grey,
-                        fontFamily: 'Outfit-Regular',
-                      }}>
-                      Hospital : {item.hospital}
-                    </Text>
+                          marginBottom: 2,
+                          fontFamily: 'Outfit-Regular',
+                        }}>
+                        Type : {item.specialization}
+                      </Text>
+                      <Text
+                        style={{
+                          color: COLORS.grey,
+                          fontFamily: 'Outfit-Regular',
+                        }}>
+                        Experience : {item.experience} Years
+                      </Text>
+                      <Text
+                        style={{
+                          color: COLORS.grey,
+                          fontFamily: 'Outfit-Regular',
+                        }}>
+                        Hospital : {item.hospital}
+                      </Text>
+                    </View>
                   </View>
                 </View>
-              </View>
+              </TouchableRipple>
             </View>
           );
         }}></FlatList>

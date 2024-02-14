@@ -1,86 +1,137 @@
-import React, {useState} from 'react';
-import {View, SafeAreaView, StyleSheet, Image, TextInput} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  View,
+  SafeAreaView,
+  StyleSheet,
+  Image,
+  TextInput,
+  Alert,
+} from 'react-native';
 import {Title, Text, TouchableRipple} from 'react-native-paper';
 import COLORS from '../../const/color';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Icon1 from 'react-native-vector-icons/FontAwesome';
 import {format} from 'date-fns';
+import {makeApiRequest} from '../../auth/helpers';
+import Snackbar from 'react-native-snackbar';
 
-const Book_Appo: React.FC = ({navigation}: any) => {
+const Book_Appo: React.FC = ({route, navigation}: any) => {
   const [name, setName] = useState('');
-  const [date, setDate] = useState('');
+  const [type, setType] = useState('');
+  const [city, setAddress] = useState('');
+  const [exp, setExp] = useState('');
+  const [contact, setContact] = useState('');
+  const [uid, setUserid] = useState('');
+  const [docid, setDocid] = useState('');
+  const [date1, setDate] = useState('');
   const [time, setTime] = useState('');
+  const [date, setDate1] = useState('');
   const [selection, setSelection] = useState<number>();
   const [DateError, setDateError] = useState<boolean>(false);
   const [TimeError, setTimeError] = useState<boolean>(false);
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const {details} = route.params;
 
-  const getData = async () => {
-    try {
-      const value = await AsyncStorage.getItem('body');
-      if (value !== null) {
-        const data = JSON.parse(value);
-        setName(data['name']);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  getData();
+  useEffect(() => {
+    setName(details.name);
+    setType(details.specialization);
+    setAddress(details.city);
+    setExp(details.experience);
+    setContact(details.contact_no);
+    setDocid(details.docid);
+    setUserid(details.userid);
 
-  const validate =()=>{
-    switch(selection){
-      case 1:{
+    switch (selection) {
+      case 1: {
         setTime('10:00');
         break;
       }
-      case 2:{
+      case 2: {
         setTime('11:00');
         break;
       }
-      case 3:{
+      case 3: {
         setTime('12:00');
         break;
       }
-      case 4:{
+      case 4: {
         setTime('13:00');
         break;
       }
-      case 5:{
+      case 5: {
         setTime('14:00');
         break;
       }
-      case 6:{
+      case 6: {
         setTime('16:00');
         break;
       }
-      case 7:{
+      case 7: {
         setTime('18:00');
         break;
       }
-      case 8:{
+      case 8: {
         setTime('19:00');
         break;
       }
     }
+  }, [details, selection]);
 
-    if(date== ''){
+  const validate = () => {
+    if (date1 == '') {
       setDateError(true);
       return false;
-    }else{
+    } else {
       setDateError(false);
     }
 
-    if(time == ''){
+    if (time == '') {
       setTimeError(true);
       return false;
-    }else{
+    } else {
       setTimeError(false);
     }
 
-    console.log(date,time);
-  }
+    collectData();
+  };
+
+  const collectData = async () => {
+    const data = {uid, docid, date, time};
+    makeApiRequest({
+      method: 'post',
+      urlPath: 'appointment_booking',
+      body: data,
+    })
+      .then(response => {
+        if (response.data['status'] == 200) {
+          if (response.data.data.status == 200) {
+            console.log(response.data.data);
+            Alert.alert(
+              'Appointment is booked please pay the fees for compeletion of process',
+            );
+            navigation.navigate('Home1');
+            return;
+          }
+          console.log({resp: response.data.data.status});
+          Snackbar.show({
+            text: response.data.data.message,
+            duration: Snackbar.LENGTH_SHORT,
+            textColor: 'white',
+            backgroundColor: 'red',
+          });
+        }
+      })
+      .catch(error => {
+        console.log('Error in api', error);
+        Snackbar.show({
+          text: 'Internal error',
+          duration: Snackbar.LENGTH_SHORT,
+          textColor: 'white',
+          backgroundColor: 'red',
+        });
+      });
+  };
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -94,6 +145,7 @@ const Book_Appo: React.FC = ({navigation}: any) => {
     const date1 = new Date(date);
     const formated = format(date1, 'PPP');
     setDate(formated);
+    setDate1(format(date1, 'yyyy-MM-dd'));
     hideDatePicker();
   };
 
@@ -154,7 +206,7 @@ const Book_Appo: React.FC = ({navigation}: any) => {
                   fontFamily: 'Outfit-Regular',
                   fontSize: 18,
                 }}>
-                Type
+                Specialization : {type}
               </Text>
               <Text
                 style={{
@@ -163,7 +215,7 @@ const Book_Appo: React.FC = ({navigation}: any) => {
                   fontFamily: 'Outfit-Regular',
                   fontSize: 18,
                 }}>
-                Address
+                Address : {city}
               </Text>
               <Text
                 style={{
@@ -172,7 +224,7 @@ const Book_Appo: React.FC = ({navigation}: any) => {
                   fontFamily: 'Outfit-Regular',
                   fontSize: 18,
                 }}>
-                Exp
+                Exp : {exp} Years
               </Text>
               <Text
                 style={{
@@ -181,15 +233,8 @@ const Book_Appo: React.FC = ({navigation}: any) => {
                   fontFamily: 'Outfit-Regular',
                   fontSize: 18,
                 }}>
-                Number
+                Contact No : {contact}
               </Text>
-              <View style={{flexDirection: 'row'}}>
-                <Icon1 name="star" size={18} color={COLORS.yellow}></Icon1>
-                <Icon1 name="star" size={18} color={COLORS.yellow}></Icon1>
-                <Icon1 name="star" size={18} color={COLORS.yellow}></Icon1>
-                <Icon1 name="star" size={18} color={COLORS.yellow}></Icon1>
-                <Icon1 name="star" size={18}></Icon1>
-              </View>
             </View>
           </View>
         </View>
@@ -213,7 +258,7 @@ const Book_Appo: React.FC = ({navigation}: any) => {
           <TextInput
             style={{color: 'black', paddingRight: 5, width: 260}}
             placeholder="Select date"
-            value={date}
+            value={date1}
             placeholderTextColor={COLORS.grey}
             editable={false}></TextInput>
         </View>
@@ -233,15 +278,21 @@ const Book_Appo: React.FC = ({navigation}: any) => {
         />
       </View>
       {DateError ? (
-            <Text style={{fontFamily: 'Outfit-Regular',color: 'red', fontSize: 14, marginLeft: 25}}>
-              Please select date
-            </Text>
-          ) : null}
+        <Text
+          style={{
+            fontFamily: 'Outfit-Regular',
+            color: 'red',
+            fontSize: 14,
+            marginLeft: 25,
+          }}>
+          Please select date
+        </Text>
+      ) : null}
       <View style={styles.profile2}>
         <Text
           style={{
             paddingBottom: 10,
-            paddingLeft:5,
+            paddingLeft: 5,
             fontSize: 20,
             fontFamily: 'Outfit-Medium',
           }}>
@@ -299,7 +350,7 @@ const Book_Appo: React.FC = ({navigation}: any) => {
           </TouchableRipple>
         </View>
         <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
-        <TouchableRipple
+          <TouchableRipple
             style={[
               styles.chip,
               selection == 5
@@ -348,15 +399,24 @@ const Book_Appo: React.FC = ({navigation}: any) => {
             <Text style={styles.TimeText}>19:00</Text>
           </TouchableRipple>
         </View>
-        {TimeError? (
-            <Text style={{fontFamily: 'Outfit-Regular',color: 'red', fontSize: 14, marginLeft: 5,marginTop:5}}>
-              Please Enter Valid Value
-            </Text>
-          ) : null}
+        {TimeError ? (
+          <Text
+            style={{
+              fontFamily: 'Outfit-Regular',
+              color: 'red',
+              fontSize: 14,
+              marginLeft: 5,
+              marginTop: 5,
+            }}>
+            Please Enter Valid Value
+          </Text>
+        ) : null}
       </View>
       <View>
         <TouchableRipple
-          onPress={() => {validate()}}
+          onPress={() => {
+            validate();
+          }}
           style={{
             paddingVertical: 12,
             backgroundColor: 'yellow',

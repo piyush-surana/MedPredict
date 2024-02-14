@@ -75,13 +75,6 @@ const My_Appo: React.FC = ({navigation}: any) => {
                 ]}>
                 Dr.{name}
               </Title>
-              <View style={{flexDirection: 'row',paddingBottom:5 }}>
-                <Icon1 name="star" size={18} color={COLORS.yellow}></Icon1>
-                <Icon1 name="star" size={18} color={COLORS.yellow}></Icon1>
-                <Icon1 name="star" size={18} color={COLORS.yellow}></Icon1>
-                <Icon1 name="star" size={18} color={COLORS.yellow}></Icon1>
-                <Icon1 name="star" size={18}></Icon1>
-              </View>
               <Text
                 style={{
                   color: COLORS.grey,
@@ -98,7 +91,7 @@ const My_Appo: React.FC = ({navigation}: any) => {
                 name="check-square"
                 color={confirm == true ? 'green' : COLORS.grey}
                 size={36}></Icon1>
-              <Text style={{fontFamily: 'Outfit-Regular',color:COLORS.grey}}>
+              <Text style={{fontFamily: 'Outfit-Regular', color: COLORS.grey}}>
                 {confirm == true ? 'Confirm' : 'Pending'}
               </Text>
             </View>
@@ -133,13 +126,6 @@ const My_Appo: React.FC = ({navigation}: any) => {
                 ]}>
                 Dr.{name}
               </Title>
-              <View style={{flexDirection: 'row',paddingBottom:5 }}>
-                <Icon1 name="star" size={18} color={COLORS.yellow}></Icon1>
-                <Icon1 name="star" size={18} color={COLORS.yellow}></Icon1>
-                <Icon1 name="star" size={18} color={COLORS.yellow}></Icon1>
-                <Icon1 name="star" size={18} color={COLORS.yellow}></Icon1>
-                <Icon1 name="star" size={18}></Icon1>
-              </View>
               <Text
                 style={{
                   color: COLORS.grey,

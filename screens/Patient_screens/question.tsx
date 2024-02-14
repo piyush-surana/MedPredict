@@ -197,8 +197,8 @@ const Question = ({navigation}: any) => {
               <Icon1
                 name="chevron-left"
                 size={18}
-                color={COLORS.dark}
-                style={{padding: 15}}></Icon1>
+                color={COLORS.primary}
+                style={{padding: 5}}></Icon1>
             </TouchableRipple>
           </View>
           <Text style={styles.headerTitle}>Your Health, Your Way</Text>
