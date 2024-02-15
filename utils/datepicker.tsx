@@ -62,6 +62,7 @@ const DatePicker = ({setDob,Dob}: any ) => {
         mode="date"
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
+        maximumDate={new Date()}
       />
     </View>
   );
