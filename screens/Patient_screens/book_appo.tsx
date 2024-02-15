@@ -40,7 +40,7 @@ const Book_Appo: React.FC = ({route, navigation}: any) => {
     setExp(details.experience);
     setContact(details.contact_no);
     setDocid(details.docid);
-    setUserid(details.userid);
+    getdata(); 
 
     switch (selection) {
       case 1: {
@@ -77,6 +77,17 @@ const Book_Appo: React.FC = ({route, navigation}: any) => {
       }
     }
   }, [details, selection]);
+
+  const getdata =async () =>{
+    try{
+      const value = await AsyncStorage.getItem('userid_global');
+      if(value!== null){
+        setUserid(value);
+          }
+    }catch(e){
+      console.log({error: e});
+    }
+  }
 
   const validate = () => {
     if (date1 == '') {
