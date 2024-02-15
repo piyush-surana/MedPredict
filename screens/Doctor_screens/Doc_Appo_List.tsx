@@ -1,26 +1,67 @@
-import React, {useState} from 'react';
-import {View, SafeAreaView, StyleSheet, Image} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, SafeAreaView, StyleSheet, Image, FlatList} from 'react-native';
 import {Title, Text, TouchableRipple} from 'react-native-paper';
 import COLORS from '../../const/color';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon1 from 'react-native-vector-icons/FontAwesome';
+import {makeApiRequest} from '../../auth/helpers';
+import Snackbar from 'react-native-snackbar';
+import { format } from 'date-fns';
 
 const Doc_Appo_List: React.FC = ({navigation}: any) => {
-  const [name, setName] = useState('');
-  const [confirm, setConfirm] = useState(true);
+  const [docid, setuid] = useState('');
+  const [list, setlist] = useState<any[]>([]);
 
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem('body');
       if (value !== null) {
         const data = JSON.parse(value);
-        setName(data['name']);
+        setuid(data['userid']);
       }
     } catch (e) {
       console.log(e);
     }
   };
   getData();
+
+  useEffect(() => {
+    collectData();
+  }, [docid]);
+
+  const collectData = async () => {
+    const data = {docid};
+    makeApiRequest({
+      method: 'post',
+      urlPath: 'doc_appointment',
+      body: data,
+    })
+      .then(response => {
+        if (response.data['status'] == 200) {
+          //console.log(response.data.data.result);
+          if (response.data.data.status == 200) {
+            setlist(response.data.data.result);
+            return;
+          }
+          console.log({resp: response.data.data.status});
+          Snackbar.show({
+            text: response.data.data.message,
+            duration: Snackbar.LENGTH_SHORT,
+            textColor: 'white',
+            backgroundColor: 'red',
+          });
+        }
+      })
+      .catch(error => {
+        console.log('Error in api', error);
+        Snackbar.show({
+          text: 'Internal error',
+          duration: Snackbar.LENGTH_SHORT,
+          textColor: 'white',
+          backgroundColor: 'red',
+        });
+      });
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -47,7 +88,11 @@ const Doc_Appo_List: React.FC = ({navigation}: any) => {
       <View>
         <Text style={styles.heading}>Appointment's</Text>
       </View>
-      <View style={styles.profile}>
+      <FlatList data={list} renderItem={({item,index})=>{
+        const date= new Date(item.appointment_date);
+        const formated = format(date,'PPP');
+        return(
+          <View style={styles.profile}>
         <View style={styles.userInfoSection}>
           <View
             style={{flexDirection: 'row', marginTop: 15, alignItems: 'center'}}>
@@ -70,17 +115,14 @@ const Doc_Appo_List: React.FC = ({navigation}: any) => {
                     color: COLORS.dark,
                   },
                 ]}>
-                Patient Name
+                {item.name}
               </Title>
               <Text
                 style={{
                   color: COLORS.grey,
                   fontFamily: 'Outfit-Regular',
                 }}>
-                Date & Time
-              </Text>
-              <Text style={{color: COLORS.grey, fontFamily: 'Outfit-Regular'}}>
-                Disease Predicted
+                {formated} {item.appointment_time}
               </Text>
               <View
                 style={[
@@ -90,22 +132,6 @@ const Doc_Appo_List: React.FC = ({navigation}: any) => {
                     paddingVertical: 10,
                   },
                 ]}>
-                <TouchableRipple
-                  style={{
-                    backgroundColor: 'green',
-                    borderRadius: 10,
-                    marginRight: 10,
-                  }}>
-                  <Text
-                    style={{
-                      fontFamily: 'Outfit-Regular',
-                      fontSize: 20,
-                      color: COLORS.white,
-                      padding: 10,
-                    }}>
-                    Confirm
-                  </Text>
-                </TouchableRipple>
                 <TouchableRipple
                   style={{backgroundColor: 'red', borderRadius: 10}}>
                   <Text
@@ -123,82 +149,8 @@ const Doc_Appo_List: React.FC = ({navigation}: any) => {
           </View>
         </View>
       </View>
-      <View style={styles.profile}>
-        <View style={styles.userInfoSection}>
-          <View
-            style={{flexDirection: 'row', marginTop: 15, alignItems: 'center'}}>
-            <Image
-              source={require('../../assets/images/avatar.png')}
-              style={{
-                width: 100,
-                height: 100,
-                borderRadius: 30,
-                backgroundColor: 'yellow',
-                padding: 20,
-              }}
-            />
-            <View style={{marginLeft: 20}}>
-              <Title
-                style={[
-                  styles.title,
-                  {
-                    marginBottom: 5,
-                    color: COLORS.dark,
-                  },
-                ]}>
-                Patient Name
-              </Title>
-              <Text
-                style={{
-                  color: COLORS.grey,
-                  fontFamily: 'Outfit-Regular',
-                }}>
-                Date & Time
-              </Text>
-              <Text style={{color: COLORS.grey, fontFamily: 'Outfit-Regular'}}>
-                Disease Predicted
-              </Text>
-              <View
-                style={[
-                  {
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    paddingVertical: 10,
-                  },
-                ]}>
-                <TouchableRipple
-                  style={{
-                    backgroundColor: 'green',
-                    borderRadius: 10,
-                    marginRight: 10,
-                  }}>
-                  <Text
-                    style={{
-                      fontFamily: 'Outfit-Regular',
-                      fontSize: 20,
-                      color: COLORS.white,
-                      padding: 10,
-                    }}>
-                    Confirm
-                  </Text>
-                </TouchableRipple>
-                <TouchableRipple
-                  style={{backgroundColor: 'red', borderRadius: 10}}>
-                  <Text
-                    style={{
-                      fontFamily: 'Outfit-Regular',
-                      fontSize: 20,
-                      color: COLORS.white,
-                      padding: 10,
-                    }}>
-                    Cancel
-                  </Text>
-                </TouchableRipple>
-              </View>
-            </View>
-          </View>
-        </View>
-      </View>
+        )
+      }}/>
     </SafeAreaView>
   );
 };

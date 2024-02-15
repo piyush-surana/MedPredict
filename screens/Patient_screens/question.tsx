@@ -166,7 +166,7 @@ const Question = ({navigation}: any) => {
               : {disease}
             </Text>
             <Text style={styles.sentence3}>
-              It is just a prediction made using a machine. Please consult to doctor for further guidance and medication. 
+            This prediction is based on hypothetical data so please consult to doctor for further consulting. 
             </Text>
             <TouchableOpacity
               onPress={() => {

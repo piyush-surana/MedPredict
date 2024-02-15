@@ -1,26 +1,69 @@
-import React, {useState} from 'react';
-import {View, SafeAreaView, StyleSheet, Image} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, SafeAreaView, StyleSheet, Image, FlatList} from 'react-native';
 import {Title, Text, TouchableRipple} from 'react-native-paper';
 import COLORS from '../../const/color';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon1 from 'react-native-vector-icons/FontAwesome';
+import {makeApiRequest} from '../../auth/helpers';
+import Snackbar from 'react-native-snackbar';
+import {format} from 'date-fns';
 
 const My_Appo: React.FC = ({navigation}: any) => {
-  const [name, setName] = useState('');
+  const [uid, setuserid] = useState('');
   const [confirm, setConfirm] = useState(true);
+
+  const [list, setlist] = useState<any[]>([]);
 
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem('body');
       if (value !== null) {
         const data = JSON.parse(value);
-        setName(data['name']);
+        setuserid(data['userid']);
       }
     } catch (e) {
       console.log(e);
     }
   };
   getData();
+
+  useEffect(() => {
+    collectData();
+  }, [uid]);
+
+  const collectData = async () => {
+    const data = {uid};
+    makeApiRequest({
+      method: 'post',
+      urlPath: 'user_appointment',
+      body: data,
+    })
+      .then(response => {
+        if (response.data['status'] == 200) {
+          //console.log(response.data.data.result);
+          if (response.data.data.status == 200) {
+            setlist(response.data.data.result);
+            return;
+          }
+          console.log({resp: response.data.data.status});
+          Snackbar.show({
+            text: response.data.data.message,
+            duration: Snackbar.LENGTH_SHORT,
+            textColor: 'white',
+            backgroundColor: 'red',
+          });
+        }
+      })
+      .catch(error => {
+        console.log('Error in api', error);
+        Snackbar.show({
+          text: 'Internal error',
+          duration: Snackbar.LENGTH_SHORT,
+          textColor: 'white',
+          backgroundColor: 'red',
+        });
+      });
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -47,108 +90,55 @@ const My_Appo: React.FC = ({navigation}: any) => {
       <View>
         <Text style={styles.heading}>Your Appointment's</Text>
       </View>
-      <View>
-        <Text style={styles.heading1}>Upcoming</Text>
-      </View>
-      <View style={styles.profile}>
-        <View style={styles.userInfoSection}>
-          <View
-            style={{flexDirection: 'row', marginTop: 15, alignItems: 'center'}}>
-            <Image
-              source={require('../../assets/images/avatar.png')}
-              style={{
-                width: 100,
-                height: 100,
-                borderRadius: 30,
-                backgroundColor: 'yellow',
-                padding: 20,
-              }}
-            />
-            <View style={{marginLeft: 20}}>
-              <Title
-                style={[
-                  styles.title,
-                  {
-                    marginBottom: 5,
-                    color: COLORS.dark,
-                  },
-                ]}>
-                Dr.{name}
-              </Title>
-              <Text
-                style={{
-                  color: COLORS.grey,
-                  fontFamily: 'Outfit-Regular',
-                }}>
-                Date & Time
-              </Text>
-              <Text style={{color: COLORS.grey, fontFamily: 'Outfit-Regular'}}>
-                Disease Predicted
-              </Text>
+      <FlatList
+        data={list}
+        renderItem={({item, index}) => {
+          const date = new Date(item.appointment_date);
+          const formated = format(date, 'PPP');
+          return (
+            <View style={styles.profile}>
+              <View style={styles.userInfoSection}>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    marginTop: 15,
+                    alignItems: 'center',
+                  }}>
+                  <Image
+                    source={require('../../assets/images/avatar.png')}
+                    style={{
+                      width: 100,
+                      height: 100,
+                      borderRadius: 30,
+                      backgroundColor: 'yellow',
+                      padding: 20,
+                    }}
+                  />
+                  <View style={{marginLeft: 20}}>
+                    <Title
+                      style={[
+                        styles.title,
+                        {
+                          marginBottom: 5,
+                          color: COLORS.dark,
+                        },
+                      ]}>
+                      Dr. {item.doctor_name}
+                    </Title>
+                    <Text
+                      style={{
+                        color: COLORS.grey,
+                        fontFamily: 'Outfit-Regular',
+                      }}>
+                      {formated} {item.appointment_time}
+                    </Text>
+                  </View>
+                </View>
+              </View>
             </View>
-            <View style={{padding: 20, alignItems: 'center'}}>
-              <Icon1
-                name="check-square"
-                color={confirm == true ? 'green' : COLORS.grey}
-                size={36}></Icon1>
-              <Text style={{fontFamily: 'Outfit-Regular', color: COLORS.grey}}>
-                {confirm == true ? 'Confirm' : 'Pending'}
-              </Text>
-            </View>
-          </View>
-        </View>
-      </View>
-      <View>
-        <Text style={styles.heading1}>Previous</Text>
-      </View>
-      <View style={styles.profile}>
-        <View style={styles.userInfoSection}>
-          <View
-            style={{flexDirection: 'row', marginTop: 15, alignItems: 'center'}}>
-            <Image
-              source={require('../../assets/images/avatar.png')}
-              style={{
-                width: 100,
-                height: 100,
-                borderRadius: 30,
-                backgroundColor: 'yellow',
-                padding: 20,
-              }}
-            />
-            <View style={{marginLeft: 20}}>
-              <Title
-                style={[
-                  styles.title,
-                  {
-                    marginBottom: 5,
-                    color: COLORS.dark,
-                  },
-                ]}>
-                Dr.{name}
-              </Title>
-              <Text
-                style={{
-                  color: COLORS.grey,
-                  fontFamily: 'Outfit-Regular',
-                }}>
-                Date & Time
-              </Text>
-              <Text style={{color: COLORS.grey, fontFamily: 'Outfit-Regular'}}>
-                Disease Predicted
-              </Text>
-            </View>
-            {/* <View style={{padding: 20, alignItems: 'center'}}>
-              <Icon1
-                name="check-square"
-                color={confirm == true ? 'green' : COLORS.grey}
-                size={36}></Icon1>
-              <Text style={{fontFamily: 'Outfit-Light'}}>
-                {confirm == true ? 'Confirm' : 'Pending'}
-              </Text>
-            </View> */}
-          </View>
-        </View>
-      </View>
+          );
+        }}
+      />
     </SafeAreaView>
   );
 };
@@ -177,7 +167,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   title: {
-    fontSize: 24,
+    fontSize: 22,
     fontFamily: 'Outfit-Bold',
   },
   heading: {

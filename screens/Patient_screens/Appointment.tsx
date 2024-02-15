@@ -4,7 +4,6 @@ import {
   SafeAreaView,
   StyleSheet,
   Image,
-  Alert,
   FlatList,
 } from 'react-native';
 import {Title, Text, TouchableRipple} from 'react-native-paper';
@@ -13,8 +12,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon1 from 'react-native-vector-icons/FontAwesome';
 import {makeApiRequest} from '../../auth/helpers';
 import Snackbar from 'react-native-snackbar';
-import {list} from 'postcss';
-import {List} from 'postcss/lib/list';
 
 const Appo_List: React.FC = ({navigation}: any) => {
   const [name, setName] = useState('');
