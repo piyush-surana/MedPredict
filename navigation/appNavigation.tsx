@@ -24,11 +24,16 @@ import Appo_List from '../screens/Patient_screens/Appointment';
 import Question from '../screens/Patient_screens/question';
 import Book_Appo from '../screens/Patient_screens/book_appo';
 import My_Appo from '../screens/Patient_screens/my_appo';
+import Payment from '../screens/Patient_screens/payment';
 
 import Doctor_UserProfile from '../screens/Doctor_screens/Doctor_User_Profile';
 import Doctor_EditProfile from '../screens/Doctor_screens/Doctor_Edit_Profile';
 import Doctor_HomeScreen from '../screens/Doctor_screens/Doctor_Home_Screen';
 import Doc_Appo_List from '../screens/Doctor_screens/Doc_Appo_List';
+
+import Admin_Home from '../screens/Admin_screen/HomeScreen';
+import User_report from '../screens/Admin_screen/user_report';
+import Doctor_report from '../screens/Admin_screen/doctor_screen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -205,6 +210,26 @@ function StackNavigator() {
         name="My_appo"
         options={{headerShown: false}}
         component={My_Appo}
+      />
+      <Stack.Screen
+        name="Admin_screen"
+        options={{headerShown: false}}
+        component={Admin_Home}
+      />
+      <Stack.Screen
+        name="user_report"
+        options={{headerShown: false}}
+        component={User_report}
+      />
+      <Stack.Screen
+        name="payment"
+        options={{headerShown: false}}
+        component={Payment}
+      />
+      <Stack.Screen
+        name="doctor_report"
+        options={{headerShown: false}}
+        component={Doctor_report}
       />
     </Stack.Navigator>
   );

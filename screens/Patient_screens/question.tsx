@@ -221,16 +221,16 @@ const Question = ({navigation}: any) => {
               layout="row"
               labelStyle={{color: COLORS.dark}}
             />
-            {error1 ? (
-              <Text
-                style={{
-                  color: 'red',
-                  fontSize: 14,
-                  fontFamily: 'Outfit-Regular',
-                }}>
-                Please select any one
-              </Text>
-            ) : null}
+              {error1 ? (
+                <Text
+                  style={{
+                    color: 'red',
+                    fontSize: 14,
+                    fontFamily: 'Outfit-Regular',
+                  }}>
+                  Please select any one
+                </Text>
+              ) : null}
           </View>
           <View style={styles.questionbox}>
             <Text style={styles.question}>2. Do you have a headache</Text>

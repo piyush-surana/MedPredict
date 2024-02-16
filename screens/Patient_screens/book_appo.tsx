@@ -121,7 +121,7 @@ const Book_Appo: React.FC = ({route, navigation}: any) => {
             Alert.alert(
               'Appointment is booked please pay the fees for compeletion of process',
             );
-            navigation.navigate('Home1');
+            navigation.navigate('payment');
             return;
           }
           console.log({resp: response.data.data.status});

@@ -103,6 +103,9 @@ const LoginScreen = ({navigation}: any) => {
         console.log('Doctor_Entered');
         navigation.navigate('Doctor_Home');
         // setUser('');
+      }else if(response.data.data['user_type']== 'Admin'){
+        console.log("Admin_Entered");
+        navigation.navigate('Admin_screen');
       }
     } else {
       // console.log('There is some problem');
