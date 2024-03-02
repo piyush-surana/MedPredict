@@ -17,6 +17,7 @@ import COLORS from '../../const/color';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {makeApiRequest} from '../../auth/helpers';
 import DatePicker from '../../utils/datepicker';
+import { format } from 'date-fns';
 
 const EditProfile: React.FC = ({navigation}: any) => {
   const [name, setName] = useState('');
@@ -54,7 +55,10 @@ const EditProfile: React.FC = ({navigation}: any) => {
           setcity(data['city']);
           setPhone(data['phone_no']);
           setGender(data['gender']);
-          setDob(data['date_of_birth']);
+          const date = new Date(data['date_of_birth']);
+          const formated = format(date, 'PPP');
+          setDob(formated);
+
         }
       }
     } catch (e) {

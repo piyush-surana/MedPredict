@@ -22,6 +22,7 @@ const {width} = Dimensions.get('screen');
 const Doctor_HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [docid, setuid] = useState('');
 
   const getData = async () => {
     try {
@@ -31,6 +32,8 @@ const Doctor_HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
         await AsyncStorage.setItem('email_global', data['email']);
         setEmail(data['email']);
         setName(data['name']);
+        setuid(data['userid']);
+      
       }
     } catch (e) {
       console.log(e);
@@ -70,7 +73,7 @@ const Doctor_HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
       <View style={style.mainCardContainer}>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('Doc_Appointment');
+            navigation.navigate('Doc_Appointment',{docid:docid});
           }}>
           <View style={style.userInfoContainer}>
             <Text style={style.mainFunction}>Appointments</Text>

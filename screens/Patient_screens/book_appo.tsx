@@ -118,9 +118,6 @@ const Book_Appo: React.FC = ({route, navigation}: any) => {
         if (response.data['status'] == 200) {
           if (response.data.data.status == 200) {
             console.log(response.data.data);
-            Alert.alert(
-              'Appointment is booked please pay the fees for compeletion of process',
-            );
             navigation.navigate('payment');
             return;
           }

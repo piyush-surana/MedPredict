@@ -22,7 +22,7 @@ export const makeApiRequest = async ({
   dispatchTypeOnRes?: string;
 }) => {
   let config: AxiosRequestConfig = {};
-  const baseApiUrl = 'http://192.168.191.164:3000/'; //192.168.151.164-phone   //192.168.1.13-pc
+  const baseApiUrl = 'http://192.168.177.164:3000/'; 
   config.method = method;
   config.url = `${baseApiUrl}${urlPath}`;
   if (token) {

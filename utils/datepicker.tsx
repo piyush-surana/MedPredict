@@ -9,7 +9,7 @@ import COLORS from '../const/color';
 
 const DatePicker = ({setDob,Dob}: any ) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-
+  const [datee, setdate]=useState('');
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   };
@@ -20,9 +20,10 @@ const DatePicker = ({setDob,Dob}: any ) => {
 
   const handleConfirm = (date: any) => {
     const date1 = new Date(date);
-    const formated=format(date1, 'yyyy-MM-dd');
+    const formated=format(date1, 'PPP');
     storeData(formated);
     setDob(formated);
+    setdate(formated);
     hideDatePicker();
   };
 

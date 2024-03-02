@@ -13,6 +13,7 @@ const Doctor_UserProfile: React.FC = ({navigation}: any) => {
   const [city, setCity] = useState('');
   const [phone, setPhone] = useState('');
   const [Gender, setGender] = useState('');
+  const [docid, setuid] = useState('');
 
   const getData = async () => {
     try {
@@ -24,6 +25,7 @@ const Doctor_UserProfile: React.FC = ({navigation}: any) => {
         setCity(data['city']);
         setPhone(data['phone_no']);
         setGender(data['gender']);
+        setuid(data['userid']);
       }
     } catch (e) {
       console.log(e);
@@ -132,7 +134,7 @@ const Doctor_UserProfile: React.FC = ({navigation}: any) => {
           <View style={styles.box}>
             <TouchableRipple
               onPress={() => {
-                navigation.navigate('Doc_Appointment');
+                navigation.navigate('Doc_Appointment',{docid:docid});
               }}>
               <View style={styles.menuItem}>
                 <Icon name="credit-card" color="#FF6347" size={25} />

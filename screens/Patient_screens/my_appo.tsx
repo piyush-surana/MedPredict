@@ -19,6 +19,7 @@ const My_Appo: React.FC = ({navigation}: any) => {
       const value = await AsyncStorage.getItem('body');
       if (value !== null) {
         const data = JSON.parse(value);
+        //console.log(data['userid']);
         setuserid(data['userid']);
       }
     } catch (e) {
@@ -130,7 +131,14 @@ const My_Appo: React.FC = ({navigation}: any) => {
                         color: COLORS.grey,
                         fontFamily: 'Outfit-Regular',
                       }}>
-                      {formated} {item.appointment_time}
+                      {formated}
+                    </Text>
+                    <Text
+                      style={{
+                        color: COLORS.grey,
+                        fontFamily: 'Outfit-Regular',
+                      }}>
+                      {item.appointment_time}
                     </Text>
                   </View>
                 </View>

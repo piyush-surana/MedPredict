@@ -13,6 +13,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Snackbar from 'react-native-snackbar';
 import {Dropdown} from 'react-native-element-dropdown';
 import DatePicker from '../../utils/datepicker';
+import { format } from 'date-fns';
 
 const Settings_Screen: React.FC = ({navigation}: any) => {
   const [name, setName] = useState('');
@@ -46,7 +47,9 @@ const Settings_Screen: React.FC = ({navigation}: any) => {
         } else {
           setEmail(data['email']);
           setName(data['name']);
-          setDob(data['date_of_birth']);
+          const date = new Date(data['date_of_birth']);
+          const formated = format(date, 'PPP');
+          setDob(formated);
           setGender(data['gender']);
           setcity(data['city']);
           setPhone(data['phone_no']);
