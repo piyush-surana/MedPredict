@@ -50,7 +50,12 @@ For backend code please contact anyone of us links are below
 
 
 ## Screenshots
-![](https://github.com/piyush-surana/MedPredict/assets/104911831/3f050cbb-03e2-44d1-8bd3-b43fd9a0c895) | ![](https://github.com/piyush-surana/MedPredict/assets/104911831/e0d1b225-cf50-44c3-b7ad-1450add17f99)|![](https://github.com/piyush-surana/MedPredict/assets/104911831/422ff953-30cb-489c-9f58-fcc5733e2579)
+![](https://github.com/piyush-surana/MedPredict/assets/104911831/3f050cbb-03e2-44d1-8bd3-b43fd9a0c895) 
+![](https://github.com/piyush-surana/MedPredict/assets/104911831/e0d1b225-cf50-44c3-b7ad-1450add17f99)
+![](https://github.com/piyush-surana/MedPredict/assets/104911831/422ff953-30cb-489c-9f58-fcc5733e2579)
+![](https://github.com/piyush-surana/MedPredict/assets/104911831/a1efd933-dc00-4132-851e-347fe524434d)
+![Screenshot![Screenshot_2024-02-10-18-20-09-593_com medpredict](https://github.com/piyush-surana/MedPredict/assets/104911831/768bc333-a59d-4ee2-9478-4e78d16a5edb)
+_2024-02-10-18-19-43-334_com medpredict](https://github.com/piyush-surana/MedPredict/assets/104911831/3da38d8d-cbfe-423a-b25a-79d4e56fae12)
 
 
 # Hi, I'm Piyush Surana! 👋
