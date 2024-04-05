@@ -54,17 +54,13 @@ For backend code please contact anyone of us links are below
 :-------------------------:|:-------------------------:|:-------------------------:
 ![](https://github.com/piyush-surana/MedPredict/assets/104911831/3f050cbb-03e2-44d1-8bd3-b43fd9a0c895)|![](https://github.com/piyush-surana/MedPredict/assets/104911831/e0d1b225-cf50-44c3-b7ad-1450add17f99)|![](https://github.com/piyush-surana/MedPredict/assets/104911831/422ff953-30cb-489c-9f58-fcc5733e2579)
 
-  HomeSceen                |   Profile Page            |  Symptom Page
+HomeSceen       |   Profile Page    |  Symptom Page
 :-------------------------:|:-------------------------:|:-------------------------:
-![](https://github.com/piyush-surana/MedPredict/assets/104911831/a1efd933-dc00-4132-851e-347fe524434d)
-|![](https://github.com/piyush-surana/MedPredict/assets/104911831/3cf92fe3-0b66-44eb-ab9f-e95a9d7b4dbd)
-|![](https://github.com/piyush-surana/MedPredict/assets/104911831/24f462a5-4074-48b6-9bee-a3776be32220)
+![](https://github.com/piyush-surana/MedPredict/assets/104911831/a1efd933-dc00-4132-851e-347fe524434d)|![](https://github.com/piyush-surana/MedPredict/assets/104911831/3cf92fe3-0b66-44eb-ab9f-e95a9d7b4dbd)|![](https://github.com/piyush-surana/MedPredict/assets/104911831/24f462a5-4074-48b6-9bee-a3776be32220)
 
-  DoctorSceen              |   AppointmentPage            |  Payment Page
+  DoctorSceen     |   AppointmentPage    |  Payment Page
 :-------------------------:|:-------------------------:|:-------------------------:
-![](https://github.com/piyush-surana/MedPredict/assets/104911831/f644f451-f471-4b2d-99c4-0db44206f658)
-|![](https://github.com/piyush-surana/MedPredict/assets/104911831/c39ab87d-d013-4d65-9e0e-44bcb1b49bca)
-|![](https://github.com/piyush-surana/MedPredict/assets/104911831/90c6eaa7-af62-4fa7-9fe8-3222d1f132b7)
+![](https://github.com/piyush-surana/MedPredict/assets/104911831/f644f451-f471-4b2d-99c4-0db44206f658)|![](https://github.com/piyush-surana/MedPredict/assets/104911831/c39ab87d-d013-4d65-9e0e-44bcb1b49bca)|![](https://github.com/piyush-surana/MedPredict/assets/104911831/90c6eaa7-af62-4fa7-9fe8-3222d1f132b7)
 
 
 # Hi, I'm Piyush Surana! 👋
