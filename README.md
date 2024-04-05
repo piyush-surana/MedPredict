@@ -1,79 +1,75 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
-# Getting Started
+# MedPredict
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+Our project aims to develop a user-friendly mobile application that assists users in predicting potential diseases based on the symptoms they input. Additionally, the application will facilitate the process of selecting a suitable doctor and booking appointments with them.
 
-## Step 1: Start the Metro Server
+## Tech Stack
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+**Client:** React Native, CSS
 
-To start Metro, run the following command from the _root_ of your React Native project:
+**Server:** Node, Express, MySQL
 
-```bash
-# using npm
-npm start
 
-# OR using Yarn
-yarn start
-```
+## Run Locally
 
-## Step 2: Start your Application
-
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
-
-### For Android
+Clone the project
 
 ```bash
-# using npm
-npm run android
-
-# OR using Yarn
-yarn android
+  gh repo clone piyush-surana/MedPredict
 ```
 
-### For iOS
+Go to the project directory
 
 ```bash
-# using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
+  cd MedPredict
 ```
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+Install dependencies
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+```bash
+  npm install
+```
 
-## Step 3: Modifying your App
+Start the server
 
-Now that you have successfully run the app, let's modify it.
+```bash
+  npm run start
+```
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+## Backend Code
 
-## Congratulations! :tada:
+For backend code please contact anyone of us links are below
+## Features
 
-You've successfully run and modified your React Native App. :partying_face:
+- Login / Signup
+- Symptoms Questionnaire
+- Doctor Suggestion
+- Payment
+- Support 
 
-### Now what?
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+## Screenshots
 
-# Troubleshooting
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
 
-# Learn More
+# Hi, I'm Piyush Surana! 👋
 
-To learn more about React Native, take a look at the following resources:
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+
+## 🚀 About Me
+I'm a Android developer... skilled in Flutter and React Native with very sound programming knowledge and good grasp on the Node and MySQL 
+
+
+## 🔗 Links
+Piyush Surana - suranap12@gmail.com
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/piyush-surana12/)
+[![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:suranap12@gmail.com)
+[![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/ig.piyush_12/)
+
+
+## Team
+Divyansh Soni - sonidivyansh79@gmail.com
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/divyansh-soni-997a58237/)
+[![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:sonidivyansh79@gmail.com)
