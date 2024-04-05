@@ -50,11 +50,7 @@ For backend code please contact anyone of us links are below
 
 
 ## Screenshots
-<img src="![Screenshot_2024-02-10-18-17-12-454_com medpredict](https://github.com/piyush-surana/MedPredict/assets/104911831/d1fa405e-11b0-4cf3-8899-842e58f8fe4c)
-" alt="Screenshots" width="50%">
-![Screenshot_2024-02-10-18-17-12-454_com medpredict](https://github.com/piyush-surana/MedPredict/assets/104911831/3f050cbb-03e2-44d1-8bd3-b43fd9a0c895)
-![Screenshot_2024-02-10-18-17-18-155_com medpredict](https://github.com/piyush-surana/MedPredict/assets/104911831/e0d1b225-cf50-44c3-b7ad-1450add17f99)
-![Screenshot_2024-02-10-18-17-22-241_com medpredict](https://github.com/piyush-surana/MedPredict/assets/104911831/422ff953-30cb-489c-9f58-fcc5733e2579)
+![](https://github.com/piyush-surana/MedPredict/assets/104911831/3f050cbb-03e2-44d1-8bd3-b43fd9a0c895)|![](https://github.com/piyush-surana/MedPredict/assets/104911831/e0d1b225-cf50-44c3-b7ad-1450add17f99)|![](https://github.com/piyush-surana/MedPredict/assets/104911831/422ff953-30cb-489c-9f58-fcc5733e2579)
 
 
 
